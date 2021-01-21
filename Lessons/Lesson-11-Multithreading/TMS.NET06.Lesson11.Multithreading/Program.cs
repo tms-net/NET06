@@ -7,33 +7,31 @@ namespace TMS.NET06.Lesson11.Multithreading
 {
     static class Program
     {
-        public static void Main()
-        {            
-            var sw = new Stopwatch();
-            var dates = Enumerable.Repeat("invalid", 10000).Concat(new [] {"2021-01-01"}).ToArray();
-            sw.Start();
-            foreach (var d in dates)
-            {
-                //if (DateTime.TryParse(d, out DateTime date))
-                if (TryParse(d, out DateTime date))
-                    Console.WriteLine(date);
-            }
-            sw.Stop();
-            Console.WriteLine(sw.ElapsedMilliseconds);
+        // A semaphore is like a nightclub: it has a certain capacity, enforced by a bouncer.
+        // A semaphore with a capacity of one is similar to a Mutex or lock,
+        // except that the semaphore has no “owner” — it’s thread-agnostic.
+        // Any thread can call Release on a Semaphore, whereas with Mutex and lock,
+        // only the thread that obtained the lock can release it.
+
+        static SemaphoreSlim _sem = new SemaphoreSlim(3);    // Capacity of 3
+
+        static void Main()
+        {
+            for (int i = 1; i <= 5; i++) new Thread(Enter).Start(i);
         }
 
-        private static bool TryParse(string value, out DateTime date)
+        static void Enter(object id)
         {
-            date = DateTime.Now;
-            try
-            {
-                date = DateTime.Parse(value);
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-            return true;
+            Console.WriteLine(id + " wants to enter");
+            _sem.Wait();
+            Console.WriteLine(id + " is in!");           // Only three threads
+            Thread.Sleep(1000 * (int)id);               // can be here at
+            Console.WriteLine(id + " is leaving");     // a time.
+            _sem.Release();
+        }
+        public static void Main()
+        {
+              
         }
     }
 }
