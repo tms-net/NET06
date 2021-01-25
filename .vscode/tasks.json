@@ -2,7 +2,19 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
+            "label": "buildHomeWork11",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/HomeWorks/HomeWork11/TMS.ShopSimulator/TMS.ShopSimulator/TMS.ShopSimulator.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "buildLesson11",
             "command": "dotnet",
             "type": "process",
             "args": [
@@ -14,7 +26,19 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "publish",
+            "label": "buildLesson12",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Lessons/Lesson-12-ParallelProgramming/TMS.NET06.Lesson12.ParallelProgramming/TMS.NET06.Lesson12.ParallelProgramming.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publishLesson11",
             "command": "dotnet",
             "type": "process",
             "args": [
@@ -26,7 +50,7 @@
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "watch",
+            "label": "watchLesson11",
             "command": "dotnet",
             "type": "process",
             "args": [

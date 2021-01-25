@@ -5,13 +5,35 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (console)",
+            "name": "Launch HomeWork11-TMS.ShopSimulator (console)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
+            "preLaunchTask": "buildHomeWork11",
+            "program": "${workspaceFolder}/HomeWorks/HomeWork11/TMS.ShopSimulator/TMS.ShopSimulator/bin/Debug/netcoreapp3.1/TMS.ShopSimulator.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "console": "externalTerminal"
+        },
+        {
+            "name": "Launch Lesson-11-Multithreading (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildLesson11",
             "program": "${workspaceFolder}/Lessons/Lesson-11-Multithreading/TMS.NET06.Lesson11.Multithreading/bin/Debug/netcoreapp3.1/TMS.NET06.Lesson11.Multithreading.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Lessons/Lesson-11-Multithreading/TMS.NET06.Lesson11.Multithreading",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Lesson-12-ParallelProgramming (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildLesson12",
+            "program": "${workspaceFolder}/Lessons/Lesson-12-ParallelProgramming/TMS.NET06.Lesson12.ParallelProgramming/bin/Debug/netcoreapp3.1/TMS.NET06.Lesson12.ParallelProgramming.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Lessons/Lesson-12-ParallelProgramming/TMS.NET06.Lesson12.ParallelProgramming",
             "console": "internalConsole",
             "stopAtEntry": false
         },
