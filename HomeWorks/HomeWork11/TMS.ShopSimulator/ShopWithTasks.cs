@@ -87,6 +87,7 @@ namespace TMS.ShopSimulator
 				while (!TryDequeueCashier(out cashier))
 				{
 					Thread.Sleep(100);
+					//await Task.Delay(100);
 				}
 
 				var timeToProcess = cashier.TimeToProcess + person.TimeToProcess;
