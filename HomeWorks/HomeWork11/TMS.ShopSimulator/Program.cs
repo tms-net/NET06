@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 
 namespace TMS.ShopSimulator
 {
@@ -8,7 +7,10 @@ namespace TMS.ShopSimulator
         static void Main(string[] args)
         {
             var peopleGenerator = new PeopleGenerator();
-            var shop = new Shop(peopleGenerator, 3);
+            var shop = new ShopWithTreads(peopleGenerator, 3);
+            //var shop = new ShopWithTasks(peopleGenerator, 3);
+            //var shop = new ShopWithThreadPool(peopleGenerator, 3);
+            Console.WriteLine($"Implementation: {shop.GetType().Name}");
             shop.Open();
             while (true)
             {

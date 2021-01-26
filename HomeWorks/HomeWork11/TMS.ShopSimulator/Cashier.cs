@@ -11,10 +11,10 @@ namespace TMS.ShopSimulator
         public int TimeToProcess { get; }
         public string Name { get; }
 
-        public Cashier()
+        public Cashier(int num)
         {
             this.TimeToProcess = rnd.Next(3000);
-            this.Name = Guid.NewGuid().ToString("N");
+            this.Name = $"#{num}";
         }
 
     }
