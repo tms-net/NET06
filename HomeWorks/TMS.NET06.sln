@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30128.74
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.FitnessTracker", "HomeWork10\TMS.FitnessTracker\TMS.NET06.FitnessTracker.csproj", "{925BC8A6-0017-49B0-9F1B-12F21A3682E2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.ShopSimulator", "HomeWork11\TMS.ShopSimulator\TMS.NET06.ShopSimulator.csproj", "{91DD9B21-5780-4420-97CD-4B4383524E16}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{925BC8A6-0017-49B0-9F1B-12F21A3682E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{925BC8A6-0017-49B0-9F1B-12F21A3682E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{925BC8A6-0017-49B0-9F1B-12F21A3682E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{925BC8A6-0017-49B0-9F1B-12F21A3682E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91DD9B21-5780-4420-97CD-4B4383524E16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91DD9B21-5780-4420-97CD-4B4383524E16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91DD9B21-5780-4420-97CD-4B4383524E16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91DD9B21-5780-4420-97CD-4B4383524E16}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1257BDB6-7766-4AA9-A144-DCC9D63F135E}
+	EndGlobalSection
+EndGlobal
