@@ -18,9 +18,16 @@ namespace TMS.ShopSimulator
 
 		public ShopWithTasks(PeopleGenerator peopleGenerator, int cashierNumber)
 		{
+			// the factory to create Person instances
 			this.peopleGenerator = peopleGenerator;
+
+			// the queue to hole currently opened cashiers
 			this.cashierQueue = new ConcurrentQueue<Cashier>();
+
+			// the task to hold all required work to be done
 			this.lastTask = Task.CompletedTask;
+
+			// all cashiers that exist in the shop
 			this.allCashiers = Enumerable.Range(1, cashierNumber).Select(n => new Cashier(n)).ToList();
 		}
 
@@ -30,6 +37,8 @@ namespace TMS.ShopSimulator
 			isOpen = true;
 			foreach (var cashier in allCashiers)
 			{
+				// just enable cashier for processing
+				// we are not making any thread work here
 				EnqueueCashier(cashier);
 				Console.WriteLine($"Cashier {cashier.Name} is opened.");
 			}
@@ -46,6 +55,7 @@ namespace TMS.ShopSimulator
 		{
 			if (isOpen)
 			{
+				// scheduling processing work to ThreadPool by Task API
 				var task = Task.Run(() => ProcessPerson(peopleGenerator.GetPerson()));
 				// update the task to hold all required work by using Task API
 				// TODO: determine how optimal it is
