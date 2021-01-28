@@ -38,6 +38,18 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "label": "buildLesson13",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Lessons/Lesson-13-AsyncAwait/TMS.NET06.Lesson13.AsyncAwait/TMS.NET06.Lesson13.AsyncAwait.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
             "label": "publishLesson11",
             "command": "dotnet",
             "type": "process",

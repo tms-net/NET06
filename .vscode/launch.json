@@ -38,6 +38,17 @@
             "stopAtEntry": false
         },
         {
+            "name": "Launch Lesson-13-AsyncAwait (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildLesson13",
+            "program": "${workspaceFolder}/Lessons/Lesson-13-AsyncAwait/TMS.NET06.Lesson13.AsyncAwait/bin/Debug/netcoreapp3.1/win-x86/TMS.NET06.Lesson13.AsyncAwait.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}/Lessons/Lesson-13-AsyncAwait/TMS.NET06.Lesson13.AsyncAwait",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
             "name": ".NET Core Attach",
             "type": "coreclr",
             "request": "attach",
