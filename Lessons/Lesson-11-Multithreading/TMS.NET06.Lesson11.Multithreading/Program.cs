@@ -29,9 +29,5 @@ namespace TMS.NET06.Lesson11.Multithreading
             Console.WriteLine(id + " is leaving");     // a time.
             _sem.Release();
         }
-        public static void Main()
-        {
-              
-        }
     }
 }
