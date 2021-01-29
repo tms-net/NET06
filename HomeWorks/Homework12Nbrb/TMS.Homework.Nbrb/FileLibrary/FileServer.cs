@@ -2,7 +2,7 @@
 
 namespace FileLibrary
 {
-    public class File
+    public class FileServer
     {
     }
 }

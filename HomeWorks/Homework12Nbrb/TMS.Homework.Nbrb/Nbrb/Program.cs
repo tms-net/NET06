@@ -1,4 +1,5 @@
 ﻿using System;
+using UILibrary;
 
 namespace Nbrb
 {
@@ -6,7 +7,9 @@ namespace Nbrb
     {
         static void Main(string[] args)
         {
-            UILibrary.UI.ToDo();
+            var uIClient = new UIApplication();
+
+            uIClient.ToDo();
         }
     }
 }

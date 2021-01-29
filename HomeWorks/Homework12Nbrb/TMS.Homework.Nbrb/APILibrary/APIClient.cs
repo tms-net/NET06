@@ -2,7 +2,7 @@
 
 namespace APILibrary
 {
-    public class API
+    public class APIClient
     {
     }
 }

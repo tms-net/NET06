@@ -1,10 +1,11 @@
 ﻿using System;
+using APILibrary;
 
 namespace UILibrary
 {
-    public class UI
+    public class UIApplication
     {
-        public static void ToDo()
+        public void ToDo()
         {
             Console.WriteLine("Start application.");
 
