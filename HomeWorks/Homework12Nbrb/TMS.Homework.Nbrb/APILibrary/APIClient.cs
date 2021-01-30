@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using APILibrary.Models;
 using Newtonsoft.Json; //добавить nuget packet - Newtonsoft.Json
 
+
 namespace APILibrary
 {
     public class APIClient
     {
+
         private Dictionary<int, int> dictionaryCurrencies;
 
         public APIClient()
@@ -104,8 +106,7 @@ namespace APILibrary
         }
 
 
-
-
-
     }
+
+    
 }
