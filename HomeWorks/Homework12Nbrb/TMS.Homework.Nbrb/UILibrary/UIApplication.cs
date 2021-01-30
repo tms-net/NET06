@@ -67,11 +67,21 @@ namespace UILibrary
                             isCurrencyExist = true;
                         }
 
+                         
                         if (isCurrencyExist)
                         {
-                            InputDates(out DateTime date1, out DateTime date2);
+                            if (command.Param == "p")
+                            {
+                                InputDates(out DateTime date1, out DateTime date2);
+                                //List<CurrencyCourse> currencyCourses = aPIClient.GetCourses(code, date1, date2);
+                            }
+                            else
+                            {
+                                DateTime date = InputDate();
+                                //CurrencyCourse currencyCourse = aPIClient.GetCourses(code, date);
+                                //currencyCourses.Add(currencyCourse);
+                            }
 
-                            //List<CurrencyCourse> currencyCourses = aPIClient.GetCourses(code, date1, date2);
                             PrintCurrencyCourses(currencyCourses);
                         }
                       
@@ -140,7 +150,7 @@ namespace UILibrary
             date2 = InputDate("end");
         }
 
-        private DateTime InputDate(string nameOfDate)
+        private DateTime InputDate(string nameOfDate = "")
         {
             bool isOk = false;
            DateTime date = new DateTime();
