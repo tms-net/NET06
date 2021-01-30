@@ -17,8 +17,11 @@ namespace UILibrary
 
         private void ParseCommandLine(string commandLine, out string name, out string param)
         {
-           name = "";
-           param = "";
+           string[] NameParamArray = commandLine.Split('-');
+
+           name = NameParamArray[0];
+            if (NameParamArray.Length == 2) param = NameParamArray[1]; else param = "";
+          
         }
 
     }
