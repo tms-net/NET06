@@ -1,5 +1,4 @@
 ﻿using APILibrary;
-using FileLibrary;
 using System;
 using System.Collections.Generic;
 
@@ -11,62 +10,83 @@ namespace UILibrary
         private List<CurrencyCourse> currencyCourses = new List<CurrencyCourse>();
         public void ToDo()
         {
+            Console.WriteLine("Hello! You are greeting by NbRb.");
             APIClient aPIClient = new APIClient();
-            //bool exit = false;
+
             while (true)
             {
+                PrintHelp();
+
                 var commandLine = Console.ReadLine();
 
-                //int.TryParse(command, out var numberOfPeople)
                 Command command = new Command(commandLine);
-              
+
 
                 switch (command.Name)
                 {
                     case "list":
+                        int currencyNumber;
+                        int.TryParse(command.Param, out currencyNumber);
+                        if (currencyNumber > 0)
+                        {
+                            Console.WriteLine($"You selected {command.Param} currencies");
+                            Console.WriteLine("======================================");
+                            //currencyList = aPIClient.GetInfo(command.Param); // api группа делает привязку  на public void GetInfo ()
+                        }
+                        else
+                        {
+                            Console.WriteLine($"You selected all currencies");
+                            Console.WriteLine("======================================");
+                            //currencyList = aPIClient.GetInfo(); // api группа делает привязку  на public void GetInfo ()
+                        }
 
-                        Console.WriteLine("You selected 10 currency");
-                       
+                        PrintCurrencies();
 
-                        //currencyList = aPIClient.GetInfo(command.Param); // api группа делает привязку  на public void GetInfo ()
                         break;
 
                     case "course":
+                        bool isCurrencyExist = false;
                         if (currencyList.Count > 0)
                         {
                             int code;
-                            bool isCurrencyExist = false;
+
                             bool res = int.TryParse(Console.ReadLine(), out code);
                             if (FindCurrencyInList(code) != null)
-                                   isCurrencyExist = true;
-                            
+                                isCurrencyExist = true;
                             else
                             {
                                 //if (aPIClient.FindCurrency(code) != null)
-                                    isCurrencyExist = true; 
+                                isCurrencyExist = true;
                             }
 
-                            if (isCurrencyExist)
-                            {
-                                InputDates(out DateTime date, out DateTime date1);
-                               
-                               //List<CurrencyCourse> currencyCourses = aPIClient.GetCourses(code, date1, date2);
-                                PrintCurrencyCourses(currencyCourses);
-                            }
                         }
+
+                        if (!isCurrencyExist)
+                        {   
+                            //if (aPIClient.FindCurrency(code) != null)
+                            isCurrencyExist = true;
+                        }
+
+                        if (isCurrencyExist)
+                        {
+                            InputDates(out DateTime date1, out DateTime date2);
+
+                            //List<CurrencyCourse> currencyCourses = aPIClient.GetCourses(code, date1, date2);
+                            PrintCurrencyCourses(currencyCourses);
+                        }
+                      
                         break;
                     case "save":
                         {
-                            Console.WriteLine("Input path");
+                            Console.WriteLine("Input path:");
                             string path = Console.ReadLine();
                             if (currencyCourses.Count > 0)
-                            { //FileService.SaveInFile(path, currencyCourses); }
-                               
+                            { 
+                             //FileService.SaveInFile(path, currencyCourses); }
                             }
                             break;
                         }
                     case "exit":
-                        // exit = true;
                         return;
 
                     default:
@@ -86,67 +106,69 @@ namespace UILibrary
             return null;
         }
 
-        //private static bool InputDate(out DateTime date, string NameOfDate)
-        //{
-        //    Console.WriteLine($"Please input {NameOfDate} date");
-        //    bool result = DateTime.TryParse(Console.ReadLine(), out date);
-        //    if (result != true) Console.WriteLine("Date is incorrect! Try again!");
-        //    return result;
-
-        //}
-
-        //private bool InputDatePeriod(out DateTime start, out DateTime end)
-        //{
-        //    //while (InputDate(out start, nameof(start)) != true) ;
-        //    //while (InputDate(out end, nameof(end)) != true) ;
-
-        //    //bool result = (start <= end) ? true : false;
-        //    //if (!result) Console.WriteLine("Error! Start date is greater than end date. Try again!");
-        //    //return result;
-
-        //    return false;
-
-        //}
-
-        private void InputDates(out DateTime date, out DateTime date1)
+        private void InputDates(out DateTime date1, out DateTime date2)
         {
-            bool firstDate = false;
-            bool secondDate = false;
-            date = new DateTime();
-            date1 = new DateTime();
+            //bool firstDate = false;
+            //bool secondDate = false;
+            //date1 = new DateTime();
+            //date2 = new DateTime();
 
-            while (!firstDate)
+            //while (!firstDate)
+            //{
+            //    Console.WriteLine("Enter start date from (day-month-year): ");
+            //    firstDate = DateTime.TryParse(Console.ReadLine(), out date1);
+
+            //    if (!firstDate)
+            //    {
+            //        Console.WriteLine("Error!!! Wrong format ( dd-mm-yyyy)!!! Please Try again ");
+            //    }
+            //}
+
+            //while (!secondDate)
+            //{
+            //    Console.WriteLine("Enter the latest date (day-month-year): ");
+            //    secondDate = DateTime.TryParse(Console.ReadLine(), out date2);
+
+            //    if (!secondDate)
+            //    {
+            //        Console.WriteLine("Error!!! Wrong format ( dd-mm-yyyy)!!! Please Try again ");
+            //    }
+
+
+            //}
+            date1 = InputDate("start");
+            date2 = InputDate("end");
+        }
+
+        private DateTime InputDate(string nameOfDate)
+        {
+            bool isOk = false;
+           DateTime date = new DateTime();
+           
+            while (!isOk)
             {
-                Console.WriteLine("Enter start date from the range (day-month-year): ");
-                firstDate = DateTime.TryParse(Console.ReadLine(), out date);
+                Console.WriteLine("Enter {nameOfDate} date from (day-month-year): ");
+                isOk = DateTime.TryParse(Console.ReadLine(), out date);
 
-                if (!firstDate)
+                if (!isOk)
                 {
                     Console.WriteLine("Error!!! Wrong format ( dd-mm-yyyy)!!! Please Try again ");
                 }
             }
 
-            while (!secondDate)
-            {
-                Console.WriteLine("Enter the latest date from the range (day-month-year): ");
-                secondDate = DateTime.TryParse(Console.ReadLine(), out date1);
-
-                if (!secondDate)
-                {
-                    Console.WriteLine("Error!!! Wrong format ( dd-mm-yyyy)!!! Please Try again ");
-                }
-
-
-            }
-
-
+            return date;
         }
 
         private void PrintCurrencyCourses(List<CurrencyCourse> currencyCourses)
-        { 
+        {
         }
 
         private void PrintHelp()
+        {
+            Console.WriteLine("Here must be HELP");
+        }
+
+        private void PrintCurrencies()
         {
         }
     }
