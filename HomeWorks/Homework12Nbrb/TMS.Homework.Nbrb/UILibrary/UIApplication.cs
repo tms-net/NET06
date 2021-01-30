@@ -7,9 +7,28 @@ namespace UILibrary
     {
         public void ToDo()
         {
-            Console.WriteLine("Start application.");
+            while (true)
+            {
+                var commandLine = Console.ReadLine();
 
-            Console.ReadKey();
+                //int.TryParse(command, out var numberOfPeople)
+                Command command = new Command(commandLine);
+                switch (command.Name)
+                {
+                    case "list":
+
+                        Console.WriteLine("You selected 10 currency");
+                        APIClient aPIClient = new APIClient();
+
+                        //List<Currency> currencyList = aPIClient.GetInfo(command.Param); // api группа делает привязку  на public void GetInfo ()
+                        break;
+
+                    
+                    default:
+                       
+                        break;
+                }
+            }
         }
     }
 }
