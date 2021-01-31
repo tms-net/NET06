@@ -11,7 +11,7 @@ namespace UILibrary
         private List<Rates> currencyExRates;// = new List<CurrencyCourse>();
         public void ToDo()
         {
-            Console.WriteLine("Hello! You are greeting by NbRb.");
+            Console.WriteLine("Hello! You are greeted by NbRb.");
             APIClient aPIClient = new APIClient();
 
             while (true)
