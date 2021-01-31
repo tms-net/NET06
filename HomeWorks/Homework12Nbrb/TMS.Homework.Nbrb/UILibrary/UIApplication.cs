@@ -1,13 +1,14 @@
 ﻿using APILibrary;
 using System;
 using System.Collections.Generic;
+using APILibrary.Models;
 
 namespace UILibrary
 {
     public class UIApplication
     {
-        private List<ShortCurrencies> currencyList = new List<ShortCurrencies>();
-        private List<CurrencyCourse> currencyCourses = new List<CurrencyCourse>();
+        private List<ShortCurrencies> currencyList; //= new List<ShortCurrencies>();
+        private List<Rates> currencyExRates;// = new List<CurrencyCourse>();
         public void ToDo()
         {
             Console.WriteLine("Hello! You are greeting by NbRb.");
@@ -30,70 +31,60 @@ namespace UILibrary
                         if (currencyNumber > 0)
                         {
                             Console.WriteLine($"You selected {command.Param} currencies");
-                            Console.WriteLine("======================================");
-                            //currencyList = aPIClient.GetInfo(command.Param); // api группа делает привязку  на public void GetInfo ()
+                            currencyList = aPIClient.GetShortCurrencies(currencyNumber);
                         }
                         else
                         {
                             Console.WriteLine($"You selected all currencies");
-                            Console.WriteLine("======================================");
-                            //currencyList = aPIClient.GetInfo(); // api группа делает привязку  на public void GetInfo ()
                         }
-
+                        Console.WriteLine("======================================");
+                        currencyList = aPIClient.GetShortCurrencies(currencyNumber);
                         PrintCurrencies();
 
                         break;
 
-                    case "course":
-                        bool isCurrencyExist = false;
+                    case "exrate":
+                        ShortCurrencies selectedCurrensy = null; ;
                         if (currencyList.Count > 0)
                         {
                             int code;
-
                             bool res = int.TryParse(Console.ReadLine(), out code);
-                            if (FindCurrencyInList(code) != null)
-                                isCurrencyExist = true;
-                            else
-                            {
-                                //if (aPIClient.FindCurrency(code) != null)
-                                isCurrencyExist = true;
-                            }
-
+                            selectedCurrensy = FindCurrencyInList(code);
                         }
 
-                        if (!isCurrencyExist)
-                        {   
-                            //if (aPIClient.FindCurrency(code) != null)
-                            isCurrencyExist = true;
+                        if (selectedCurrensy == null)
+                        {
+                            //selectedCurrensy = aPIClient.FindCurrency(code);
                         }
 
-                         
-                        if (isCurrencyExist)
+
+                        if (selectedCurrensy != null)
                         {
                             if (command.Param == "p")
                             {
                                 InputDates(out DateTime date1, out DateTime date2);
-                                //List<CurrencyCourse> currencyCourses = aPIClient.GetCourses(code, date1, date2);
+                                List<Rates> currencyExRates = aPIClient.GetRates(date1, date2, selectedCurrensy.Code);
                             }
                             else
                             {
                                 DateTime date = InputDate();
-                                //CurrencyCourse currencyCourse = aPIClient.GetCourses(code, date);
-                                //currencyCourses.Add(currencyCourse);
+                                Rates currencyRate = aPIClient.GetRates(date, selectedCurrensy.Code);
+                                currencyExRates.Add(currencyRate);
                             }
 
-                            PrintCurrencyCourses(currencyCourses);
+                            PrintCurrencyExrates(currencyExRates);
                         }
-                      
+
                         break;
                     case "save":
                         {
                             Console.WriteLine("Input path:");
                             string path = Console.ReadLine();
-                            if (currencyCourses.Count > 0)
-                            { 
-                             //FileService.SaveInFile(path, currencyCourses); }
+                            if (currencyExRates.Count > 0)
+                            {
+                                //FileService.SaveInFile(path, currencyCourses); }
                             }
+                            else Console.WriteLine("There is nothing to save!");
                             break;
                         }
                     case "exit":
@@ -118,34 +109,6 @@ namespace UILibrary
 
         private void InputDates(out DateTime date1, out DateTime date2)
         {
-            //bool firstDate = false;
-            //bool secondDate = false;
-            //date1 = new DateTime();
-            //date2 = new DateTime();
-
-            //while (!firstDate)
-            //{
-            //    Console.WriteLine("Enter start date from (day-month-year): ");
-            //    firstDate = DateTime.TryParse(Console.ReadLine(), out date1);
-
-            //    if (!firstDate)
-            //    {
-            //        Console.WriteLine("Error!!! Wrong format ( dd-mm-yyyy)!!! Please Try again ");
-            //    }
-            //}
-
-            //while (!secondDate)
-            //{
-            //    Console.WriteLine("Enter the latest date (day-month-year): ");
-            //    secondDate = DateTime.TryParse(Console.ReadLine(), out date2);
-
-            //    if (!secondDate)
-            //    {
-            //        Console.WriteLine("Error!!! Wrong format ( dd-mm-yyyy)!!! Please Try again ");
-            //    }
-
-
-            //}
             date1 = InputDate("start");
             date2 = InputDate("end");
         }
@@ -153,8 +116,8 @@ namespace UILibrary
         private DateTime InputDate(string nameOfDate = "")
         {
             bool isOk = false;
-           DateTime date = new DateTime();
-           
+            DateTime date = new DateTime();
+
             while (!isOk)
             {
                 Console.WriteLine("Enter {nameOfDate} date from (day-month-year): ");
@@ -169,13 +132,21 @@ namespace UILibrary
             return date;
         }
 
-        private void PrintCurrencyCourses(List<CurrencyCourse> currencyCourses)
+        private void PrintCurrencyExrates(List<Rates> currencyExRates)
         {
         }
 
         private void PrintHelp()
         {
-            Console.WriteLine("Here must be HELP");
+            Console.WriteLine("===========HELP=============");
+            Console.WriteLine("list         display all currencies");
+            Console.WriteLine("list -n      display n currencies");
+            Console.WriteLine("exrate       request&display currency rates on date");
+            Console.WriteLine("exrate -p    request&display currency rates for the period");
+            Console.WriteLine("save         save requested currency rates");
+            Console.WriteLine("exit         exit program");
+            Console.WriteLine("help         display help");
+            Console.WriteLine("============================");
         }
 
         private void PrintCurrencies()
