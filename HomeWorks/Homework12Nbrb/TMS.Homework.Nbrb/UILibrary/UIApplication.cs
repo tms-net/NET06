@@ -7,17 +7,17 @@ namespace UILibrary
 {
     public class UIApplication
     {
-        private List<ShortCurrencies> currencyList; //= new List<ShortCurrencies>();
-        private List<Rates> currencyExRates;// = new List<CurrencyCourse>();
+        private List<ShortCurrencies> currencyList; 
+        private List<Rates> currencyExRates;
         public void ToDo()
         {
             Console.WriteLine("Hello! You are greeted by NbRb.");
             APIClient aPIClient = new APIClient();
 
+            PrintHelp();
+
             while (true)
             {
-                PrintHelp();
-
                 var commandLine = Console.ReadLine();
 
                 Command command = new Command(commandLine);
@@ -26,12 +26,10 @@ namespace UILibrary
                 switch (command.Name)
                 {
                     case "list":
-                        int currencyNumber;
-                        int.TryParse(command.Param, out currencyNumber);
+                        int.TryParse(command.Param, out int currencyNumber);
                         if (currencyNumber > 0)
                         {
-                            Console.WriteLine($"You selected {command.Param} currencies");
-                            currencyList = aPIClient.GetShortCurrencies(currencyNumber);
+                            Console.WriteLine($"You selected {currencyNumber} currencies");
                         }
                         else
                         {
@@ -44,12 +42,15 @@ namespace UILibrary
                         break;
 
                     case "exrate":
-                        ShortCurrencies selectedCurrensy = null; ;
-                        if (currencyList.Count > 0)
-                        {
-                            int code;
-                            bool res = int.TryParse(Console.ReadLine(), out code);
-                            selectedCurrensy = FindCurrencyInList(code);
+                        ShortCurrencies selectedCurrensy = null;
+                        Console.WriteLine("Enter currency code:");
+                        int.TryParse(Console.ReadLine(), out int code);
+                        if (currencyList!= null)
+                        { 
+                            if (currencyList.Count > 0)
+                            {                           
+                                selectedCurrensy = FindCurrencyInList(code);
+                            }
                         }
 
                         if (selectedCurrensy == null)
@@ -60,6 +61,7 @@ namespace UILibrary
 
                         if (selectedCurrensy != null)
                         {
+                            if (currencyExRates != null) currencyExRates.Clear();
                             if (command.Param == "p")
                             {
                                 InputDates(out DateTime date1, out DateTime date2);
@@ -80,9 +82,13 @@ namespace UILibrary
                         {
                             Console.WriteLine("Input path:");
                             string path = Console.ReadLine();
-                            if (currencyExRates.Count > 0)
+                            if (currencyExRates != null)
                             {
-                                //FileService.SaveInFile(path, currencyCourses); }
+                                if (currencyExRates.Count > 0)
+                                {
+                                    //FileService.SaveInFile(path, currencyCourses); }
+                                }
+                                else Console.WriteLine("There is nothing to save!");
                             }
                             else Console.WriteLine("There is nothing to save!");
                             break;
