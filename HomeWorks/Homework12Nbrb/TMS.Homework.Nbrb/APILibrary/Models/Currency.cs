@@ -4,7 +4,7 @@ using System.Text;
 
 namespace APILibrary.Models
 {
-    public class Currencies
+    public class Currency
     { public int Cur_ID { get; set; }// внутренний код
         public int Cur_ParentID { get; set; }//– этот код используется для связи, при изменениях наименования, количества единиц к которому устанавливается курс белорусского рубля, буквенного, цифрового кодов и т.д.фактически одной и той же валюты*.
         public int Cur_Code { get; set; }//– цифровой код
