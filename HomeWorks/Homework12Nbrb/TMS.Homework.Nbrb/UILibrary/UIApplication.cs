@@ -164,6 +164,13 @@ namespace UILibrary
 
         private void PrintCurrencies()
         {
+            Console.WriteLine("*****List of currencies*****");
+            Console.WriteLine("\nCODE     ABBREVIATION");
+
+            foreach (var shortCurrency in currencyList)
+            {
+                Console.WriteLine($"{0}     {1}", shortCurrency.Code, shortCurrency.Abbreviation);
+            }
         }
     }
 }
