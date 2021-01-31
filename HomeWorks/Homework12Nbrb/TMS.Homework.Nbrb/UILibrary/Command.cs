@@ -21,8 +21,8 @@ namespace UILibrary
 
             if (NameParamArray.Length != 0)
             {
-                name = NameParamArray[0].ToLower();
-                if (NameParamArray.Length == 2) param = NameParamArray[1].ToLower(); else param = "";
+                name = NameParamArray[0].Trim().ToLower();
+                if (NameParamArray.Length == 2) param = NameParamArray[1].Trim().ToLower(); else param = "";
             }
             else { name = ""; param = ""; }
 

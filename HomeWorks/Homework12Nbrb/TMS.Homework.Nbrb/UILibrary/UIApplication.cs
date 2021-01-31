@@ -1,14 +1,13 @@
 ﻿using APILibrary;
+using APILibrary.Models;
 using System;
 using System.Collections.Generic;
-using APILibrary.Models;
 
 namespace UILibrary
 {
     public class UIApplication
     {
-        private List<ShortCurrency> currencyList; 
-        private List<Rate> currencyRates;
+        private List<ShortCurrency> currencyList;
         private List<ShortRate> currencyShortRates;
         public void ToDo()
         {
@@ -19,6 +18,7 @@ namespace UILibrary
 
             while (true)
             {
+                Console.WriteLine("Enter a command:");
                 var commandLine = Console.ReadLine();
 
                 Command command = new Command(commandLine);
@@ -36,60 +36,70 @@ namespace UILibrary
                         {
                             Console.WriteLine($"You selected all currencies");
                         }
-                        Console.WriteLine("======================================");
+                        Console.WriteLine("============================");
                         currencyList = aPIClient.GetShortCurrencies(currencyNumber);
                         PrintCurrencies();
 
                         break;
 
                     case "exrate":
-                        ShortCurrency selectedCurrensy = null;
+                        //ShortCurrency selectedCurrensy = null;
                         Console.WriteLine("Enter currency code:");
                         int.TryParse(Console.ReadLine(), out int code);
-                        if (currencyList!= null)
-                        { 
-                            if (currencyList.Count > 0)
-                            {                           
-                                selectedCurrensy = FindCurrencyInList(code);
-                            }
-                        }
+                        currencyShortRates = null;
+                        // здесь должен был быть поиск...в api не реализовано. 
+                        //if (currencyList!= null)
+                        //{ 
+                        //    if (currencyList.Count > 0)
+                        //    {                           
+                        //        selectedCurrensy = FindCurrencyInList(code);
+                        //    }
+                        //}
 
-                        if (selectedCurrensy == null)
+                        //if (selectedCurrensy == null)
+                        //{
+                        //    //selectedCurrensy = aPIClient.FindCurrency(code);
+                        //}
+
+
+                        //if (selectedCurrensy != null)
+                        //{
+
+                        if (command.Param == "p")
                         {
-                            //selectedCurrensy = aPIClient.FindCurrency(code);
+                            InputDates(out DateTime date1, out DateTime date2);
+                            currencyShortRates = aPIClient.GetRates(date1, date2, code).listShortRate;
                         }
-
-
-                        if (selectedCurrensy != null)
+                        else
                         {
-                            if (currencyRates != null) currencyRates.Clear();
-                            if (command.Param == "p")
-                            {
-                                InputDates(out DateTime date1, out DateTime date2);
-                                (currencyShortRates, code) = aPIClient.GetRates(date1, date2, selectedCurrensy.Code);
-                                PrintCurrencyRates(currencyShortRates);
-                            }
-                            else
-                            {
-                                DateTime date = InputDate();
-                                Rate currencyRate = aPIClient.GetRates(date, selectedCurrensy.Code);
-                                currencyRates.Add(currencyRate);
-                                PrintCurrencyRates(currencyRates);
-                            }
+                            //if (currencyShortRates != null)
+                            //    currencyShortRates.Clear();
+                            //else currencyShortRates = new List<ShortRate>();
 
-                           
+                            DateTime date = InputDate("a");
+                            Rate rate = aPIClient.GetRates(date, code);
+                            if (rate != null)
+                            {
+                                currencyShortRates = new List<ShortRate>();
+                                ShortRate shortRate = new ShortRate();
+                                shortRate.Date = rate.Date;
+                                shortRate.Cur_OfficialRate = (decimal)rate.Cur_OfficialRate;
+                                currencyShortRates.Add(shortRate);
+                            }
                         }
+                        PrintCurrencyRates(code, currencyShortRates);
+                        // }
 
                         break;
                     case "save":
                         {
                             Console.WriteLine("Input path:");
                             string path = Console.ReadLine();
-                            if (currencyRates != null)
+                            if (currencyShortRates != null)
                             {
-                                if (currencyRates.Count > 0)
+                                if (currencyShortRates.Count > 0)
                                 {
-                                    //FileService.SaveInFile(path, currencyCourses); }
+                                    //FileService.SaveInFile(path, currencyShortRates); }
                                 }
                                 else Console.WriteLine("There is nothing to save!");
                             }
@@ -118,8 +128,15 @@ namespace UILibrary
 
         private void InputDates(out DateTime date1, out DateTime date2)
         {
-            date1 = InputDate("start");
-            date2 = InputDate("end");
+            bool res = true;
+            do
+            {
+              date1 = InputDate("start");
+              date2 = InputDate("end");
+
+                if (date1 > date2) { res = false; Console.WriteLine("Error! First date shouldn't be greater than second date."); }
+            } while (!res);
+            
         }
 
         private DateTime InputDate(string nameOfDate = "")
@@ -129,7 +146,7 @@ namespace UILibrary
 
             while (!isOk)
             {
-                Console.WriteLine("Enter {nameOfDate} date from (day-month-year): ");
+                Console.WriteLine($"Enter {nameOfDate} date (day-month-year): ");
                 isOk = DateTime.TryParse(Console.ReadLine(), out date);
 
                 if (!isOk)
@@ -141,12 +158,18 @@ namespace UILibrary
             return date;
         }
 
-        private void PrintCurrencyRates(List<Rate> currencyRates)
+        private void PrintCurrencyRates(int currCode, List<ShortRate> currencyShortRates)
         {
-        }
-
-        private void PrintCurrencyRates(List<ShortRate> currencyShortRates)
-        {
+            if (currencyShortRates == null)
+            { Console.WriteLine($"Somethings went wrong. May be currency code {currCode} isn't exist.");
+                return;
+            }
+            Console.WriteLine("*****Currency rates*****");
+            Console.WriteLine($"Currency code: {currCode}");
+            foreach (var shortRate in currencyShortRates)
+            {
+                Console.WriteLine($"Date: {shortRate.Date.ToShortDateString()}, rate: {shortRate.Cur_OfficialRate}");
+            }
         }
 
         private void PrintHelp()
@@ -165,11 +188,11 @@ namespace UILibrary
         private void PrintCurrencies()
         {
             Console.WriteLine("*****List of currencies*****");
-            Console.WriteLine("\nCODE     ABBREVIATION");
+            Console.WriteLine("\nCODE   ABBR    NAME");
 
             foreach (var shortCurrency in currencyList)
             {
-                Console.WriteLine($"{0}     {1}", shortCurrency.Code, shortCurrency.Abbreviation);
+                Console.WriteLine("{0:d3}    {1}     {2}", shortCurrency.Code, shortCurrency.Abbreviation,shortCurrency.Name);
             }
         }
     }
