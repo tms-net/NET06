@@ -7,8 +7,8 @@ namespace UILibrary
 {
     public class UIApplication
     {
-        private List<ShortCurrencies> currencyList; 
-        private List<Rates> currencyExRates;
+        private List<ShortCurrency> currencyList; 
+        private List<Rate> currencyExRates;
         public void ToDo()
         {
             Console.WriteLine("Hello! You are greeted by NbRb.");
@@ -42,7 +42,7 @@ namespace UILibrary
                         break;
 
                     case "exrate":
-                        ShortCurrencies selectedCurrensy = null;
+                        ShortCurrency selectedCurrensy = null;
                         Console.WriteLine("Enter currency code:");
                         int.TryParse(Console.ReadLine(), out int code);
                         if (currencyList!= null)
@@ -65,12 +65,12 @@ namespace UILibrary
                             if (command.Param == "p")
                             {
                                 InputDates(out DateTime date1, out DateTime date2);
-                                List<Rates> currencyExRates = aPIClient.GetRates(date1, date2, selectedCurrensy.Code);
+                                List<Rate> currencyExRates = aPIClient.GetRates(date1, date2, selectedCurrensy.Code);
                             }
                             else
                             {
                                 DateTime date = InputDate();
-                                Rates currencyRate = aPIClient.GetRates(date, selectedCurrensy.Code);
+                                Rate currencyRate = aPIClient.GetRates(date, selectedCurrensy.Code);
                                 currencyExRates.Add(currencyRate);
                             }
 
@@ -103,7 +103,7 @@ namespace UILibrary
             }
         }
 
-        private ShortCurrencies FindCurrencyInList(int code)
+        private ShortCurrency FindCurrencyInList(int code)
         {
             foreach (var currency in currencyList)
             {
@@ -138,7 +138,7 @@ namespace UILibrary
             return date;
         }
 
-        private void PrintCurrencyExrates(List<Rates> currencyExRates)
+        private void PrintCurrencyExrates(List<Rate> currencyExRates)
         {
         }
 
