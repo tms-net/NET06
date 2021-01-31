@@ -19,8 +19,12 @@ namespace UILibrary
         {
             string[] NameParamArray = commandLine.Split('-');
 
-            name = NameParamArray[0].ToLower();
-            if (NameParamArray.Length == 2) param = NameParamArray[1].ToLower(); else param = "";
+            if (NameParamArray.Length != 0)
+            {
+                name = NameParamArray[0].ToLower();
+                if (NameParamArray.Length == 2) param = NameParamArray[1].ToLower(); else param = ""
+            }
+            else { name = ""; param = ""; }
 
         }
 
