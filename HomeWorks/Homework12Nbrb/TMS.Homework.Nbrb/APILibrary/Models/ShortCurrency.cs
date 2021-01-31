@@ -4,16 +4,21 @@ using System.Text;
 
 namespace APILibrary.Models
 {
-    public class ShortCurrencies
+    public class ShortCurrency
     {
         /// <summary>
-        /// Code currency (код валюты)
+        /// Currency code
         /// </summary>
         public int Code { get; set; }
 
         /// <summary>
-        /// Abbreviation currency (Абревиатура валюты)
+        /// Abbreviation
         /// </summary>
         public string Abbreviation { get; set; }
+
+        /// <summary>
+        /// Currency name
+        /// </summary>
+        public string Name { get; set; }
     }
 }
