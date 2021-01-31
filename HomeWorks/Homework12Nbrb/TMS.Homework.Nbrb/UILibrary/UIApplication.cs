@@ -8,7 +8,8 @@ namespace UILibrary
     public class UIApplication
     {
         private List<ShortCurrency> currencyList; 
-        private List<Rate> currencyExRates;
+        private List<Rate> currencyRates;
+        private List<ShortRate> currencyShortRates;
         public void ToDo()
         {
             Console.WriteLine("Hello! You are greeted by NbRb.");
@@ -61,20 +62,22 @@ namespace UILibrary
 
                         if (selectedCurrensy != null)
                         {
-                            if (currencyExRates != null) currencyExRates.Clear();
+                            if (currencyRates != null) currencyRates.Clear();
                             if (command.Param == "p")
                             {
                                 InputDates(out DateTime date1, out DateTime date2);
-                                List<Rate> currencyExRates = aPIClient.GetRates(date1, date2, selectedCurrensy.Code);
+                                (currencyShortRates, code) = aPIClient.GetRates(date1, date2, selectedCurrensy.Code);
+                                PrintCurrencyRates(currencyShortRates);
                             }
                             else
                             {
                                 DateTime date = InputDate();
                                 Rate currencyRate = aPIClient.GetRates(date, selectedCurrensy.Code);
-                                currencyExRates.Add(currencyRate);
+                                currencyRates.Add(currencyRate);
+                                PrintCurrencyRates(currencyRates);
                             }
 
-                            PrintCurrencyExrates(currencyExRates);
+                           
                         }
 
                         break;
@@ -82,9 +85,9 @@ namespace UILibrary
                         {
                             Console.WriteLine("Input path:");
                             string path = Console.ReadLine();
-                            if (currencyExRates != null)
+                            if (currencyRates != null)
                             {
-                                if (currencyExRates.Count > 0)
+                                if (currencyRates.Count > 0)
                                 {
                                     //FileService.SaveInFile(path, currencyCourses); }
                                 }
@@ -138,7 +141,11 @@ namespace UILibrary
             return date;
         }
 
-        private void PrintCurrencyExrates(List<Rate> currencyExRates)
+        private void PrintCurrencyRates(List<Rate> currencyRates)
+        {
+        }
+
+        private void PrintCurrencyRates(List<ShortRate> currencyShortRates)
         {
         }
 
