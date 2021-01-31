@@ -146,7 +146,7 @@ namespace UILibrary
         {
             Console.WriteLine("===========HELP=============");
             Console.WriteLine("list         display all currencies");
-            Console.WriteLine("list -n      display n currencies");
+            Console.WriteLine("list -n      display n currencies (n - number of currencies)");
             Console.WriteLine("exrate       request&display currency rates on date");
             Console.WriteLine("exrate -p    request&display currency rates for the period");
             Console.WriteLine("save         save requested currency rates");
