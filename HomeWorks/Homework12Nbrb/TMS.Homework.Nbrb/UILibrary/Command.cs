@@ -10,18 +10,22 @@ namespace UILibrary
         public string Param;
 
         public Command(string commandLine)
-            
-        { 
+
+        {
             ParseCommandLine(commandLine, out Name, out Param);
         }
 
         private void ParseCommandLine(string commandLine, out string name, out string param)
         {
-           string[] NameParamArray = commandLine.Split('-');
+            string[] NameParamArray = commandLine.Split('-');
 
-           name = NameParamArray[0];
-            if (NameParamArray.Length == 2) param = NameParamArray[1]; else param = "";
-          
+            if (NameParamArray.Length != 0)
+            {
+                name = NameParamArray[0].Trim().ToLower();
+                if (NameParamArray.Length == 2) param = NameParamArray[1].Trim().ToLower(); else param = "";
+            }
+            else { name = ""; param = ""; }
+
         }
 
     }
