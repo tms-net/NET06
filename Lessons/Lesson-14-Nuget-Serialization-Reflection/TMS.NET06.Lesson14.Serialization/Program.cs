@@ -3,6 +3,16 @@ using System.Text.Json;
 
 namespace TMS.NET06.Lesson14.Serialization
 {
+	public class JsonClass
+    {
+	    public string stringProp { get; set; }
+	    public int numProp { get; set; }
+	    public object objProp { get; set; }
+	    public object[] arrayProp { get; set; }
+        public bool boolProp { get; set; }
+        public object unknownProp { get; set; }
+    }
+
     class Program
     {
         // TODO: review how JsonSerializer works with objects
@@ -11,15 +21,7 @@ namespace TMS.NET06.Lesson14.Serialization
         // - unknown objects
         // - array with different types (JsonElement, etc.)
         // - serialization exceptions
-        public class JsonClass
-	    {
-		    public string stringProp { get; set; }
-		    public int numProp { get; set; }
-		    public object objProp { get; set; }
-		    public object[] arrayProp { get; set; }
-            public bool boolProp { get; set; }
-            public object unknownProp { get; set; }
-        }
+        
 
         static void Main(string[] args)
         {
