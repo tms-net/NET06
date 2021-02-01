@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "buildHomeWork11",
-            "program": "${workspaceFolder}/HomeWorks/HomeWork11/TMS.ShopSimulator/TMS.ShopSimulator/bin/Debug/netcoreapp3.1/TMS.ShopSimulator.dll",
+            "program": "${workspaceFolder}/HomeWorks/HomeWork11/TMS.ShopSimulator/bin/Debug/netcoreapp3.1/TMS.NET06.ShopSimulator.exe",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
@@ -34,6 +34,17 @@
             "program": "${workspaceFolder}/Lessons/Lesson-12-ParallelProgramming/TMS.NET06.Lesson12.ParallelProgramming/bin/Debug/netcoreapp3.1/TMS.NET06.Lesson12.ParallelProgramming.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Lessons/Lesson-12-ParallelProgramming/TMS.NET06.Lesson12.ParallelProgramming",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Launch Lesson-13-AsyncAwait (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildLesson13",
+            "program": "${workspaceFolder}/Lessons/Lesson-13-AsyncAwait/TMS.NET06.Lesson13.AsyncAwait/bin/Debug/netcoreapp3.1/win-x86/TMS.NET06.Lesson13.AsyncAwait.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}/Lessons/Lesson-13-AsyncAwait/TMS.NET06.Lesson13.AsyncAwait",
             "console": "internalConsole",
             "stopAtEntry": false
         },

@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/HomeWorks/HomeWork11/TMS.ShopSimulator/TMS.ShopSimulator/TMS.ShopSimulator.csproj",
+                "${workspaceFolder}/HomeWorks/HomeWork11/TMS.ShopSimulator/TMS.NET06.ShopSimulator.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -32,6 +32,18 @@
             "args": [
                 "build",
                 "${workspaceFolder}/Lessons/Lesson-12-ParallelProgramming/TMS.NET06.Lesson12.ParallelProgramming/TMS.NET06.Lesson12.ParallelProgramming.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "buildLesson13",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Lessons/Lesson-13-AsyncAwait/TMS.NET06.Lesson13.AsyncAwait/TMS.NET06.Lesson13.AsyncAwait.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
