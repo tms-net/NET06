@@ -45,28 +45,23 @@ namespace APILibrary
         /// </summary>
         /// <param name="countCurrencies">Count elements need result</param>
         /// <returns>list short currencies</returns>
-        public List<ShortCurrency> GetShortCurrencies(int countCurrencies)
+        public async Task<List<ShortCurrency>> GetShortCurrenciesAsync(int countCurrencies)
         {
             List<ShortCurrency> vRes = new List<ShortCurrency>();
 
-            var listCurrencies = GetAllCurrenciesAsync().Result.Where(x => x.Cur_DateEnd > DateTime.Now).OrderBy(y => y.Cur_Code).ToList();
+            var listCurrencies = (await GetAllCurrenciesAsync()).ToList();
 
             CreateDictionaryCurrencies(listCurrencies);
 
-            var currentCountCurrencies = (countCurrencies > listCurrencies.Count) || (countCurrencies == 0)
-                ? listCurrencies.Count
-                : countCurrencies;
+            return listCurrencies.Where(x => x.Cur_DateEnd > DateTime.Now)
+                                .OrderBy(y => y.Cur_Code)
+                                .Take(countCurrencies > 0 ? countCurrencies : listCurrencies.Count)
+                                .Select(c => new ShortCurrency {
+                                    Code = c.Cur_Code,
+                                    Abbreviation = c.Cur_Abbreviation,
+                                    Name = c.Cur_Name
+                                }).ToList();
 
-            for (var i = 0; i < currentCountCurrencies; i++)
-            {
-                var shortCurrency = new ShortCurrency();
-                shortCurrency.Code = listCurrencies[i].Cur_Code;
-                shortCurrency.Abbreviation = listCurrencies[i].Cur_Abbreviation;
-                shortCurrency.Name = listCurrencies[i].Cur_Name;
-
-                vRes.Add(shortCurrency);
-            }
-            return vRes;
         }
 
         /// <summary>
@@ -77,7 +72,7 @@ namespace APILibrary
         {
             dictionaryCurrencies.Clear();
 
-            foreach (var currency in listCurrencies)
+            foreach (var currency in listCurrencies.Where(c => c.Cur_DateEnd > DateTime.Now))
             {
                 dictionaryCurrencies.Add(currency.Cur_Code, currency.Cur_ID);
             }
@@ -89,7 +84,7 @@ namespace APILibrary
         /// <param name="forDate">Date currency</param>
         /// <param name="codeCurrency">Code currency</param>
         /// <returns>Task</returns>
-        private async Task<Rate> GetRateOnDate(DateTime forDate, int codeCurrency)
+        private async Task<Rate> GetRateOnDateAsync(DateTime forDate, int codeCurrency)
         {
             using (var httpClient = new HttpClient())
             {
@@ -108,18 +103,7 @@ namespace APILibrary
         /// <param name="forDate">Date currency</param>
         /// <param name="codeCurrency">Code currency</param>
         /// <returns>Rate</returns>
-        public Rate GetRates(DateTime forDate, int codeCurrency)
-        {
-            try
-            {
-                return GetRateOnDate(forDate, codeCurrency).Result;
-            }
-            catch
-            {
-                return null;
-            }
-
-        }
+        public Task<Rate> GetRatesAsync(DateTime forDate, int codeCurrency) => GetRateOnDateAsync(forDate, codeCurrency);     
 
         /// <summary>
         /// Get list short rates (получение курса валюты за указанный период)

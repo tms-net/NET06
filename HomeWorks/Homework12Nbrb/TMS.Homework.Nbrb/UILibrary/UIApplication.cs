@@ -1,7 +1,9 @@
 ﻿using APILibrary;
 using APILibrary.Models;
+using FileLibrary;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace UILibrary
 {
@@ -9,7 +11,13 @@ namespace UILibrary
     {
         private List<ShortCurrency> currencyList;
         private List<ShortRate> currencyShortRates;
-        public void ToDo()
+
+        public UIApplication(IFileService fileService)
+        {
+
+        }
+
+        public async Task ToDo()
         {
             Console.WriteLine("Hello! You are greeted by NbRb.");
             APIClient aPIClient = new APIClient();
@@ -37,7 +45,7 @@ namespace UILibrary
                             Console.WriteLine($"You selected all currencies");
                         }
                         Console.WriteLine("============================");
-                        currencyList = aPIClient.GetShortCurrencies(currencyNumber);
+                        currencyList = await aPIClient.GetShortCurrenciesAsync(currencyNumber);
                         PrintCurrencies();
 
                         break;
@@ -76,7 +84,7 @@ namespace UILibrary
                         else
                         {
                             DateTime date = InputDate("a");
-                            Rate rate = aPIClient.GetRates(date, code);
+                            Rate rate = await aPIClient.GetRatesAsync(date, code);
                             if (rate != null)
                             {
                                 currencyShortRates = new List<ShortRate>();

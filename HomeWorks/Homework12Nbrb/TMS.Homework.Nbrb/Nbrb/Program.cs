@@ -1,15 +1,8 @@
-﻿using System;
+﻿using APILibrary.Models;
+using FileLibrary;
+using System;
 using UILibrary;
 
-namespace Nbrb
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            var uIClient = new UIApplication();
+var uIClient = new UIApplication(new FileService<ShortRate>);
 
-            uIClient.ToDo();
-        }
-    }
-}
+await uIClient.ToDo();
