@@ -43,19 +43,22 @@ namespace UILibrary
                         break;
 
                     case "exrate":
-                        //ShortCurrency selectedCurrensy = null;
+                        ShortCurrency selectedCurrensy = null;
                         Console.WriteLine("Enter currency code:");
                         int.TryParse(Console.ReadLine(), out int code);
                         currencyShortRates = null;
-                        // здесь должен был быть поиск...в api не реализовано. 
-                        //if (currencyList!= null)
-                        //{ 
-                        //    if (currencyList.Count > 0)
-                        //    {                           
-                        //        selectedCurrensy = FindCurrencyInList(code);
-                        //    }
-                        //}
+                        bool isCurrExists = false;
+                        if (currencyList != null)
+                        {
+                            if (currencyList.Count > 0)
+                            {
+                                selectedCurrensy = FindCurrencyInList(code);
+                                if (selectedCurrensy != null)
+                                    isCurrExists = true;
+                            }
+                        }
 
+                        //search is not implemented in api.. 
                         //if (selectedCurrensy == null)
                         //{
                         //    //selectedCurrensy = aPIClient.FindCurrency(code);
@@ -72,10 +75,6 @@ namespace UILibrary
                         }
                         else
                         {
-                            //if (currencyShortRates != null)
-                            //    currencyShortRates.Clear();
-                            //else currencyShortRates = new List<ShortRate>();
-
                             DateTime date = InputDate("a");
                             Rate rate = aPIClient.GetRates(date, code);
                             if (rate != null)
@@ -87,7 +86,7 @@ namespace UILibrary
                                 currencyShortRates.Add(shortRate);
                             }
                         }
-                        PrintCurrencyRates(code, currencyShortRates);
+                        PrintCurrencyRates(code, currencyShortRates, isCurrExists);
                         // }
 
                         break;
@@ -118,6 +117,12 @@ namespace UILibrary
 
         private ShortCurrency FindCurrencyInList(int code)
         {
+            if (currencyList == null)
+            {
+                Console.WriteLine("Somethings went wrong. Currency list is null");
+                return null;
+            }
+
             foreach (var currency in currencyList)
             {
                 if (currency.Code == code) return currency;
@@ -158,10 +163,14 @@ namespace UILibrary
             return date;
         }
 
-        private void PrintCurrencyRates(int currCode, List<ShortRate> currencyShortRates)
+        private void PrintCurrencyRates(int currCode, List<ShortRate> currencyShortRates, bool isCurrExists)
         {
-            if (currencyShortRates == null)
-            { Console.WriteLine($"Somethings went wrong. May be currency code {currCode} isn't exist.");
+           if (currencyShortRates == null)
+            {
+                if (isCurrExists)
+                    Console.WriteLine("Somethings went wrong.");
+                else
+                    Console.WriteLine($"Somethings went wrong. May be currency code {currCode} isn't exist.");
                 return;
             }
             Console.WriteLine("*****Currency rates*****");
@@ -187,6 +196,12 @@ namespace UILibrary
 
         private void PrintCurrencies()
         {
+            if (currencyList == null)
+            {
+                Console.WriteLine("Somethings went wrong. Currency list is null");
+                return;
+            }
+
             Console.WriteLine("*****List of currencies*****");
             Console.WriteLine("\nCODE   ABBR    NAME");
 
