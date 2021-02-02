@@ -1,10 +1,10 @@
-﻿using System;
+﻿using APILibrary.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using APILibrary.Models;
 
 
 namespace APILibrary
@@ -15,6 +15,8 @@ namespace APILibrary
         /// Dictionary for currencies (save code currency and internal code)
         /// </summary>
         private Dictionary<int, int> dictionaryCurrencies;
+        private static HttpClient httpClient = new HttpClient();
+
 
         public APIClient()
         {
@@ -25,20 +27,7 @@ namespace APILibrary
         /// Getting full json file with all currencies
         /// </summary>
         /// <returns>list Currency</returns>
-        private async Task<List<Currency>> GetAllCurrenciesAsync()
-        {
-            //HttpClient httpClient = new HttpClient();
-            //string request = "https://www.nbrb.by/api/exrates/currencies";
-            //HttpResponseMessage response = (await httpClient.GetAsync(request)).EnsureSuccessStatusCode();
-            //string responseBody = await response.Content.ReadAsStringAsync();
-
-            //return JsonConvert.DeserializeObject<List<Currency>>(responseBody);
-
-            using (var httpClient = new HttpClient())
-            {
-                return await httpClient.GetFromJsonAsync<List<Currency>>("https://www.nbrb.by/api/exrates/currencies");
-            }
-        }
+        private async Task<List<Currency>> GetAllCurrenciesAsync() => await httpClient.GetFromJsonAsync<List<Currency>>("https://www.nbrb.by/api/exrates/currencies");
 
         /// <summary>
         /// Receiving currency as a short list (input 0 return all list) (Получение списка валют, указанное количество (если парам. 0 вернет весь список))
@@ -91,14 +80,11 @@ namespace APILibrary
         /// <returns>Task</returns>
         private async Task<Rate> GetRateOnDate(DateTime forDate, int codeCurrency)
         {
-            using (var httpClient = new HttpClient())
-            {
-                var searchDate = forDate.ToString("yyyy-M-d");
-                var searchCode = dictionaryCurrencies.FirstOrDefault(x => x.Key == codeCurrency).Value;
+            var searchDate = forDate.ToString("yyyy-M-d");
+            var searchCode = dictionaryCurrencies.FirstOrDefault(x => x.Key == codeCurrency).Value;
 
-                var request = "https://www.nbrb.by/api/exrates/rates/" + searchCode + "?ondate=" + searchDate;
-                return await httpClient.GetFromJsonAsync<Rate>(request);
-            }
+            var request = "https://www.nbrb.by/api/exrates/rates/" + searchCode + "?ondate=" + searchDate;
+            return await httpClient.GetFromJsonAsync<Rate>(request);
         }
 
 
@@ -108,18 +94,8 @@ namespace APILibrary
         /// <param name="forDate">Date currency</param>
         /// <param name="codeCurrency">Code currency</param>
         /// <returns>Rate</returns>
-        public Rate GetRates(DateTime forDate, int codeCurrency)
-        {
-            try
-            {
-                return GetRateOnDate(forDate, codeCurrency).Result;
-            }
-            catch
-            {
-                return null;
-            }
+        public Rate GetRates(DateTime forDate, int codeCurrency) => GetRateOnDate(forDate, codeCurrency).Result;
 
-        }
 
         /// <summary>
         /// Get list short rates (получение курса валюты за указанный период)
@@ -128,17 +104,7 @@ namespace APILibrary
         /// <param name="finishDate">Finish date</param>
         /// <param name="codeCurrency">Code currency</param>
         /// <returns>List short rate</returns>
-        public (List<ShortRate> listShortRate, int codeCurrency) GetRates(DateTime startDate, DateTime finishDate, int codeCurrency)
-        {
-            try
-            {
-                return (GetRatesOnPeriod(startDate, finishDate, codeCurrency).Result, codeCurrency);
-            }
-            catch
-            {
-                return (null, codeCurrency);
-            }
-        }
+        public (List<ShortRate> listShortRate, int codeCurrency) GetRates(DateTime startDate, DateTime finishDate, int codeCurrency) => (GetRatesOnPeriod(startDate, finishDate, codeCurrency).Result, codeCurrency);
 
         /// <summary>
         /// Task for get list rates
@@ -149,17 +115,14 @@ namespace APILibrary
         /// <returns>Task</returns>
         private async Task<List<ShortRate>> GetRatesOnPeriod(DateTime startDate, DateTime finishDate, int codeCurrency)
         {
-            using (var httpClient = new HttpClient())
-            {
-                var searchFirstDate = startDate.ToString("yyyy-M-d");
-                var searchFinishDate = finishDate.ToString("yyyy-M-d");
-                var searchCode = dictionaryCurrencies.FirstOrDefault(x => x.Key == codeCurrency).Value;
+            var searchFirstDate = startDate.ToString("yyyy-M-d");
+            var searchFinishDate = finishDate.ToString("yyyy-M-d");
+            var searchCode = dictionaryCurrencies.FirstOrDefault(x => x.Key == codeCurrency).Value;
 
-                var request = "https://www.nbrb.by/API/ExRates/Rates/Dynamics/" + searchCode + "?startDate=" + searchFirstDate + "&endDate=" + searchFinishDate;
-                return await httpClient.GetFromJsonAsync<List<ShortRate>>(request);
-            }
+            var request = "https://www.nbrb.by/API/ExRates/Rates/Dynamics/" + searchCode + "?startDate=" + searchFirstDate + "&endDate=" + searchFinishDate;
+            return await httpClient.GetFromJsonAsync<List<ShortRate>>(request);
         }
     }
 
-    
+
 }
