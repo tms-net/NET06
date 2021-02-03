@@ -21,7 +21,7 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-        private APIClient _apiClient;
+        private readonly APIClient _apiClient;
 
         public MainWindow()
         {
@@ -31,8 +31,18 @@ namespace WpfApp1
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            var currencies = await _apiClient.GetShortCurrenciesAsync();
-            txtCurrencied.Text = string.Join("\n", currencies.Select(c => c.Name));
+	        txtCurrencies.Text = "loading currencies...";
+            var currencies = await _apiClient.GetShortCurrenciesAsync(0);
+            txtCurrencies.Text = string.Join("\t", currencies.Select(c => $"{c.Name} - {c.Code}"));
+        }
+
+        private /*async*/ void Button2_Click(object sender, RoutedEventArgs e)
+        {
+	        txtCurrencies.Text = "loading rates...";
+            var rates = _apiClient.GetRates(DateTime.Now.AddDays(-2), DateTime.Now, 145);
+            txtCurrencies.Text = $"results for: {rates.codeCurrency}:\n";
+            //await Task.Delay(100);
+            txtCurrencies.Text += string.Join("\t", rates.listShortRate.Select(r => r.Cur_OfficialRate));
         }
     }
 }

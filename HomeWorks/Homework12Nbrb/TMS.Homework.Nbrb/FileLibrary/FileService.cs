@@ -11,20 +11,14 @@ namespace FileLibrary
             _path = path;
         }
 
-        public void Save<T>(T data) { }
+        public void Save<T>(T data)
+        {
+
+        }
+
         public T Load<T>()
         {
             return default(T);
-        }
-
-        public void Save(T data)
-        {
-            throw new NotImplementedException();
-        }
-
-        public T Load()
-        {
-            throw new NotImplementedException();
         }
     }
 }

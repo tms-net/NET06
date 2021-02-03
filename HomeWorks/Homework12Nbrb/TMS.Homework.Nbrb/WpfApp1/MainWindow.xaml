@@ -5,9 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Background="AliceBlue">
     <Grid>
-        <Button Click="Button_Click" Content="Click Me!" Width="200" Height="50"/>
-        <TextBlock x:Name="txtCurrencied" Text="Currencied go here"/>
+        <StackPanel Margin="0,0,0,15" VerticalAlignment="Bottom">
+            <Button Click="Button_Click" Content="Currencies" Width="200" Height="50" Margin="10"/>
+            <Button Click="Button2_Click" Content="Rates" Width="200" Height="50" Margin="10"/>
+        </StackPanel>
+
+        <TextBlock x:Name="txtCurrencies" Background="White" Text="Currencies go here" Width="800" Height="250" Padding="20" VerticalAlignment="Top"/>
     </Grid>
 </Window>

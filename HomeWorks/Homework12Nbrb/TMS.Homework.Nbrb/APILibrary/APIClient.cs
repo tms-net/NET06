@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using APILibrary.Models;
 
@@ -112,10 +113,13 @@ namespace APILibrary
         /// <param name="finishDate">Finish date</param>
         /// <param name="codeCurrency">Code currency</param>
         /// <returns>List short rate</returns>
+        //public async Task<(List<ShortRate> listShortRate, int codeCurrency)> GetRates(DateTime startDate, DateTime finishDate, int codeCurrency)
         public (List<ShortRate> listShortRate, int codeCurrency) GetRates(DateTime startDate, DateTime finishDate, int codeCurrency)
         {
             try
             {
+                SynchronizationContext.SetSynchronizationContext(null);
+                //return (await GetRatesOnPeriod(startDate, finishDate, codeCurrency), codeCurrency);
                 return (GetRatesOnPeriod(startDate, finishDate, codeCurrency).Result, codeCurrency);
             }
             catch
