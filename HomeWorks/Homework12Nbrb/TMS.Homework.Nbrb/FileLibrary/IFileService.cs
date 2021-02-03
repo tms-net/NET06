@@ -5,7 +5,7 @@ namespace FileLibrary
 {
     public interface IFileService
     {
-        Task SaveAsync<T>(T data);
-        Task<T> Load<t>();
+        Task SaveAsync<T>(string path, T data);
+        Task<T> LoadAsync<t>(string path);
     }
 }
