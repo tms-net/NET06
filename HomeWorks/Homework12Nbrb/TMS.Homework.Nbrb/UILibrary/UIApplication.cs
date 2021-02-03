@@ -2,6 +2,9 @@
 using APILibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using FileLibrary;
+using System.Linq;
 
 namespace UILibrary
 {
@@ -9,7 +12,12 @@ namespace UILibrary
     {
         private List<ShortCurrency> currencyList;
         private List<ShortRate> currencyShortRates;
-        public void ToDo()
+        //public UIApplication(IFileService fileService)
+        //{
+
+        //}
+
+        public async Task ToDo()
         {
             Console.WriteLine("Hello! You are greeted by NbRb.");
             APIClient aPIClient = new APIClient();
@@ -31,13 +39,19 @@ namespace UILibrary
                         if (currencyNumber > 0)
                         {
                             Console.WriteLine($"You selected {currencyNumber} currencies");
+                         
                         }
                         else
                         {
                             Console.WriteLine($"You selected all currencies");
                         }
                         Console.WriteLine("============================");
-                        currencyList = aPIClient.GetShortCurrencies(currencyNumber);
+                        // currencyList = aPIClient.GetShortCurrencies(currencyNumber);
+
+                        currencyList = (await aPIClient.GetShortCurrenciesAsync());
+                        if (currencyNumber > 0) currencyList = currencyList.Take(currencyNumber).ToList();
+
+
                         PrintCurrencies();
 
                         break;
@@ -70,13 +84,17 @@ namespace UILibrary
 
                         if (command.Param == "p")
                         {
-                            InputDates(out DateTime date1, out DateTime date2);
-                            currencyShortRates = aPIClient.GetRates(date1, date2, code).listShortRate;
+                           bool isInputBreak = InputDates(out DateTime date1, out DateTime date2);
+                            if (!isInputBreak) break;
+                            currencyShortRates = await aPIClient.GetRatesAsync(date1, date2, code);
+
                         }
                         else
                         {
-                            DateTime date = InputDate("a");
-                            Rate rate = aPIClient.GetRates(date, code);
+                            DateTime date = InputDate(out bool isInputBreak, "a");
+                            if (isInputBreak) break;
+                            // Rate rate = aPIClient.GetRates(date, code);
+                            Rate rate = await aPIClient.GetRatesAsync(date, code);
                             if (rate != null)
                             {
                                 currencyShortRates = new List<ShortRate>();
@@ -131,28 +149,50 @@ namespace UILibrary
             return null;
         }
 
-        private void InputDates(out DateTime date1, out DateTime date2)
+        private bool InputDates(out DateTime date1, out DateTime date2)
         {
             bool res = true;
             do
             {
-              date1 = InputDate("start");
-              date2 = InputDate("end");
+                date1 = InputDate(out bool isInputBreak, "start");
+                if (!isInputBreak)
+                {
+                    date2 = InputDate(out isInputBreak, "end");
+                    if (isInputBreak)  return false; 
+                }
+                else { date2 = new DateTime(); return false; }
 
                 if (date1 > date2) { res = false; Console.WriteLine("Error! First date shouldn't be greater than second date."); }
             } while (!res);
-            
+
+            return true;
         }
 
-        private DateTime InputDate(string nameOfDate = "")
+        private DateTime InputDate(out bool isInputBreak, string nameOfDate = "")
         {
             bool isOk = false;
+            isInputBreak = false;
             DateTime date = new DateTime();
 
             while (!isOk)
             {
                 Console.WriteLine($"Enter {nameOfDate} date (day-month-year): ");
-                isOk = DateTime.TryParse(Console.ReadLine(), out date);
+                
+                ConsoleKeyInfo firstKey = Console.ReadKey();
+                if (firstKey.Key == ConsoleKey.Escape)
+                {
+                    Console.WriteLine($"\n Do you want to break date input? If Yes Press Y/y else press any key:");
+                    var key = Console.ReadKey().Key;
+                    if (key == ConsoleKey.Y) 
+                    {
+                        isInputBreak = true; 
+                        Console.WriteLine();
+                        return date;
+                    }
+
+                }
+                string userInput = firstKey.KeyChar + Console.ReadLine();
+                isOk = DateTime.TryParse(userInput, out date);
 
                 if (!isOk)
                 {
@@ -165,7 +205,7 @@ namespace UILibrary
 
         private void PrintCurrencyRates(int currCode, List<ShortRate> currencyShortRates, bool isCurrExists)
         {
-           if (currencyShortRates == null)
+            if (currencyShortRates == null)
             {
                 if (isCurrExists)
                     Console.WriteLine("Somethings went wrong.");
@@ -207,7 +247,7 @@ namespace UILibrary
 
             foreach (var shortCurrency in currencyList)
             {
-                Console.WriteLine("{0:d3}    {1}     {2}", shortCurrency.Code, shortCurrency.Abbreviation,shortCurrency.Name);
+                Console.WriteLine("{0:d3}    {1}     {2}", shortCurrency.Code, shortCurrency.Abbreviation, shortCurrency.Name);
             }
         }
     }
