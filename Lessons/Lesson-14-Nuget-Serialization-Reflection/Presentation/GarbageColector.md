@@ -1,96 +1,95 @@
 ---
 marp: true
 theme: uncover
+style: | 
+    section.slide {
+        padding-top:150px
+    }
+    section.slide h1 {
+    position: absolute;
+    left: 80px;
+    top: 80px;
+    right: 80px;
+    height: 70px;
+    line-height: 70px;
+    }
+    section.slide li {
+        font-size: 0.9em;
+    }
+
+    section.slide img {
+    position: absolute;
+    left: 50px;
+    top: 200px;
+    }
+
+    section.small ul {
+        padding-left: 50%;
+    }
+
+    section.small2 ul {
+        padding-left: 30%;
+    }
+
+    section.small3 img {
+    position: absolute;
+    left: 20%;
+    top: 60%;
+    }
+
+    section.small4 img {
+    position: absolute;
+    left: 20%;
+    }
+
+    section.small4 ul {
+        margin-top: 300px;
+        font-size: 0.9em;
+    }
+
+    section.small5 img {
+    margin-left: 50px;
+    }
+
+    section.small5 ul {
+        margin-left: 45%;
+        font-size: 0.9em;
+    }
+
+    section.small6 img {
+    margin-left: 30px;
+    }
+
+    section.small6 ul {
+        margin-left: 50%;
+        font-size: 0.8em;
+    }
+
+    section.small3 ul {
+        margin-top: -200px;
+        font-size: 0.8em;
+    }
+
+    section.small li {
+        font-size: 0.7em;
+    }
+
+    section.small0 li {
+        font-size: 0.8em;
+    }
+
+    section.small7 pre {
+        font-size: 0.5em;
+    }
+    section.small7 h1 {
+    position: absolute;
+    left: 80px;
+    top: 50px;
+    right: 80px;
+    height: 70px;
+    line-height: 70px;
+    }
 ---
-<style>
-section.slide {
-    padding-top:150px
-}
-section.slide h1 {
-  position: absolute;
-  left: 80px;
-  top: 80px;
-  right: 80px;
-  height: 70px;
-  line-height: 70px;
-}
-section.slide li {
-    font-size: 0.9em;
-}
-
-section.slide img {
-   position: absolute;
-   left: 50px;
-   top: 200px;
-}
-
-section.small ul {
-    padding-left: 50%;
-}
-
-section.small2 ul {
-    padding-left: 30%;
-}
-
-section.small3 img {
-   position: absolute;
-   left: 20%;
-   top: 60%;
-}
-
-section.small4 img {
-   position: absolute;
-   left: 20%;
-}
-
-section.small4 ul {
-    margin-top: 300px;
-    font-size: 0.9em;
-}
-
-section.small5 img {
-   margin-left: 50px;
-}
-
-section.small5 ul {
-    margin-left: 45%;
-    font-size: 0.9em;
-}
-
-section.small6 img {
-   margin-left: 30px;
-}
-
-section.small6 ul {
-    margin-left: 50%;
-    font-size: 0.8em;
-}
-
-section.small3 ul {
-    margin-top: -200px;
-    font-size: 0.8em;
-}
-
-section.small li {
-    font-size: 0.7em;
-}
-
-section.small0 li {
-    font-size: 0.8em;
-}
-
-section.small7 pre {
-    font-size: 0.5em;
-}
-section.small7 h1 {
-  position: absolute;
-  left: 80px;
-  top: 50px;
-  right: 80px;
-  height: 70px;
-  line-height: 70px;
-}
-</style>
 
 ![bg](img/title_page_bg.jpg)
 
