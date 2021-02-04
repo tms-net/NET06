@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace TMS.NET06.Lesson14.Serialization
 {
 	public class JsonClass
     {
-	    public string stringProp { get; set; }
+        [JsonPropertyName("stringProp")]
+	    public string StringProp { get; set; }
 	    public int numProp { get; set; }
 	    public object objProp { get; set; }
 	    public object[] arrayProp { get; set; }
@@ -41,7 +43,7 @@ namespace TMS.NET06.Lesson14.Serialization
             try
             {
 	            var obj = JsonSerializer.Deserialize<JsonClass>(json);
-	            obj.stringProp = "for serialization";
+	            obj.StringProp = "for serialization";
                 Console.WriteLine(JsonSerializer.Serialize(obj));
             }
             catch (Exception ex)
