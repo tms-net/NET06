@@ -17,6 +17,7 @@ namespace TMS.HomeWork.MVConsole.App
 
         public int MyProperty1 { get; set; }
         public string MyProperty2 { get; set; }
+        public Cat cat;
 
         public void MyMethod(int i)
         // internal void MyMethod(int i)

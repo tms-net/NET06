@@ -5,6 +5,7 @@ namespace TMS.Homework.MVConsole.UI
 {
     public class UI
     {
+        private Random randomNumber = new Random();
         public void View<T>(T model)
         {
             // // Загружаем библиотеку классов
@@ -87,11 +88,10 @@ namespace TMS.Homework.MVConsole.UI
             foreach (FieldInfo fil in fieldNames)
                 Console.Write("--> " + fil.ReflectedType.Name + " " + fil.Name + "\n");
 
-           
+
         }
 
         // TODO: learn generic type constraints
-       // public T Edit<T>(T class1) where T: class, new()
         public T Edit<T>() where T : class, new()
         {
             //return new T();
@@ -102,7 +102,8 @@ namespace TMS.Homework.MVConsole.UI
             try
             {
                 // Используем позднее связывание
-                instance = (T) Activator.CreateInstance(type);
+                //instance = (T) Activator.CreateInstance(type);
+                instance = new T();
                 Console.WriteLine("Объект создан!");
             }
             catch (Exception ex)
@@ -111,18 +112,75 @@ namespace TMS.Homework.MVConsole.UI
             }
 
             var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-
+            Console.WriteLine("=============properties=============");
             for (int i = 0; i < properties.Length; i++)
             {
-                // properties[i].SetValue(i, " ");
-                Type propertyType = properties[i].PropertyType;
-                Console.WriteLine(properties[i].PropertyType.Name);
-                if (propertyType.Name == "Int32") { properties[i].SetValue(instance, 32); }
-                if (propertyType.Name == "String") { properties[i].SetValue(instance, "someString"); }
-                Console.WriteLine(properties[i].GetValue(instance));
+                PropertyInfo property = properties[i];
+                Type propertyType = property.PropertyType;
+                var propertyValue = property.GetValue(instance);
+
+                var s = propertyValue == null ? "null" : propertyValue;
+                Console.WriteLine($"Property {property.Name}, type {propertyType}, value {s}");
+
+                switch (property)
+                {
+                    case PropertyInfo pi when pi.PropertyType == typeof(int):
+                        property.SetValue(instance, randomNumber.Next());
+                        break;
+                    case PropertyInfo pi when pi.PropertyType == typeof(string):
+                        property.SetValue(instance, $"Property_{propertyType.Name}_someStringValue{i.ToString()}");
+                        break;
+                    case PropertyInfo pi when pi.PropertyType == typeof(double):
+                        property.SetValue(instance, randomNumber.NextDouble());
+                        break;
+                    default:
+                        break;
+                }
+                propertyValue = property.GetValue(instance);
+                s = propertyValue == null ? "null" : propertyValue;
+                Console.WriteLine($"After changing: field {property.Name}, value {s}\n");
+            }
+
+            Console.WriteLine("=============fields============");
+            FieldInfo[] fields = type.GetFields();
+            for (int i = 0; i < fields.Length; i++)
+            {
+                FieldInfo field = fields[i];
+                Type fieldType = field.FieldType;
+                var fieldValue = field.GetValue(instance);
+                var s = fieldValue == null ? "null" : fieldValue;
+                Console.WriteLine($"Field {field.Name}, type {fieldType}, value {s}");
+
+                switch (field)
+                {
+                    case FieldInfo fi when fi.FieldType == typeof(int):
+                        field.SetValue(instance, randomNumber.Next());
+                        break;
+                    case FieldInfo fi when fi.FieldType == typeof(string):
+                        field.SetValue(instance, $"Field_{fieldType.Name}_someStringValue{i.ToString()}");
+                        break;
+                    case FieldInfo fi when fi.FieldType == typeof(double):
+                        field.SetValue(instance, randomNumber.NextDouble());
+                        break;
+                    case FieldInfo fi when fi.FieldType.IsClass:
+                        fieldValue = Activator.CreateInstance(fieldType);
+                        field.SetValue(instance, fieldValue);
+                        break;
+                    default:
+                        break;
+                }
+                fieldValue = field.GetValue(instance);
+                s = fieldValue == null ? "null" : fieldValue;
+                Console.WriteLine($"After changing: field {field.Name}, value {s}\n");
+
+
             }
 
             return instance;
         }
+
+
+
     }
 }
+
