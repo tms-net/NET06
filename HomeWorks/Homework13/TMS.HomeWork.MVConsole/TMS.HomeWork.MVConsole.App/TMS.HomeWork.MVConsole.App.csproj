@@ -5,4 +5,8 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TMS.Homework.MVConsole.UI\TMS.Homework.MVConsole.UI.csproj" />
+  </ItemGroup>
+
 </Project>
