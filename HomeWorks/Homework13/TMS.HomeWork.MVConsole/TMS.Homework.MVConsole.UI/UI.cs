@@ -10,12 +10,17 @@ namespace TMS.Homework.MVConsole.UI
     public class UI
     {
         private Random randomNumber = new Random();
-        public void View<T>(T model)
+        public void View<T>(T model) //where T : class
         {
             Console.WriteLine("Список методов класса : " + model.ToString() + "\n");
 
             Type t = typeof(T);
 
+            View(t, model);
+        }
+
+        private void View(Type t, object model)
+        {
             MethodInfo[] arr = t.GetMethods();
 
             foreach (var item in arr)
@@ -68,7 +73,7 @@ namespace TMS.Homework.MVConsole.UI
                 {
                     object obj = field.GetValue(model);
                     //var newModel = Convert.ChangeType(obj, field.GetType());
-                    //View<field.GetType()>(obj);
+                    View(field.FieldType, obj);
                 }
                 else if (field.FieldType.IsArray)
                 {
@@ -90,38 +95,6 @@ namespace TMS.Homework.MVConsole.UI
             }
         }
 
-            // Вывести методы
-            foreach (MethodInfo m in MArr)
-            {
-                Console.Write(" --> " + m.ReturnType.Name + " \t" + m.Name + "(");
-                // Вывести параметры методов
-                ParameterInfo[] p = m.GetParameters();
-                for (int i = 0; i < p.Length; i++)
-                {
-                    Console.Write(p[i].ParameterType.Name + " " + p[i].Name);
-                    if (i + 1 < p.Length) Console.Write(", ");
-                }
-                Console.Write(")\n");
-                if (m.Name == "MyMethod")
-                {
-                    Console.Write("\n вызов метода\n");
-                    object[] args = new object[1];
-                    args[0] = 9;
-                    m.Invoke(model, args);
-                }
-            }
-
-            Console.WriteLine("\n*** Реализуемые интерфейсы ***\n");
-            var im = t.GetInterfaces();
-            foreach (Type tp in im)
-                Console.WriteLine("--> " + tp.Name);
-            Console.WriteLine("\n*** Поля и свойства ***\n");
-            FieldInfo[] fieldNames = t.GetFields();
-            foreach (FieldInfo fil in fieldNames)
-                Console.Write("--> " + fil.ReflectedType.Name + " " + fil.Name + "\n");
-
-
-        }
 
         // TODO: learn generic type constraints
         public T Edit<T>() where T : class, new()
@@ -173,7 +146,7 @@ namespace TMS.Homework.MVConsole.UI
             //    Console.WriteLine($"After changing: field {property.Name}, value {s}\n");
             //}
 
-            SetPropertyOrFields<PropertyInfo, T>(properties, instance);
+            SetPropertyOrFields<T>(properties, instance);
 
             Console.WriteLine("=============fields============");
             FieldInfo[] fields = type.GetFields();
@@ -209,65 +182,69 @@ namespace TMS.Homework.MVConsole.UI
 
 
             //}
-            SetPropertyOrFields<FieldInfo, T>(fields, instance);
+            SetPropertyOrFields<T>(fields, instance);
             return instance;
         }
         
-        private void SetPropertyOrFields<P, T>(P[] properties, T instance)
+        private void SetPropertyOrFields<T>(MemberInfo[] properties, T instance)
         {
-            Type type = typeof(P);
-            object[] param = { instance };
-            // MethodInfo miGet =  type.GetMethod("GetValue");
-            MethodInfo miGet = type.GetMethods().Single(m => m.Name == "GetValue" && m.GetParameters().Length == 1);
-            // MethodInfo miSet = type.GetMethod("SetValue");
-            MethodInfo miSet = type.GetMethods().Single(m => m.Name == "SetValue" && m.GetParameters().Length == 2);
-            PropertyInfo propertyTypeInfo = null;
-            if (type == typeof(PropertyInfo)) propertyTypeInfo = type.GetProperty("PropertyType");
-            if (type == typeof(FieldInfo)) propertyTypeInfo = type.GetProperty("FieldType");
+            //object[] param = { instance };
+            //// MethodInfo miGet =  type.GetMethod("GetValue");
+            //MethodInfo miGet = type.GetMethods().Single(m => m.Name == "GetValue" && m.GetParameters().Length == 1);
+            //// MethodInfo miSet = type.GetMethod("SetValue");
+            //MethodInfo miSet = type.GetMethods().Single(m => m.Name == "SetValue" && m.GetParameters().Length == 2);
+            //PropertyInfo propertyTypeInfo = null;
+            //if (type == typeof(PropertyInfo)) propertyTypeInfo = type.GetProperty("PropertyType");
+            //if (type == typeof(FieldInfo)) propertyTypeInfo = type.GetProperty("FieldType");
 
             for (int i = 0; i < properties.Length; i++)
             {
-                P property = properties[i];
-                Type propertyType = (Type)propertyTypeInfo.GetValue(property);
+                var property = properties[i];
+                //P property = properties[i];
+                //Type propertyType = (Type)propertyTypeInfo.GetValue(property);
                 // m.Invoke(model, args);
                 // var propertyValue = property.GetValue(instance);
 
-                var propertyValue = miGet.Invoke(property, param);
+                //var propertyValue = miGet.Invoke(property, param);
 
-                PropertyInfo propertyNameInfo = type.GetProperty("Name");
-                string propertyName = (string)propertyNameInfo.GetValue(property);
-                var s = propertyValue == null ? "null" : propertyValue;
-                Console.WriteLine($"Property {propertyName}, type {propertyType}, value {s}");
+                //PropertyInfo propertyNameInfo = type.GetProperty("Name");
+                //string propertyName = (string)propertyNameInfo.GetValue(property);
+                //var s = propertyValue == null ? "null" : propertyValue;
+                //Console.WriteLine($"Property {propertyName}, type {propertyType}, value {s}");
 
                 switch (property)
                 {
-                    case PropertyInfo pi when pi.PropertyType == typeof(int):
-                        // property.SetValue(instance, randomNumber.Next());
-                        object[] ps = { instance, randomNumber.Next() };
-                        miSet.Invoke(property, ps);
+                    case PropertyInfo pi:
+                        pi.SetValue(instance, GetValue(pi.PropertyType));
                         break;
-                    case PropertyInfo pi when pi.PropertyType == typeof(string):
-                        object[] ps1 = { instance, "some" };
-                        miSet.Invoke(property, ps1);
-                        //property.SetValue(instance, $"Property_{propertyType.Name}_someStringValue{i.ToString()}");
-                        break;
-                    case PropertyInfo pi when pi.PropertyType == typeof(double):
-
-                        object[] ps2 = { instance, randomNumber.NextDouble() };
-                        miSet.Invoke(property, ps2);
-                        //property.SetValue(instance, randomNumber.NextDouble());
+                    case FieldInfo fi:
+                        fi.SetValue(instance, GetValue(fi.FieldType));
                         break;
                     default:
                         break;
                 }
                 // propertyValue = property.GetValue(instance);
-                propertyValue = miGet.Invoke(property, param);
-                s = propertyValue == null ? "null" : propertyValue;
-                Console.WriteLine($"After changing: field {propertyName}, value {s}\n");
+                //propertyValue = miGet.Invoke(property, param);
+                //s = propertyValue == null ? "null" : propertyValue;
+                //Console.WriteLine($"After changing: field {propertyName}, value {s}\n");
             }
         }
 
+        private object GetValue(Type fieldType)
+        {
+            switch(fieldType)
+            {
+                case var ft when ft == typeof(int):
+                    return randomNumber.Next();
+                case var ft when ft == typeof(string):
+                    return $"Property_someStringValue";
+                case var ft when ft == typeof(double):
+                    return randomNumber.NextDouble();
+                default:
+                    return null;
 
+            }
+        }
     }
 }
 

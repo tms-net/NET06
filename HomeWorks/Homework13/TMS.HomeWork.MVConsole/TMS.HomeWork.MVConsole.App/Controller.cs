@@ -24,7 +24,7 @@ namespace TMS.HomeWork.MVConsole.App
             for (int i = 0; i < 3; i++)
             {
                 students.Add(GetStudent());
-                _ui.View(students[students.Count]);
+                //_ui.View(students[students.Count-1]);
             }
 
             _csvService.SaveToCSV(students);
