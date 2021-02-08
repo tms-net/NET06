@@ -49,6 +49,17 @@
             "stopAtEntry": false
         },
         {
+            "name": "Launch Lesson-16-PatternMatching (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildLesson16",
+            "program": "${workspaceFolder}/Lessons/Lesson-16-UnitTesting/TMS.NET06.Lesson16.PatternMatching/bin/Debug/net5.0/TMS.NET06.Lesson16.PatternMatching.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}/Lessons/Lesson-16-UnitTesting/TMS.NET06.Lesson16.PatternMatching",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
             "name": ".NET Core Attach",
             "type": "coreclr",
             "request": "attach",

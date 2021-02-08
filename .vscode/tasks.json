@@ -50,6 +50,18 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "label": "buildLesson16",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Lessons/Lesson-16-UnitTesting/TMS.NET06.Lesson16.PatternMatching/TMS.NET06.Lesson16.PatternMatching.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
             "label": "publishLesson11",
             "command": "dotnet",
             "type": "process",
