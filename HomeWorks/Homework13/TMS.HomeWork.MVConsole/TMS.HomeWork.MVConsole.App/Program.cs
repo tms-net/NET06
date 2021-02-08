@@ -23,6 +23,11 @@ catch (Exception e)
     Console.WriteLine(e);
 }
 
-
 Console.ReadLine();
 
+public class Foo
+{
+    public int ID { get; set; }
+    public string Name { get; set; }
+    public string Sex { get; set; }
+}

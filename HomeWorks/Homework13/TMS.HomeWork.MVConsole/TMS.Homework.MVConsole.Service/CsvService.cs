@@ -9,22 +9,6 @@ namespace TMS.Homework.MVConsole.Service
 {
     public class CsvService
     {
-        private readonly string _rootPath = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                "MVConsole");
-
-        public void Persist<T>(IEnumerable<T> models)
-        {
-            var path = Path.Combine(_rootPath, DateTime.Now.ToString());
-            using (var fs = new FileStream(path, FileMode.Create))
-            {
-                foreach (var model in models)
-                {
-                    fs.Write(Encoding.UTF8.GetBytes(model.ToString()));
-                }
-            }
-        }
-
         /// <summary>
         /// Method that get`s solution root folder
         /// </summary>
@@ -41,10 +25,10 @@ namespace TMS.Homework.MVConsole.Service
         }
 
         /// <summary>
-        /// 
+        /// Method to save your IEnumarable models to CSV file.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="models"></param>
+        /// <typeparam name="T">Model`s type</typeparam>
+        /// <param name="models">IEnumerable models</param>
         public void SaveToCSV<T>(IEnumerable<T> models)
         {
             var path = GetSolutionRootFolder() + $"\\{DateTime.Now.ToString("dd-MM-yyyy hh-mm-ss")}.csv";
@@ -76,11 +60,11 @@ namespace TMS.Homework.MVConsole.Service
             }
         }
         /// <summary>
-        /// 
+        /// Method to save your IEnumarable models to CSV file.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="models"></param>
-        /// <param name="path"></param>
+        /// <typeparam name="T">Model`s type</typeparam>
+        /// <param name="models">IEnumerable models</param>
+        /// <param name="path">Path to file</param>
         public void SaveToCSV<T>(IEnumerable<T> models, string path)
         {
             var pathToSave = path + $"\\{DateTime.Now.ToString("dd-MM-yyyy hh-mm-ss")}.csv";
@@ -114,17 +98,19 @@ namespace TMS.Homework.MVConsole.Service
         }
 
         /// <summary>
-        /// 
+        /// Method to save your IEnumarable models to CSV file.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="models"></param>
-        /// <param name="path"></param>
+        /// <typeparam name="T">Model`s type</typeparam>
+        /// <param name="models">IEnumerable models</param>
+        /// <param name="path">Path to file</param>
+        /// <param name="fileName">Specific .csv file name</param>
+        /// <exception cref="e">File already exists</exception>
         public void SaveToCSV<T>(IEnumerable<T> models, string path, string fileName)
         {
             path = path + $"\\{fileName}.csv";
-            
+            var e = new Exception("Файл с таким именем уже существует!");
             if(File.Exists(path))
-                throw new Exception("Файл с таким именем уже существует!");
+                throw e;
             
             var properties = typeof(T).GetProperties();
             var stringBuilder = new StringBuilder();
@@ -151,11 +137,5 @@ namespace TMS.Homework.MVConsole.Service
             }
         }
 
-    }
-    public class Foo
-    {
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public string Sex { get; set; }
     }
 }
