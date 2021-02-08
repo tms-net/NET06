@@ -5,23 +5,15 @@ using TMS.Homework.MVConsole.Service;
 using TMS.Homework.MVConsole.UI;
 using TMS.HomeWork.MVConsole.App;
 
-var myList = new List<Foo>
+namespace TMS.HomeWork.MVConsole.App
 {
-    new Foo {ID = 1, Name = "One", Sex = "Male"},
-    new Foo {ID = 2, Name = "Two", Sex = "Female"}
-};
-Console.WriteLine("Hello MVC!!!");
-var csvService = new CsvService();
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+            UI ui = new UI();
 
-UI ui = new UI();
-MyClass myClass = new MyClass();
-//ui.View(myClass);
-
-//ui.Edit(myClass);
-var myClass1 = ui.Edit<MyClass>();
-Console.WriteLine("Вернулись==========");
-Console.WriteLine($"myClass.MyProperty1  {myClass1.MyProperty1}");
-Console.WriteLine($"myClass.MyProperty2 {myClass1.MyProperty2}");
-
-
-
+            Controller controller = new Controller(ui);
+        }
+    }
+}
