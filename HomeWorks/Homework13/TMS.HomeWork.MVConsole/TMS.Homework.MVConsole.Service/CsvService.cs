@@ -36,7 +36,6 @@ namespace TMS.Homework.MVConsole.Service
                 Thread.Sleep(1000);
             path = GetSolutionRootFolder() + $"\\{DateTime.Now.ToString("dd-MM-yyyy hh-mm-ss")}.csv";
             var properties = typeof(T).GetProperties();
-            var stringBuilder = new StringBuilder();
             using (var fileStream = new FileStream(path, FileMode.Create))
             {
                 for (int i = 0; i < properties.Length; i++)
@@ -73,7 +72,6 @@ namespace TMS.Homework.MVConsole.Service
             pathToSave = null;
             pathToSave = path + $"\\{DateTime.Now.ToString("dd-MM-yyyy hh-mm-ss")}.csv";
             var properties = typeof(T).GetProperties();
-            var stringBuilder = new StringBuilder();
             using (var fileStream = new FileStream(pathToSave, FileMode.Create))
             {
                 for (int i = 0; i < properties.Length; i++)
@@ -86,10 +84,10 @@ namespace TMS.Homework.MVConsole.Service
 
                 foreach (var m in models)
                 {
-                    for(int i = 0; i < properties.Length; i++)
+                    for (int i = 0; i < properties.Length; i++)
                     {
                         fileStream.Write(Encoding.UTF8.GetBytes($"{m.GetType().GetProperty(properties[i].Name).GetValue(m, null)}"));
-                        if (i != properties.Length-1)
+                        if (i != properties.Length - 1)
                             fileStream.Write(Encoding.UTF8.GetBytes(","));
                     }
                     fileStream.Write(Encoding.UTF8.GetBytes("\r\n"));
@@ -109,11 +107,10 @@ namespace TMS.Homework.MVConsole.Service
         {
             path = path + $"\\{fileName}.csv";
             var e = new Exception("Файл с таким именем уже существует!");
-            if(File.Exists(path))
+            if (File.Exists(path))
                 throw e;
-            
+
             var properties = typeof(T).GetProperties();
-            var stringBuilder = new StringBuilder();
             using (var fileStream = new FileStream(path, FileMode.Create))
             {
                 for (int i = 0; i < properties.Length; i++)
