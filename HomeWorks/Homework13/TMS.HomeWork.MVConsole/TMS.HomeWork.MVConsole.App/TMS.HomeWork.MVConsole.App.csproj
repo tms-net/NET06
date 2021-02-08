@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="22.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TMS.Homework.MVConsole.Service\TMS.Homework.MVConsole.Service.csproj" />
     <ProjectReference Include="..\TMS.Homework.MVConsole.UI\TMS.Homework.MVConsole.UI.csproj" />
   </ItemGroup>
