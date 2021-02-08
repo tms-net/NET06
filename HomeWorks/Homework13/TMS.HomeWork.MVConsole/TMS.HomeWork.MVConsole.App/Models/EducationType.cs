@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TMS.HomeWork.MVConsole.App
 {
-    enum EducationType
+    public enum EducationType
     {
         Budget = 1,
 

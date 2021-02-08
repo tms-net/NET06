@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TMS.HomeWork.MVConsole.App
 {
-    enum Gender
+    public enum Gender
     {
         Male = 1,
 

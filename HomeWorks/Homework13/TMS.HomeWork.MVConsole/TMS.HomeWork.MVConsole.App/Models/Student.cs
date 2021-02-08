@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TMS.HomeWork.MVConsole.App
 {
-    class Student
+    public class Student
     {
         public string Id { get; set; }
         public string FirstName { get; set; }

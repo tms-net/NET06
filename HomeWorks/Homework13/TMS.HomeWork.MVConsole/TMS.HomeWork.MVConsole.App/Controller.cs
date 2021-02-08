@@ -6,13 +6,13 @@ using TMS.Homework.MVConsole.UI;
 
 namespace TMS.HomeWork.MVConsole.App
 {
-    class Controller
+    public class Controller
     {
         private UI _ui;
-        private readonly CsvService _csvService;
+        private readonly ICsvService _csvService;
         Random rnd = new Random();
 
-        public Controller(UI ui, CsvService csvService)
+        public Controller(UI ui, ICsvService csvService)
         {
             _ui = ui;
             _csvService = csvService;
@@ -30,7 +30,7 @@ namespace TMS.HomeWork.MVConsole.App
             _csvService.SaveToCSV(students);
         }
 
-        public Student GetStudent()
+        private Student GetStudent()
         {
             var personGenerator = new PersonNameGenerator();
 

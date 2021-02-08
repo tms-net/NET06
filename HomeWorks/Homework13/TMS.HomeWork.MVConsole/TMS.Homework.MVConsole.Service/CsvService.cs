@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace TMS.Homework.MVConsole.Service
 {
-    public class CsvService
+    public class CsvService : ICsvService
     {
         /// <summary>
         /// Method that get`s solution root folder
