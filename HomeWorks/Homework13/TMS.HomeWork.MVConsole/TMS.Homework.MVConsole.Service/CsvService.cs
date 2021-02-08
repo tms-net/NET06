@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 
@@ -32,32 +33,14 @@ namespace TMS.Homework.MVConsole.Service
         public void SaveToCSV<T>(IEnumerable<T> models)
         {
             var path = GetSolutionRootFolder() + $"\\{DateTime.Now.ToString("dd-MM-yyyy hh-mm-ss")}.csv";
+
+            // TODO: otimize it
             if (File.Exists(path))
                 Thread.Sleep(1000);
-            path = GetSolutionRootFolder() + $"\\{DateTime.Now.ToString("dd-MM-yyyy hh-mm-ss")}.csv";
-            var properties = typeof(T).GetProperties();
-            using (var fileStream = new FileStream(path, FileMode.Create))
-            {
-                for (int i = 0; i < properties.Length; i++)
-                {
-                    fileStream.Write(Encoding.UTF8.GetBytes($"{properties[i].Name}"));
-                    if (i != properties.Length - 1)
-                        fileStream.Write(Encoding.UTF8.GetBytes(","));
-                }
-                fileStream.Write(Encoding.UTF8.GetBytes("\r\n"));
 
-                foreach (var m in models)
-                {
-                    for (int i = 0; i < properties.Length; i++)
-                    {
-                        fileStream.Write(Encoding.UTF8.GetBytes($"{m.GetType().GetProperty(properties[i].Name).GetValue(m, null)}"));
-                        if (i != properties.Length - 1)
-                            fileStream.Write(Encoding.UTF8.GetBytes(","));
-                    }
-                    fileStream.Write(Encoding.UTF8.GetBytes("\r\n"));
-                }
-            }
+            SaveToCSV(models, path);
         }
+        
         /// <summary>
         /// Method to save your IEnumarable models to CSV file.
         /// </summary>
@@ -66,27 +49,38 @@ namespace TMS.Homework.MVConsole.Service
         /// <param name="path">Path to file</param>
         public void SaveToCSV<T>(IEnumerable<T> models, string path)
         {
-            var pathToSave = path + $"\\{DateTime.Now.ToString("dd-MM-yyyy hh-mm-ss")}.csv";
-            if (File.Exists(pathToSave))
-                Thread.Sleep(1000);
-            pathToSave = null;
-            pathToSave = path + $"\\{DateTime.Now.ToString("dd-MM-yyyy hh-mm-ss")}.csv";
-            var properties = typeof(T).GetProperties();
-            using (var fileStream = new FileStream(pathToSave, FileMode.Create))
+
+            var properties = typeof(T).GetProperties(BindingFlags.Instance | BindingFlags.Public);
+            using (var fileStream = new FileStream(path, FileMode.Create))
             {
-                for (int i = 0; i < properties.Length; i++)
-                {
-                    fileStream.Write(Encoding.UTF8.GetBytes($"{properties[i].Name}"));
-                    if (i != properties.Length - 1)
-                        fileStream.Write(Encoding.UTF8.GetBytes(","));
-                }
+                var header = string.Join(",", properties.Select(p => p.Name));
+
+                //for (int i = 0; i < properties.Length; i++)
+                //{
+                //    fileStream.Write(Encoding.UTF8.GetBytes($"{properties[i].Name}"));
+                //    if (i != properties.Length - 1)
+                //        fileStream.Write(Encoding.UTF8.GetBytes(","));
+                //}
+
+                fileStream.Write(Encoding.UTF8.GetBytes(header));
                 fileStream.Write(Encoding.UTF8.GetBytes("\r\n"));
+
+                // Student {
+                //      public DateTime BirthDay { get; set; }
+                // }
 
                 foreach (var m in models)
                 {
                     for (int i = 0; i < properties.Length; i++)
                     {
-                        fileStream.Write(Encoding.UTF8.GetBytes($"{m.GetType().GetProperty(properties[i].Name).GetValue(m, null)}"));
+                        var propValue = (m.GetType()
+                            .GetProperty(properties[i].Name)
+                            .GetValue(m, null)?
+                                .ToString());
+
+                        propValue ??= string.Empty;
+
+                        fileStream.Write(Encoding.UTF8.GetBytes(propValue));
                         if (i != properties.Length - 1)
                             fileStream.Write(Encoding.UTF8.GetBytes(","));
                     }
@@ -110,28 +104,7 @@ namespace TMS.Homework.MVConsole.Service
             if (File.Exists(path))
                 throw e;
 
-            var properties = typeof(T).GetProperties();
-            using (var fileStream = new FileStream(path, FileMode.Create))
-            {
-                for (int i = 0; i < properties.Length; i++)
-                {
-                    fileStream.Write(Encoding.UTF8.GetBytes($"{properties[i].Name}"));
-                    if (i != properties.Length - 1)
-                        fileStream.Write(Encoding.UTF8.GetBytes(","));
-                }
-                fileStream.Write(Encoding.UTF8.GetBytes("\r\n"));
-
-                foreach (var m in models)
-                {
-                    for (int i = 0; i < properties.Length; i++)
-                    {
-                        fileStream.Write(Encoding.UTF8.GetBytes($"{m.GetType().GetProperty(properties[i].Name).GetValue(m, null)}"));
-                        if (i != properties.Length - 1)
-                            fileStream.Write(Encoding.UTF8.GetBytes(","));
-                    }
-                    fileStream.Write(Encoding.UTF8.GetBytes("\r\n"));
-                }
-            }
+            SaveToCSV(models, path);
         }
 
     }

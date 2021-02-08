@@ -1,5 +1,7 @@
 ﻿using RandomNameGeneratorLibrary;
 using System;
+using System.Collections.Generic;
+using TMS.Homework.MVConsole.Service;
 using TMS.Homework.MVConsole.UI;
 
 namespace TMS.HomeWork.MVConsole.App
@@ -7,15 +9,27 @@ namespace TMS.HomeWork.MVConsole.App
     class Controller
     {
         private UI _ui;
-
+        private readonly CsvService _csvService;
         Random rnd = new Random();
 
-        public Controller(UI ui)
+        public Controller(UI ui, CsvService csvService)
         {
             _ui = ui;
-            var student = GetStudent();
-            ui.View(student);
+            _csvService = csvService;
         }
+
+        public void Run()
+        {
+            var students = new List<Student>();
+            for (int i = 0; i < 3; i++)
+            {
+                students.Add(GetStudent());
+                _ui.View(students[students.Count]);
+            }
+
+            _csvService.SaveToCSV(students);
+        }
+
         public Student GetStudent()
         {
             var personGenerator = new PersonNameGenerator();

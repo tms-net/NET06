@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TMS.HomeWork.MVConsole.App
 {
@@ -12,5 +13,7 @@ namespace TMS.HomeWork.MVConsole.App
         public int GroupNumber { get; set; }
         public int SpecialtyCode { get; set; }
         public EducationType EducationType { get; set; }
+
+        public IEnumerable<ExamResult> ExamResults { get; }
     }
 }

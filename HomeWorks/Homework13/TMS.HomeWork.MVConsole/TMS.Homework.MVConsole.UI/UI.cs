@@ -9,38 +9,9 @@ namespace TMS.Homework.MVConsole.UI
         private Random randomNumber = new Random();
         public void View<T>(T model)
         {
-            // // Загружаем библиотеку классов
-            //Assembly asm = Assembly.LoadFrom("c:\\Users\\Admin\\source\repos\\TMS.Homework.Nbrb\\Nbrb\\bin\\Debug\\net5.0\\Nbrb.exe");
-            //// Находим типы содержащиеся в fontinfo.dll
-            //Type[] alltypes = asm.GetTypes();
-            //Console.WriteLine("*** Найденые типы ***\n");
-            //foreach (Type t1 in alltypes)
-            //    Console.WriteLine("-> " + t1.Name);
-            //Console.WriteLine();
-
-            //// Выбираем последний класс
-            //Type temp = alltypes[alltypes.Length - 1];
-            //Console.WriteLine("Используем класс " + temp.Name + "\n");
-
-            //// Отображаем сведения о конструкторах
-            //Console.WriteLine("*** Конструкторы ***\n");
-            //ConstructorInfo[] ci = temp.GetConstructors();
-            //foreach (ConstructorInfo c in ci)
-            //{
-            //    Console.Write("-> " + c.Name + "(");
-            //    // Выводим параметры
-            //    ParameterInfo[] p = c.GetParameters();
-            //    for (int i = 0; i < p.Length; i++)
-            //    {
-            //        Console.Write(p[i].ParameterType.Name + " " + p[i].Name);
-            //        if (i + 1 < p.Length) Console.Write(", ");
-            //    }
-            //    Console.Write(")\n\n");
-            //}
-            //Console.WriteLine("===============================other");
-
             Type t = typeof(T);
             Console.WriteLine("*** Конструкторы ***\n");
+
             ConstructorInfo[] ci = t.GetConstructors();
             foreach (ConstructorInfo c in ci)
             {
@@ -181,6 +152,7 @@ namespace TMS.Homework.MVConsole.UI
             SetPropertyOrFields<FieldInfo, T>(fields, instance);
             return instance;
         }
+        
         private void SetPropertyOrFields<P, T>(P[] properties, T instance)
         {
             Type type = typeof(P);
