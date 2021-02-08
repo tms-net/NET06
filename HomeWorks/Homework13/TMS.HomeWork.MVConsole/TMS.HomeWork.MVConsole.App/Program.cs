@@ -1,4 +1,14 @@
-﻿using System;
+﻿using TMS.Homework.MVConsole.UI;
 
-Console.WriteLine("Hello MVC!!!");
+namespace TMS.HomeWork.MVConsole.App
+{
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+            UI ui = new UI();
 
+            Controller controller = new Controller(ui);
+        }
+    }
+}
