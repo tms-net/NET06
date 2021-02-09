@@ -5,4 +5,13 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="RandomNameGeneratorLibrary" Version="1.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TMS.Homework.MVConsole.Service\TMS.Homework.MVConsole.Service.csproj" />
+    <ProjectReference Include="..\TMS.Homework.MVConsole.UI\TMS.Homework.MVConsole.UI.csproj" />
+  </ItemGroup>
+
 </Project>

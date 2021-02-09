@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Moq" Version="4.16.0" />
+    <PackageReference Include="NUnit" Version="3.12.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TMS.HomeWork.MVConsole.App\TMS.HomeWork.MVConsole.App.csproj" />
+    <ProjectReference Include="..\TMS.Homework.MVConsole.Service\TMS.Homework.MVConsole.Service.csproj" />
+    <ProjectReference Include="..\TMS.Homework.MVConsole.UI\TMS.Homework.MVConsole.UI.csproj" />
+  </ItemGroup>
+
+</Project>

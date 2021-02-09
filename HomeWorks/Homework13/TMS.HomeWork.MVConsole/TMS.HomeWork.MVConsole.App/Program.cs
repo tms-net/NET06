@@ -1,4 +1,8 @@
-﻿using System;
+﻿using TMS.Homework.MVConsole.Service;
+using TMS.Homework.MVConsole.UI;
+using TMS.HomeWork.MVConsole.App;
 
-Console.WriteLine("Hello MVC!!!");
+var ui = new UI();
+var controller = new Controller(ui, new CsvService());
 
+controller.Run();
