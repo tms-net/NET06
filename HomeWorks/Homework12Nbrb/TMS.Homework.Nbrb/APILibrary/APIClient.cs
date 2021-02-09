@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
-
+[assembly: InternalsVisibleTo("APILibraryTests")]
 namespace APILibrary
 {
     public class APIClient
@@ -15,13 +16,18 @@ namespace APILibrary
         /// <summary>
         /// Dictionary for currencies (save code currency and internal code)
         /// </summary>
-        private Dictionary<int, int> dictionaryCurrencies;
-
-        private static HttpClient httpClient = new HttpClient();
+        private readonly Dictionary<int, int> dictionaryCurrencies;
+        private readonly HttpClient httpClient = new HttpClient();
 
         public APIClient()
         {
             dictionaryCurrencies = new Dictionary<int, int>();
+            httpClient = new HttpClient();
+        }
+
+        internal APIClient(HttpMessageHandler httpMessageHandler) : this()
+        {
+            httpClient = new HttpClient(httpMessageHandler);
         }
 
         /// <summary>
