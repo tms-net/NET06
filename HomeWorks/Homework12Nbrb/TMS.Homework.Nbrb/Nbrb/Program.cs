@@ -3,6 +3,19 @@ using FileLibrary;
 using System;
 using UILibrary;
 
-var uIClient = new UIApplication(new FileService<ShortRate>);
+//namespace Nbrb
+//{
+//    class Program
+//    {
+//        static void Main(string[] args)
+//        {
+//            var uIClient = new UIApplication();
 
+//            uIClient.ToDo();
+//        }
+//    }
+//}
+
+//var uIClient = new UIApplication(new FileService<ShortRate>);
+var uIClient = new UIApplication();
 await uIClient.ToDo();
