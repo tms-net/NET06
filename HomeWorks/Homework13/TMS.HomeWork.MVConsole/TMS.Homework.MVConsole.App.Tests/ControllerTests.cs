@@ -38,9 +38,9 @@ namespace TMS.Homework.MVConsole.App.Tests
             // act
             controller.Run();
 
-           Action<ICsvService> action =
-                service =>
-                    service.SaveToCSV(Enumerable.Empty<Student>());
+            Action<ICsvService> action =
+                 service =>
+                     service.SaveToCSV(Enumerable.Empty<Student>());
 
             //serviceMock.Verify(action);
 

@@ -185,7 +185,7 @@ namespace TMS.Homework.MVConsole.UI
             SetPropertyOrFields<T>(fields, instance);
             return instance;
         }
-        
+
         private void SetPropertyOrFields<T>(MemberInfo[] properties, T instance)
         {
             //object[] param = { instance };
@@ -232,7 +232,7 @@ namespace TMS.Homework.MVConsole.UI
 
         private object GetValue(Type fieldType)
         {
-            switch(fieldType)
+            switch (fieldType)
             {
                 case var ft when ft == typeof(int):
                     return randomNumber.Next();
@@ -243,6 +243,60 @@ namespace TMS.Homework.MVConsole.UI
                 default:
                     return null;
 
+            }
+        }
+
+        private void SetPropertyOrFields_Old<P, T>(P[] properties, T instance)
+        {
+            Type type = typeof(P);
+            object[] param = { instance };
+            // MethodInfo miGet =  type.GetMethod("GetValue");
+            MethodInfo miGet = type.GetMethods().Single(m => m.Name == "GetValue" && m.GetParameters().Length == 1);
+            // MethodInfo miSet = type.GetMethod("SetValue");
+            MethodInfo miSet = type.GetMethods().Single(m => m.Name == "SetValue" && m.GetParameters().Length == 2);
+            PropertyInfo propertyTypeInfo = null;
+            if (type == typeof(PropertyInfo)) propertyTypeInfo = type.GetProperty("PropertyType");
+            if (type == typeof(FieldInfo)) propertyTypeInfo = type.GetProperty("FieldType");
+
+            for (int i = 0; i < properties.Length; i++)
+            {
+                P property = properties[i];
+                Type propertyType = (Type)propertyTypeInfo.GetValue(property);
+                // m.Invoke(model, args);
+                // var propertyValue = property.GetValue(instance);
+
+                var propertyValue = miGet.Invoke(property, param);
+
+                PropertyInfo propertyNameInfo = type.GetProperty("Name");
+                string propertyName = (string)propertyNameInfo.GetValue(property);
+                var s = propertyValue == null ? "null" : propertyValue;
+                Console.WriteLine($"Property {propertyName}, type {propertyType}, value {s}");
+
+                switch (property)
+                {
+                    case PropertyInfo pi when pi.PropertyType == typeof(int):
+                        // property.SetValue(instance, randomNumber.Next());
+                        object[] ps = { instance, randomNumber.Next() };
+                        miSet.Invoke(property, ps);
+                        break;
+                    case PropertyInfo pi when pi.PropertyType == typeof(string):
+                        object[] ps1 = { instance, "some" };
+                        miSet.Invoke(property, ps1);
+                        //property.SetValue(instance, $"Property_{propertyType.Name}_someStringValue{i.ToString()}");
+                        break;
+                    case PropertyInfo pi when pi.PropertyType == typeof(double):
+
+                        object[] ps2 = { instance, randomNumber.NextDouble() };
+                        miSet.Invoke(property, ps2);
+                        //property.SetValue(instance, randomNumber.NextDouble());
+                        break;
+                    default:
+                        break;
+                }
+                // propertyValue = property.GetValue(instance);
+                propertyValue = miGet.Invoke(property, param);
+                s = propertyValue == null ? "null" : propertyValue;
+                Console.WriteLine($"After changing: field {propertyName}, value {s}\n");
             }
         }
     }
