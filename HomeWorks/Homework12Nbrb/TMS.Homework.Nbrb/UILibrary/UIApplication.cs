@@ -13,15 +13,19 @@ namespace UILibrary
     {
         private List<ShortCurrency> currencyList;
         private List<ShortRate> currencyShortRates;
-        //public UIApplication(IFileService fileService)
-        //{
+        private APIClient aPIClient;
+        public UIApplication(APIClient aPIClient)
+        {
+            this.aPIClient = aPIClient;
 
-        //}
+        }
 
         public async Task ToDo()
         {
             Console.WriteLine("Hello! You are greeted by NbRb.");
-            APIClient aPIClient = new APIClient();
+            //APIClient aPIClient = new APIClient();
+
+            currencyList = (await aPIClient.GetShortCurrenciesAsync());
 
             PrintHelp();
 

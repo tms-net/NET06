@@ -1,6 +1,7 @@
 ﻿using RandomNameGeneratorLibrary;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMS.Homework.MVConsole.Service;
 using TMS.Homework.MVConsole.UI;
 
@@ -27,7 +28,7 @@ namespace TMS.HomeWork.MVConsole.App
                 //_ui.View(students[students.Count-1]);
             }
 
-            _csvService.SaveToCSV(students);
+            _csvService.SaveToCSV(Enumerable.Empty<Student>());
         }
 
         private Student GetStudent()

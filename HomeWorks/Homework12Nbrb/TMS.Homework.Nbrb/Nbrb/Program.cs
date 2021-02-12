@@ -17,5 +17,5 @@ using UILibrary;
 //}
 
 //var uIClient = new UIApplication(new FileService<ShortRate>);
-var uIClient = new UIApplication();
+var uIClient = new UIApplication(new APILibrary.APIClient());
 await uIClient.ToDo();

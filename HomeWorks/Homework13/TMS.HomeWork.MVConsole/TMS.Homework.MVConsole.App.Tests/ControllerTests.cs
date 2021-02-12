@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using TMS.Homework.MVConsole.Service;
 using TMS.HomeWork.MVConsole.App;
 
@@ -37,11 +38,18 @@ namespace TMS.Homework.MVConsole.App.Tests
             // act
             controller.Run();
 
+           Action<ICsvService> action =
+                service =>
+                    service.SaveToCSV(Enumerable.Empty<Student>());
+
+            //serviceMock.Verify(action);
+
             // assert
             serviceMock.Verify(service =>
-                service.SaveToCSV(
-                    It.Is<IEnumerable<Student>>(
-                        actualStudents => actualStudents != null)));
+                //service.SaveToCSV(Enumerable.Empty<Student>()));
+                service.SaveToCSV(It.IsAny<IEnumerable<Student>>()));
+            //It.Is<IEnumerable<Student>>(
+            //    actualStudents => actualStudents != null)));
         }
     }
 }

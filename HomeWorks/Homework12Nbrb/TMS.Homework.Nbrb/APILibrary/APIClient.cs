@@ -40,7 +40,7 @@ namespace APILibrary
         /// Receiving currency as a short list (Получение полного списка валют)
         /// </summary>
         /// <returns>list short currencies</returns>
-        public async Task<List<ShortCurrency>> GetShortCurrenciesAsync()
+        public virtual async Task<List<ShortCurrency>> GetShortCurrenciesAsync()
         {
             var listCurrencies = (await GetAllCurrenciesAsync()).ToList();
 
