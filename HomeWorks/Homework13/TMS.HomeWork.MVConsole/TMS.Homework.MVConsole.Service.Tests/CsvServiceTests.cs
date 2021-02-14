@@ -42,12 +42,21 @@ namespace TMS.Homework.MVConsole.Service.Tests
 		public void SaveToCSVShouldCreateValidCsvFileFormat()
 		{
 			// TODO: https://appm.import2.com/csv_file_checker
+			// https://csvlint.io/
 
 			// arrange
+			var service = new CsvService();
+            var fileName = Guid.NewGuid().ToString("N");
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), $"{fileName}.csv");
+            var models = new[] { new { PropertyWithCommas = "Property,With,Commas" } };
 
 			// act
+            service.SaveToCSV(models, Directory.GetCurrentDirectory(), fileName);
 
 			//assert
+
+			//Must be magic to working with API here
+
 			Assert.Fail();
 		}
 
