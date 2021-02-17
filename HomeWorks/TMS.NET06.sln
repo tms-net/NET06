@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.FitnessTracker", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.ShopSimulator", "HomeWork11\TMS.ShopSimulator\TMS.NET06.ShopSimulator.csproj", "{91DD9B21-5780-4420-97CD-4B4383524E16}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.NET06.HttpClientApp", "TMS.NET06.HttpClientApp\TMS.NET06.HttpClientApp.csproj", "{B52798A1-9104-45AD-A17D-2657EC396E53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.NET06.HttpClientApp.Tests", "TMS.NET06.HttpClientApp.Tests\TMS.NET06.HttpClientApp.Tests.csproj", "{46572339-11C0-43B0-A710-37D4B0AD2277}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{91DD9B21-5780-4420-97CD-4B4383524E16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91DD9B21-5780-4420-97CD-4B4383524E16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91DD9B21-5780-4420-97CD-4B4383524E16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B52798A1-9104-45AD-A17D-2657EC396E53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B52798A1-9104-45AD-A17D-2657EC396E53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B52798A1-9104-45AD-A17D-2657EC396E53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B52798A1-9104-45AD-A17D-2657EC396E53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46572339-11C0-43B0-A710-37D4B0AD2277}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46572339-11C0-43B0-A710-37D4B0AD2277}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46572339-11C0-43B0-A710-37D4B0AD2277}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46572339-11C0-43B0-A710-37D4B0AD2277}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
