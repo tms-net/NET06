@@ -19,11 +19,12 @@ namespace TMS.NET06.HttpClientApp.Tests
 			//https://en.wikipedia.org/wiki/HTTP_ETag
 		}
 
-		[Test]
-		public async Task GetContentShouldCorrectlyHandleETagHeaders()
+		[TestCase("http://localhost/etag")]
+		[TestCase("http://localhost/etag2")]
+		public async Task GetContentShouldCorrectlyHandleETagHeaders(string uri)
 		{
 			// arrange
-			var etagUri = new Uri("http://localhost/etag");
+			var etagUri = new Uri(uri);
 			var etag = "\"686897696a7c876b7e\"";
 			var etagHeader = EntityTagHeaderValue.Parse(etag);
 			var handlerMock = new Mock<HttpMessageHandler>();
@@ -73,7 +74,8 @@ namespace TMS.NET06.HttpClientApp.Tests
 				"SendAsync",
 				Times.Exactly(1),
 				ItExpr.Is<HttpRequestMessage>(req =>
-					req.Method == HttpMethod.Get && req.RequestUri == etagUri && !req.Headers.IfNoneMatch.Any()),
+					req.Method == HttpMethod.Get &&
+					req.RequestUri == etagUri && !req.Headers.IfNoneMatch.Any()),
 				ItExpr.IsAny<CancellationToken>());
 			CollectionAssert.AreEquivalent(new []
 			{
