@@ -1,9 +1,21 @@
 body {
     font-family: "Trirong", serif;
+    background-color: #fbfbfb;
 }
 
-h1,h2,h3,h4,h5,h6,p {
+h1, h2, h3, h4, h5, h6, p {
     margin: 0;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    color: black;
+    text-decoration: none;
 }
 
 .main {
@@ -11,20 +23,62 @@ h1,h2,h3,h4,h5,h6,p {
     margin: auto;
 }
 
-nav ul {
-    list-style-type: none;
-}
-
-.style1 .header {
+.header {
     background-color: #4CAF50;
     color: white;
     border-radius: 3px;
     padding: 10px;
 }
 
-.style2 .header {
-    background-color: #df6e23;
+.main-menu {
+    float: left;
+    width: 30%;
+}
+
+.main-description {
+    float: left;
+    width: 550px;
+}
+
+.content {
+    margin-top: 10px;
+}
+
+.main-menu li {
+    background-color: #f1f1f1;
+    border: 1px solid #d4d4d4;
+    border-radius: 4px;
+    font-size: 16px;
+    padding: 8px 2px 8px 8px;
+    margin: 5px 0;
+}
+
+li.main-menu-active {
+    background-color: #4CAF50;
+    font-weight: bold;
+}
+
+li.main-menu-active a {
     color: white;
-    border-radius: 3px;
-    padding: 10px;
+}
+
+.main-description {
+    padding: 5px 0 5px 10px;
+}
+
+.main-decription-item {
+    background-color: #f1f1f1;
+    border: 1px solid #d4d4d4;
+    border-radius: 4px;
+    margin-bottom: 12px;
+}
+
+.main-decription-item h3 {
+    font-size: 26px;
+    margin: 12px;
+}
+
+.main-decription-item p {
+    font-size: 14px;
+    margin: 10px 0 10px 12px;
 }
