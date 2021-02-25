@@ -6,16 +6,78 @@ h1,h2,h3,h4,h5,h6,p {
     margin: 0;
 }
 
+h1.header.style1 {
+    text-align: center;
+}
 .main {
-    width: 800px;
+    width: auto;
     margin: auto;
 }
 
-nav ul {
+nav ul.style1 {
     list-style-type: none;
+    padding-inline-start: 0px;
+    float: left;
+    width: 250px;
 }
 
-.style1 .header {
+
+nav ul li.style1 {    
+    list-style-type: none;
+    color: black;
+    background-color: #d4d4d4;
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+nav ul li.style1:first-child{
+    background-color: #4CAF50;   
+    color: black;    
+}
+
+nav ul li.style1:hover {
+    background-color: white;
+}
+
+nav ul li.style1:visited {
+    background-color: #4CAF50;
+}
+
+.footer.style1 {
+    background-color: #4CAF50;
+    font-size: 20px;
+    color: white;
+    /*--font-weight: bold;*/
+    text-align: center; 
+    padding: 20px;
+}
+
+.header.style1 {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 3px;
+    padding: 10px;
+}
+
+.main-description.style1 {
+margin-left: 270px;
+}
+
+.main-decription-item.style1 {
+    margin-bottom: 20px;
+    padding: 10px;
+    margin: 0px;
+}
+
+div p.style1 {
+    text-align: justify;
+    text-indent: 25px;   
+}
+
+/*.style1 .header {
     background-color: #4CAF50;
     color: white;
     border-radius: 3px;
@@ -27,4 +89,4 @@ nav ul {
     color: white;
     border-radius: 3px;
     padding: 10px;
-}
+}*/
