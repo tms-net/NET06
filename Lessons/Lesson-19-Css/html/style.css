@@ -6,6 +6,10 @@
     font-family: "Times New Roman", Times, serif;
 }
 
+.style3 body {
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
 h1,h2,h3,h4,h5,h6,p {
     margin: 0;
     padding: 0px;
@@ -39,26 +43,50 @@ h3 {
     padding: 10px;
 }
 
+.style3 .header {
+    /*background-color: #df4923;*/    
+    border-radius: 3px;
+    padding: 10px;
+}
+
 .style1 .header p {
     font-size: 16px;
 }
 
 .style2 .header p {
     font-size: 30px;
-    /*margin-top: 10px;*/
+    margin: 0 0 0 10px;
+}
+
+.style3 p {
+    font-size: 20px;    
 }
 
 .style1 .content {
     position: relative;
 }
 
-.style1 h1 {
-    text-align: left;
+.style3 .content {
+    margin: 10px;
 }
 
 .style2 h1 {
-    text-align: left;
     font-size: 50px;
+    margin: 0 0 0 10px;
+}
+
+.style3 h3 {
+    color: #4CAF50;
+    font-size: 26px;
+}
+
+.style3 .sidebar h3 {
+    font-size: 24px;
+}
+
+.style3 h1{
+    color: #4CAF50;
+    font-size: 40px;
 }
 
 .style2 h3 {
@@ -78,6 +106,12 @@ h3 {
     float: right;
     width: 180px;  
     margin: 20px; 
+}
+
+.style3 nav ul {
+    position: relative;
+    overflow: auto;
+    padding: 0;
 }
 
 .style2 nav ul li {    
@@ -104,14 +138,33 @@ h3 {
     cursor: pointer;
 }
 
+.style3 nav ul li {    
+    list-style-type: none;
+    color: white;
+    background-color: #555555;
+    margin: 4px;
+    font-size: 1.2em;
+    padding: 2px;
+    cursor: pointer;
+    text-align: center;
+    float: left;
+    width: 200px;
+}
+
 .style1 nav ul li:first-child{
     background-color: #4CAF50;   
-    color: white;    
+    color: white;   
+    font-weight: bold; 
 }
 
 .style2 nav ul li:nth-child(2){
     background-color: white;   
     color: #d14836;   
+    font-weight: bold; 
+}
+
+.style3 nav ul li:nth-child(3){
+    background-color: #4CAF50;  
     font-weight: bold; 
 }
 
@@ -124,12 +177,8 @@ h3 {
     color: #d14836;
 }
 
-.style1 nav ul li:visited {
-    background-color: #4CAF50;
-}
-
-.style2 nav ul li:visited {
-    background-color: #4CAF50;
+.style3 nav ul li:hover {
+    background-color: rgb(158, 154, 154);
 }
 
 .style1 .main-description {
@@ -152,14 +201,14 @@ h3 {
     margin: 0px;
 }
 
-/*.style1 div p {
-    text-align: justify;
-    text-indent: 25px;   
-}*/
 .style2 .sidebar p {
     margin-bottom: 10px;
     color: #d14836;
     font-size: 20px;
+}
+
+.style3 .sidebar p {
+    font-size: 18px;
 }
 
 .style1 .sidebar {
@@ -182,6 +231,13 @@ h3 {
     padding: 10px;
 }
 
+.style3 .sidebar {
+    background-color: #f1f1f1;
+    border: 1px solid #d4d4d4;
+    padding: 10px;
+    margin: 10px 0 0 0;
+}
+
 .style1 .footer {
     font-size: 20px;
     background-color: #d4d4d4;
@@ -200,4 +256,10 @@ h3 {
     color: white;
     font-size: 80%;
     padding: 10px;
+}
+
+.style3 .footer {
+    margin: 10px;
+    text-align: center;
+    font-size: 80%;
 }
