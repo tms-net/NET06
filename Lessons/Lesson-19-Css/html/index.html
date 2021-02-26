@@ -18,8 +18,8 @@
         <div class="content">
             <nav class="main-menu">
                 <ul>
-                    <li><a href="#">Главная</a></li>
-                    <li><a href="#">Валюты</a></li>
+                    <li><a href="#" data-style="style1" onclick="onLinkClicked(this);">Главная</a></li>
+                    <li><a href="#" data-style="style2" onclick="onLinkClicked(this);">Валюты</a></li>
                 </ul>
             </nav>
             <div class="main-description">
@@ -34,5 +34,12 @@
             </div>
         </div>
    </div>
+   <script type="text/javascript">
+    function onLinkClicked(link) {
+        var body = document.getElementsByTagName("body")[0];
+        var styleAttr = link.getAttribute("data-style");
+        body.className += " " + styleAttr;
+    }
+   </script>
 </body>
 </html>
