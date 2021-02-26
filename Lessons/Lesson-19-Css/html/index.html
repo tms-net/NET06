@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
 </head>
-<body class="style1">
+<body class="style2">
    <div class="main">
         <header class="header">
             <h1>Welcome to nbrb.by</h1>
@@ -18,9 +18,9 @@
         <div class="content">
             <nav class="main-menu">
                 <ul>
-                    <li><a href="#" data-style="style1" onclick="onLinkClicked(this);">Stylesheet 1</a></li>
-                    <li><a href="#" data-style="style2" onclick="onLinkClicked(this);">Stylesheet 2</a></li>
-                    <li><a href="#" data-style="nostyle" onclick="onLinkClicked(this);">No stylesheet</a></li>
+                    <li data-style="style1" onclick="onLinkClicked(this);">Stylesheet 1</li>
+                    <li data-style="style2" onclick="onLinkClicked(this);">Stylesheet 2</li>
+                    <li data-style="null" onclick="onLinkClicked(this);">No Stylesheet</li>
                 </ul>
             </nav>
             <div class="main-description">
@@ -30,7 +30,12 @@
                         валютных договоров на веб-портале, размещенном на официальном сайте Национального банка в глобальной компьютерной сети Интернет. 
                         Соответствующее решение принято постановлением Правления Национального банка от 12 февраля 2021 г. № 37 (далее – постановление № 37) 
                         в целях реализации положений новой редакции Закона Республики Беларусь от 22 июля 2003 г. № 226-З "О валютном регулировании и валютном 
-                        контроле", которая вступает в силу с 9 июля 2021 г. и предусматривает либерализацию порядка проведения валютных операций.</p>
+                        контроле", которая вступает в силу с 9 июля 2021 г. и предусматривает либерализацию порядка проведения валютных операций.                        
+                        <br>
+                        <br>Для перехода на другой стиль выберите: <a href=# data-style="style1" onclick="onLinkClicked(this);">Stylesheet1</a>, 
+                        <a href=# data-style="style2" onclick="onLinkClicked(this);">Stylesheet2</a>,
+                        <a href=# data-style="null" onclick="onLinkClicked(this);">No Stylesheet</a>.
+                    </p>
                 </div>
                 <div class="main-decription-item">
                     <h3>Опубликованы Основы макропруденциальной политики Национального банка</h3>

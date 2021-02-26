@@ -48,6 +48,10 @@ h3 {
     /*margin-top: 10px;*/
 }
 
+.style1 .content {
+    position: relative;
+}
+
 .style1 h1 {
     text-align: left;
 }
@@ -68,6 +72,27 @@ h3 {
     width: 250px;
 }
 
+.style2 nav ul {
+    list-style-type: none;
+    padding-inline-start: 0px;
+    float: right;
+    width: 180px;  
+    margin: 20px; 
+}
+
+.style2 nav ul li {    
+    list-style-type: none;
+    color: white;
+    text-align: center; 
+    background-color: #d14836;
+    border-radius: 25px;
+    padding: 5px 5px 5px 15px ;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    cursor: pointer;
+    border: 1px solid #d14836;
+}
+
 .style1 nav ul li {    
     list-style-type: none;
     color: black;
@@ -81,26 +106,41 @@ h3 {
 
 .style1 nav ul li:first-child{
     background-color: #4CAF50;   
-    color: black;    
+    color: white;    
+}
+
+.style2 nav ul li:nth-child(2){
+    background-color: white;   
+    color: #d14836;   
+    font-weight: bold; 
 }
 
 .style1 nav ul li:hover {
     background-color: white;
 }
 
+.style2 nav ul li:hover {
+    background-color: white;
+    color: #d14836;
+}
+
 .style1 nav ul li:visited {
     background-color: #4CAF50;
 }
 
+.style2 nav ul li:visited {
+    background-color: #4CAF50;
+}
+
 .style1 .main-description {
-margin-left: 270px;
+    margin: 0 270px;
 }
 
 .style2 .main-description {
     margin-right: 270px;
     background-color: white;
     padding: 10px;
-    margin: 10px;
+    margin: 10px 10px 0px 10px;
 }
 .style2 .main-description h3 {
     color: #d14836;
@@ -122,10 +162,23 @@ margin-left: 270px;
     font-size: 20px;
 }
 
+.style1 .sidebar {
+    background-color: #32a4e7;
+    color: white;;
+    margin: 10px 0 10px 10px;
+    border-radius: 5px;
+    padding: 10px;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    position: absolute;
+    width: 180px;
+}
+
 .style2 .sidebar {
     background-color: #F6DAD7;
     color: #d14836;;
-    margin: 10px;
+    margin: 0px 10px 10px 10px;
     padding: 10px;
 }
 
