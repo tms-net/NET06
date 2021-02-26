@@ -9,42 +9,54 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
 </head>
-<body>
+<body class="style1">
    <div class="main">
-        <header class="header style1">
-            <h1 class="header style1">Welcome to nbrb.by</h1>
-            <p class="style1">Our bank is very populare bank in the world...</p>            
+        <header class="header">
+            <h1>Welcome to nbrb.by</h1>
+            <p>Our bank is very populare bank in the world...</p>            
         </header>        
         <div class="content">
             <nav class="main-menu">
-                <ul class="style1">
-                    <!--<li><a href="#">Главная</a></li>-->
-                    <li class="style1">Main</li>
-                    <li class="style1">Currencies</li>
-                    <li class="style1">Our progress</li>
-                    <li class="style1">Simple mode</li>
+                <ul>
+                    <li><a href="#" data-style="style1" onclick="onLinkClicked(this);">Stylesheet 1</a></li>
+                    <li><a href="#" data-style="style2" onclick="onLinkClicked(this);">Stylesheet 2</a></li>
+                    <li><a href="#" data-style="nostyle" onclick="onLinkClicked(this);">No stylesheet</a></li>
                 </ul>
             </nav>
-            <div class="main-description style1">
-                <div class="main-decription-item style1">
+            <div class="main-description">
+                <div class="main-decription-item">
                     <h3>В Республике Беларусь определен порядок регистрации резидентами валютных договоров на веб-портале Национального банка</h3>
-                    <p class="style1">В Республике Беларусь определен порядок регистрации резидентами (физическими и юридическими лицами, индивидуальными предпринимателями) 
+                    <p>В Республике Беларусь определен порядок регистрации резидентами (физическими и юридическими лицами, индивидуальными предпринимателями) 
                         валютных договоров на веб-портале, размещенном на официальном сайте Национального банка в глобальной компьютерной сети Интернет. 
                         Соответствующее решение принято постановлением Правления Национального банка от 12 февраля 2021 г. № 37 (далее – постановление № 37) 
                         в целях реализации положений новой редакции Закона Республики Беларусь от 22 июля 2003 г. № 226-З "О валютном регулировании и валютном 
                         контроле", которая вступает в силу с 9 июля 2021 г. и предусматривает либерализацию порядка проведения валютных операций.</p>
                 </div>
-                <div class="main-decription-item style1">
+                <div class="main-decription-item">
                     <h3>Опубликованы Основы макропруденциальной политики Национального банка</h3>
-                    <p class="style1">Соответствующее решение принято постановлением Правления Национального банка от 12 февраля 2021 г. № 37 (далее – постановление № 37) 
+                    <p>Соответствующее решение принято постановлением Правления Национального банка от 12 февраля 2021 г. № 37 (далее – постановление № 37) 
                         в целях реализации положений новой редакции Закона Республики Беларусь от 22 июля 2003 г. № 226-З "О валютном регулировании и валютном 
                         контроле", которая вступает в силу с 9 июля 2021 г. и предусматривает либерализацию порядка проведения валютных операций.</p>
-                </div>
+                </div>                
+            </div>
+            <div class="sidebar">
+                <h3>Side-bar</h3>
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
             </div>
         </div>
         <div>
-            <p class="footer style1">This may be your advertising</p>
+            <p class="footer">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
         </div>
    </div>
+   <script type="text/javascript">
+    function onLinkClicked(link) {
+        var body = document.getElementsByTagName("body")[0];
+        var styleAttr = link.getAttribute("data-style");
+        body.className = '';
+        //if (styleAttr !== 'nostyle') {       
+            body.className += " " + styleAttr;
+        //}
+    }
+   </script>
 </body>
 </html>

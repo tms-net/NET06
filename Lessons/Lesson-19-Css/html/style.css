@@ -1,28 +1,74 @@
-body {
+.style1 body {
     font-family: "Trirong", serif;
+}
+
+.style2 body {
+    font-family: "Times New Roman", Times, serif;
 }
 
 h1,h2,h3,h4,h5,h6,p {
     margin: 0;
+    padding: 0px;
 }
 
-h1.header.style1 {
-    text-align: center;
+h3 {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
-.main {
+
+.style1 .main {
     width: auto;
     margin: auto;
 }
 
-nav ul.style1 {
+.style2 .main {
+    background-color: #d14836;
+}
+
+.style1 .header {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 3px;
+    padding: 10px;
+}
+
+.style2 .header {
+    /*background-color: #df4923;*/
+    color: white;
+    border-radius: 3px;
+    padding: 10px;
+}
+
+.style1 .header p {
+    font-size: 16px;
+}
+
+.style2 .header p {
+    font-size: 30px;
+    /*margin-top: 10px;*/
+}
+
+.style1 h1 {
+    text-align: left;
+}
+
+.style2 h1 {
+    text-align: left;
+    font-size: 50px;
+}
+
+.style2 h3 {
+    font-size: 22px;
+}
+
+.style1 nav ul {
     list-style-type: none;
     padding-inline-start: 0px;
     float: left;
     width: 250px;
 }
 
-
-nav ul li.style1 {    
+.style1 nav ul li {    
     list-style-type: none;
     color: black;
     background-color: #d4d4d4;
@@ -33,60 +79,72 @@ nav ul li.style1 {
     cursor: pointer;
 }
 
-nav ul li.style1:first-child{
+.style1 nav ul li:first-child{
     background-color: #4CAF50;   
     color: black;    
 }
 
-nav ul li.style1:hover {
+.style1 nav ul li:hover {
     background-color: white;
 }
 
-nav ul li.style1:visited {
+.style1 nav ul li:visited {
     background-color: #4CAF50;
 }
 
-.footer.style1 {
-    background-color: #4CAF50;
-    font-size: 20px;
-    color: white;
-    /*--font-weight: bold;*/
-    text-align: center; 
-    padding: 20px;
-}
-
-.header.style1 {
-    background-color: #4CAF50;
-    color: white;
-    border-radius: 3px;
-    padding: 10px;
-}
-
-.main-description.style1 {
+.style1 .main-description {
 margin-left: 270px;
 }
 
-.main-decription-item.style1 {
+.style2 .main-description {
+    margin-right: 270px;
+    background-color: white;
+    padding: 10px;
+    margin: 10px;
+}
+.style2 .main-description h3 {
+    color: #d14836;
+}
+
+.style1 .main-decription-item {
     margin-bottom: 20px;
     padding: 10px;
     margin: 0px;
 }
 
-div p.style1 {
+/*.style1 div p {
     text-align: justify;
     text-indent: 25px;   
-}
-
-/*.style1 .header {
-    background-color: #4CAF50;
-    color: white;
-    border-radius: 3px;
-    padding: 10px;
-}
-
-.style2 .header {
-    background-color: #df6e23;
-    color: white;
-    border-radius: 3px;
-    padding: 10px;
 }*/
+.style2 .sidebar p {
+    margin-bottom: 10px;
+    color: #d14836;
+    font-size: 20px;
+}
+
+.style2 .sidebar {
+    background-color: #F6DAD7;
+    color: #d14836;;
+    margin: 10px;
+    padding: 10px;
+}
+
+.style1 .footer {
+    font-size: 20px;
+    background-color: #d4d4d4;
+    color: black;
+    /*--font-weight: bold;*/
+    border-radius: 5px;
+    text-align: center; 
+    font-size: 80%;
+    padding: 10px;
+}
+
+.style2 .footer {
+    font-size: 20px;
+    /*--font-weight: bold;*/
+    text-align: center; 
+    color: white;
+    font-size: 80%;
+    padding: 10px;
+}
