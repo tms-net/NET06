@@ -1,0 +1,350 @@
+.style2 body {
+    font-family: "Times New Roman", Times, serif;
+}
+
+.style3 body {
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.style4 body {
+    font-family: "Times New Roman", Times, serif;
+}
+
+h1,h2,h3,h4,h5,h6,p {
+    margin: 0;
+    padding: 0px;
+}
+
+h3 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+$color-green1: #4CAF50;
+$color-red: #d14836;
+$color-white: white;
+$color-black: black;
+$color-green2: #84c754;
+
+%style-header {
+    border-radius: 3px;
+    padding: 10px;    
+}
+
+%nav-ul-position {
+    position: relative;
+    overflow: auto;    
+}
+
+@mixin nav-ul-line-style {
+    list-style-type: none;
+    padding-inline-start: 0px;
+}
+
+%default-footer {
+    text-align: center; 
+    font-size: 80%; 
+    padding: 10px;   
+}
+
+.style1 .content, .style4 .content {
+    position: relative;
+}
+
+@for $i from 1 through 4 {
+    .style#{$i} nav ul li:nth-child(#{$i}){  
+        font-weight: bold; 
+    }
+}
+
+.style1 {
+    body {
+        font-family: "Trirong", serif;
+    }
+
+    .header {
+        background-color: $color-green1;
+        color: $color-white;
+        @extend %style-header;
+    }
+
+    .header p {
+        font-size: 16px;
+    }
+
+    nav ul {
+        @include nav-ul-line-style;
+        float: left;
+        width: 250px;
+    }
+
+    nav ul li {    
+        list-style-type: none;
+        color: $color-black;
+        background-color: #d4d4d4;
+        border-radius: 3px;
+        padding: 5px;
+        font-size: 1.2em;
+        margin-bottom: 5px;
+        cursor: pointer;
+    }
+
+    nav ul li:nth-child(1){
+        background-color: $color-green1;   
+        color: $color-white;   
+    }
+
+    nav ul li:hover {
+        background-color: $color-white;
+    }
+
+    .main-description {
+        margin: 0 270px;
+    }
+
+    .main-decription-item {
+        margin-bottom: 20px;
+        padding: 10px;
+        margin: 0px;
+    }
+
+    .sidebar {
+        background-color: #32a4e7;
+        color: $color-white;
+        margin: 10px 0 10px 10px;
+        border-radius: 5px;
+        padding: 10px;
+        top: 0px;
+        bottom: 0px;
+        right: 0px;
+        position: absolute;
+        width: 180px;
+    }
+
+    .footer {
+        background-color: #d4d4d4;
+        color: $color-black;
+        border-radius: 5px;
+        @extend %default-footer;
+    }
+}
+
+.style2 {
+    .main {
+        background-color: $color-red;
+    }
+
+    .header {
+        color: $color-white;
+        @extend %style-header;
+    }
+
+    .header p {
+        font-size: 30px;
+        margin: 0 0 0 10px;
+    }
+
+    h1 {
+        font-size: 50px;
+        margin: 0 0 0 10px;
+    }
+
+    h3 {
+        font-size: 22px;
+    }
+    
+    nav ul {
+        @include nav-ul-line-style;
+        float: right;
+        width: 180px;  
+        margin: 20px; 
+    }
+
+    nav ul li {    
+        list-style-type: none;
+        color: $color-white;
+        text-align: center; 
+        background-color: $color-red;
+        border-radius: 25px;
+        padding: 5px 5px 5px 15px ;
+        font-size: 1.2em;
+        margin-bottom: 5px;
+        cursor: pointer;
+        border: 1px solid $color-red;
+    }
+
+    nav ul li:nth-child(2){
+        background-color: $color-white;   
+        color: $color-red;   
+    }
+
+    nav ul li:hover {
+        background-color: $color-white;
+        color: $color-red;
+    }
+
+    .main-description {
+        margin-right: 270px;
+        background-color: $color-white;
+        padding: 10px;
+        margin: 10px 10px 0px 10px;
+    }
+
+    .main-description h3 {
+        color: $color-red;
+    }
+
+    .sidebar {
+        background-color: #F6DAD7;
+        color: $color-red;
+        margin: 0px 10px 10px 10px;
+        padding: 10px;
+    }
+
+    .sidebar p {
+        margin-bottom: 10px;
+        color: $color-red;
+        font-size: 20px;
+    }
+
+    .footer {
+        color: $color-white;
+        @extend %default-footer;
+    }
+}
+
+.style3 {
+    .header {  
+        @extend %style-header;
+    }
+
+    p {
+        font-size: 20px;    
+    }
+
+    .content {
+        margin: 10px;
+    }
+    
+    h3 {
+        color: $color-green1;
+        font-size: 26px;
+    }
+    
+    .sidebar h3 {
+        font-size: 24px;
+    }
+    
+    h1{
+        color: $color-green1;
+        font-size: 40px;
+    }
+
+    nav ul {
+        @extend %nav-ul-position;
+        padding: 0;
+    }
+
+    nav ul li {    
+        list-style-type: none;
+        color: $color-white;
+        background-color: #555555;
+        margin: 4px;
+        font-size: 1.2em;
+        padding: 2px;
+        cursor: pointer;
+        text-align: center;
+        float: left;
+        width: 200px;
+    }
+
+    nav ul li:nth-child(3){
+        background-color: $color-green1;  
+    }
+
+    nav ul li:hover {
+        background-color: #9e9a9a;
+    }
+
+    .sidebar p {
+        font-size: 18px;
+    }
+
+    .sidebar {
+        background-color: #f1f1f1;
+        border: 1px solid #d4d4d4;
+        padding: 10px;
+        margin: 10px 0 0 0;
+    }
+
+    .footer {
+        @extend %default-footer;
+    }
+}
+
+.style4 {
+    .main {
+        background-color: $color-black;
+    }
+    
+    .header {
+        padding: 30px;
+    }
+
+    nav ul {
+        @extend %nav-ul-position;
+        padding-left: 60px;
+        margin: 0;
+    }
+    
+    nav ul li {    
+        color: #84c754;
+        font-size: 1.2em;
+        cursor: pointer;
+        width: 200px;
+    }
+
+    nav ul li:nth-child(4){
+        color: $color-white; 
+    }
+    
+    nav ul li:hover {
+        color: $color-white;
+    }
+    
+    .main-description {
+        padding: 30px;
+    }
+    
+    .linkcolor {
+        color: $color-white;
+    }
+    
+    .sidebar {
+        color: $color-white;
+        border: 1px solid #ffffff;
+        padding: 10px;
+        top: 0;
+        right: 0;
+        width: 350px;
+        position: absolute;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+
+    .footer {
+        margin: 10px;    
+        color: $color-white;
+        border-radius: 5px;
+        border: 1px solid $color-white;
+        @extend %default-footer;
+    }
+
+    .sidebar h3, .sidebar p {
+        color: $color-white;
+    }
+
+    h1, h3, p {
+        color: $color-green2;
+    }
+}
