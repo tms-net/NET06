@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
 </head>
-<body>
+<body class="body">
    <div class="main">
         <header class="header">
             <h1>Welcome to nbrb.by</h1>
@@ -18,8 +18,8 @@
         <div class="content">
             <nav class="main-menu">
                 <ul>
-                    <li><a href="#" data-style="style1" onclick="onLinkClicked(this);">Главная</a></li>
-                    <li><a href="#" data-style="style2" onclick="onLinkClicked(this);">Валюты</a></li>
+                    <li><a class="link" href="#" data-style="style1" onclick="onLinkClicked(this);">Стиль 1</a></li>
+                    <li><a class="link" href="#" data-style="style2" onclick="onLinkClicked(this);">Стиль 2</a></li>
                 </ul>
             </nav>
             <div class="main-description">
@@ -35,8 +35,21 @@
         </div>
    </div>
    <script type="text/javascript">
+    var allStyles = [];
+    window.onload = function() {
+        for(var elem of document.getElementsByClassName("link")) {
+            allStyles.push(elem.getAttribute('data-style'));
+        }
+    }
+
     function onLinkClicked(link) {
         var body = document.getElementsByTagName("body")[0];
+        for(let i=0; i<allStyles.length; i++) {
+            body.className = body.className.replace(allStyles[i], "");
+        }
+
+        body.className = body.className.trim();
+
         var styleAttr = link.getAttribute("data-style");
         body.className += " " + styleAttr;
     }
