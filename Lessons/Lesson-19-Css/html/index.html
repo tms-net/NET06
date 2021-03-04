@@ -53,6 +53,20 @@
         var styleAttr = link.getAttribute("data-style");
         body.className += " " + styleAttr;
     }
+
+    class MyGlobalScopeClass {
+        constructor() {
+          this.myProp = "prop";
+        }
+
+        getMyProp() {
+            return this.myProp;
+        }
+
+        setMyProp(val) {
+            this.myProp = val;
+        }
+    };
    </script>
 </body>
 </html>
