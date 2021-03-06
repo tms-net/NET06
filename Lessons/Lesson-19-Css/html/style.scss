@@ -1,25 +1,3 @@
-.style2 body {
-    font-family: "Times New Roman", Times, serif;
-}
-
-.style3 body {
-    font-family: "Lucida Console", "Courier New", monospace;
-}
-
-.style4 body {
-    font-family: "Times New Roman", Times, serif;
-}
-
-h1,h2,h3,h4,h5,h6,p {
-    margin: 0;
-    padding: 0px;
-}
-
-h3 {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
 $color-green1: #4CAF50;
 $color-red: #d14836;
 $color-white: white;
@@ -47,6 +25,166 @@ $color-green2: #84c754;
     padding: 10px;   
 }
 
+@mixin messages-validate {
+    display:none;
+    background: #f1f1f1;
+    color: #000;
+    //position: relative;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.style2 body {
+    font-family: "Times New Roman", Times, serif;
+}
+
+.style3 body {
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.style4 body {
+    font-family: "Times New Roman", Times, serif;
+}
+
+h1,h2,h3,h4,h5,h6,p {
+    margin: 0;
+    padding: 0px;
+}
+
+h3 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-pack: distribute;
+        justify-content: space-between;
+    //background-color: #f6f6f6;
+    //border-bottom: 1px solid #e0e0e0;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding: 10px;
+}
+
+//-----------------------------------------------
+/*.validate-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-pack: distribute;
+        justify-content: space-between;
+    //background-color: #f6f6f6;
+    //border-bottom: 1px solid #e0e0e0;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding: 10px;
+}*/
+
+h3.header-validate {
+    text-align: center;
+}
+
+.buttons-validate {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 10px 0px 10px;
+}
+
+.validate-content {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-validate {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    display: block;
+}
+
+.button-validate {
+    list-style-type: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 300;
+    color: $color-white;
+    text-align: center;
+    background-color: #64eb64;
+    border: 1px solid #15a02c;
+    padding: 0.7em 0.7em;
+    border-radius: 10px;
+    cursor: pointer;
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#64eb64), to(#15a02c));
+    background-image: linear-gradient(to top, #64eb64, #15a02c);    
+}
+
+.button-validate:hover {
+    background-color: white;
+}
+
+//input[type=text], select {
+.text-validate{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.message-name-validate {
+    @include messages-validate;
+}
+
+.message-password-validate {
+    @include messages-validate;
+}
+
+.validate-content p {
+    padding: 10px 35px;
+    font-size: 18px;
+}
+
+.valid-validate {
+    color: green;
+}
+
+.valid-validate:before {
+    position: relative;
+    left: -35px;
+    content: "✔";
+}
+
+.invalid-validate {
+    color: red;
+}
+
+.invalid-validate:before {
+    position: relative;
+    left: -35px;
+    content: "✖";
+}
+
+.checkbox-validate{
+    margin: 10px;
+}
+
+//------------------------------------------------
 .style1 .content, .style4 .content {
     position: relative;
 }

@@ -1,3 +1,7 @@
+.style1 body {
+  font-family: "Trirong", serif;
+}
+
 .style2 body {
   font-family: "Times New Roman", Times, serif;
 }
@@ -20,93 +24,6 @@ h3 {
   margin-bottom: 10px;
 }
 
-.style1 .header, .style2 .header, .style3 .header {
-  border-radius: 3px;
-  padding: 10px;
-}
-
-.style3 nav ul, .style4 nav ul {
-  position: relative;
-  overflow: auto;
-}
-
-.style1 .footer, .style2 .footer, .style3 .footer, .style4 .footer {
-  text-align: center;
-  font-size: 80%;
-  padding: 10px;
-}
-
-.style1 body {
-  font-family: "Trirong", serif;
-}
-
-.style1 .header {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.style1 .header p {
-  font-size: 16px;
-}
-
-.style1 nav ul {
-  list-style-type: none;
-  -webkit-padding-start: 0px;
-          padding-inline-start: 0px;
-  float: left;
-  width: 250px;
-}
-
-.style1 nav ul li {
-  list-style-type: none;
-  color: black;
-  background-color: #d4d4d4;
-  border-radius: 3px;
-  padding: 5px;
-  font-size: 1.2em;
-  margin-bottom: 5px;
-  cursor: pointer;
-}
-
-.style1 nav ul li:nth-child(1) {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.style1 nav ul li:hover {
-  background-color: white;
-}
-
-.style1 .main-description {
-  margin: 0 270px;
-}
-
-.style1 .main-decription-item {
-  margin-bottom: 20px;
-  padding: 10px;
-  margin: 0px;
-}
-
-.style1 .sidebar {
-  background-color: #32a4e7;
-  color: white;
-  margin: 10px 0 10px 10px;
-  border-radius: 5px;
-  padding: 10px;
-  top: 0px;
-  bottom: 0px;
-  right: 0px;
-  position: absolute;
-  width: 180px;
-}
-
-.style1 .footer {
-  font-size: 20px;
-  background-color: #d4d4d4;
-  color: black;
-  border-radius: 5px;
-}
-
 .style2 .main {
   background-color: #d14836;
 }
@@ -115,12 +32,26 @@ h3 {
   background-color: black;
 }
 
+.style1 .header, .style2 .header, .style3 .header {
+  border-radius: 3px;
+  padding: 10px;
+}
+
+.style1 .header {
+  background-color: #4CAF50;
+  color: white;
+}
+
 .style2 .header {
   color: white;
 }
 
 .style4 .header {
   padding: 30px;
+}
+
+.style1 .header p {
+  font-size: 16px;
 }
 
 .style2 .header p {
@@ -167,6 +98,19 @@ h3 {
   color: #84c754;
 }
 
+.style3 nav ul, .style4 nav ul {
+  position: relative;
+  overflow: auto;
+}
+
+.style1 nav ul {
+  list-style-type: none;
+  -webkit-padding-start: 0px;
+          padding-inline-start: 0px;
+  float: left;
+  width: 250px;
+}
+
 .style2 nav ul {
   list-style-type: none;
   -webkit-padding-start: 0px;
@@ -183,6 +127,17 @@ h3 {
 .style4 nav ul {
   padding-left: 60px;
   margin: 0;
+}
+
+.style1 nav ul li {
+  list-style-type: none;
+  color: black;
+  background-color: #d4d4d4;
+  border-radius: 3px;
+  padding: 5px;
+  font-size: 1.2em;
+  margin-bottom: 5px;
+  cursor: pointer;
 }
 
 .style2 nav ul li {
@@ -234,6 +189,11 @@ h3 {
   font-weight: bold;
 }
 
+.style1 nav ul li:nth-child(1) {
+  background-color: #4CAF50;
+  color: white;
+}
+
 .style2 nav ul li:nth-child(2) {
   background-color: white;
   color: #d14836;
@@ -247,6 +207,10 @@ h3 {
   color: white;
 }
 
+.style1 nav ul li:hover {
+  background-color: white;
+}
+
 .style2 nav ul li:hover {
   background-color: white;
   color: #d14836;
@@ -258,6 +222,10 @@ h3 {
 
 .style4 nav ul li:hover {
   color: white;
+}
+
+.style1 .main-description {
+  margin: 0 270px;
 }
 
 .style2 .main-description {
@@ -275,6 +243,12 @@ h3 {
   color: #d14836;
 }
 
+.style1 .main-decription-item {
+  margin-bottom: 20px;
+  padding: 10px;
+  margin: 0px;
+}
+
 .style4 .linkcolor {
   color: white;
 }
@@ -287,6 +261,19 @@ h3 {
 
 .style3 .sidebar p {
   font-size: 18px;
+}
+
+.style1 .sidebar {
+  background-color: #32a4e7;
+  color: white;
+  margin: 10px 0 10px 10px;
+  border-radius: 5px;
+  padding: 10px;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  position: absolute;
+  width: 180px;
 }
 
 .style2 .sidebar {
@@ -317,6 +304,19 @@ h3 {
 
 .style4 .sidebar h3, .style4 .sidebar p {
   color: white;
+}
+
+.style1 .footer, .style2 .footer, .style3 .footer, .style4 .footer {
+  text-align: center;
+  font-size: 80%;
+  padding: 10px;
+}
+
+.style1 .footer {
+  font-size: 20px;
+  background-color: #d4d4d4;
+  color: black;
+  border-radius: 5px;
 }
 
 .style2 .footer {

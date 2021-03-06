@@ -1,3 +1,20 @@
+@charset "UTF-8";
+.style1 .header, .style2 .header, .style3 .header {
+  border-radius: 3px;
+  padding: 10px;
+}
+
+.style3 nav ul, .style4 nav ul {
+  position: relative;
+  overflow: auto;
+}
+
+.style1 .footer, .style2 .footer, .style3 .footer, .style4 .footer {
+  text-align: center;
+  font-size: 80%;
+  padding: 10px;
+}
+
 .style2 body {
   font-family: "Times New Roman", Times, serif;
 }
@@ -20,20 +37,140 @@ h3 {
   margin-bottom: 10px;
 }
 
-.style1 .header, .style2 .header, .style3 .header {
-  border-radius: 3px;
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-pack: distribute;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   padding: 10px;
 }
 
-.style3 nav ul, .style4 nav ul {
-  position: relative;
-  overflow: auto;
-}
-
-.style1 .footer, .style2 .footer, .style3 .footer, .style4 .footer {
+/*.validate-content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-pack: distribute;
+        justify-content: space-between;
+    //background-color: #f6f6f6;
+    //border-bottom: 1px solid #e0e0e0;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding: 10px;
+}*/
+h3.header-validate {
   text-align: center;
-  font-size: 80%;
-  padding: 10px;
+}
+
+.buttons-validate {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin: 10px 10px 0px 10px;
+}
+
+.validate-content {
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form-validate {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  display: block;
+}
+
+.button-validate {
+  list-style-type: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 300;
+  color: white;
+  text-align: center;
+  background-color: #64eb64;
+  border: 1px solid #15a02c;
+  padding: 0.7em 0.7em;
+  border-radius: 10px;
+  cursor: pointer;
+  background-image: -webkit-gradient(linear, left bottom, left top, from(#64eb64), to(#15a02c));
+  background-image: linear-gradient(to top, #64eb64, #15a02c);
+}
+
+.button-validate:hover {
+  background-color: white;
+}
+
+.text-validate {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.message-name-validate {
+  display: none;
+  background: #f1f1f1;
+  color: #000;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+.message-password-validate {
+  display: none;
+  background: #f1f1f1;
+  color: #000;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+.validate-content p {
+  padding: 10px 35px;
+  font-size: 18px;
+}
+
+.valid-validate {
+  color: green;
+}
+
+.valid-validate:before {
+  position: relative;
+  left: -35px;
+  content: "✔";
+}
+
+.invalid-validate {
+  color: red;
+}
+
+.invalid-validate:before {
+  position: relative;
+  left: -35px;
+  content: "✖";
+}
+
+.checkbox-validate {
+  margin: 10px;
 }
 
 .style1 .content, .style4 .content {

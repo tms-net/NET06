@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- https://www.w3schools.com/css/css_intro.asp -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="javascript" href="all.js">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
+</head>
+<body>
+    <div class="validate-content">        
+        <form id="formValid" class="form-validate">
+            <div>
+                <h3 class="header-validate">Registration information</h3>
+            </div>
+
+            <div>
+                <label for="first_name">First Name:</label> 
+                <label ></label>
+                <input class="text-validate" required type="text" name="first_name" id="first_name" placeholder="First name"/>
+            </div>
+            
+            <div>
+                <label for="last_name">Last Name:</label>
+                <input class="text-validate" type="text" name="last_name" id="last_name" placeholder="Last name"/>
+            </div>
+
+            <div>
+                <label for="password">Password:</label>
+                <input class="text-validate" type="password" name="password" id="password" placeholder="Password"/>
+            </div>
+
+            <div>
+                <label for="accept">Accept terms and conditions.</label>
+                <input class="checkbox-validate" type="checkbox" name="accept" id="accept"/>
+            </div>
+
+            <div class="buttons-validate">
+                <input type="submit" class="button-validate" value="Submit" />
+                <a href="file:///D:\Progs\GitHub\NET06\Lessons\Lesson-19-Css\html\index.html" class="button-validate">Cancel</a>
+
+            </div>
+            
+        </form>
+        <div>
+            <div class="message-name-validate" id="message-name-validate">
+                <h3>Selected name must contain the following:</h3>                
+                <p id="firstUpperName" class="invalid-validate">Only first <b>capital (uppercase)</b> letter</p>
+                <p id="lowersName" class="invalid-validate">Second and other letters only <b>lowercase</b></p>
+                <p id="notUseSpecSymbol" class="invalid-validate">Don`t use special symbol, <b>only english</b> letters</p>
+            </div>
+        </div>
+        <div>
+            <div class="message-password-validate" id="message-password-validate">
+                <h3>Password must contain the following:</h3>
+                <p id="capitalPass" class="invalid-validate">Minimum <b>one capital (uppercase)</b> letter</p>
+                <p id="numberPass" class="invalid-validate">Minimum <b>one number</b></p>
+                <p id="lengthPass" class="invalid-validate">Minimum <b>8 characters</b></p>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+    
+    var allStyles = [];
+    window.onload = function() {
+        for(var elem of document.getElementsByClassName("link")) {
+            allStyles.push(elem.getAttribute('data-style'));
+        }
+    }
+
+    function onLinkClicked(link) {
+        var body = document.getElementsByTagName("body")[0];
+        for(let i=0; i<allStyles.length; i++) {
+            body.className = body.className.replace(allStyles[i], "");
+        }
+
+        body.className = body.className.trim();
+
+        var styleAttr = link.getAttribute("data-style");
+        body.className += " " + styleAttr;
+    }
+    //----------------------------------------
+
+    var firstN = document.getElementById('first_name');
+    var lastN = document.getElementById('last_name');
+    var pass = document.getElementById('password');
+    var messageNameValidate = document.getElementById("message-name-validate");
+    var messagePasswordValidate = document.getElementById("message-password-validate");
+    var lengthPass = document.getElementById("lengthPass");
+    var numbers = /[0-9]/g;
+    var numberPass = document.getElementById("numberPass");
+    var upperCaseLetters = /[A-Z]/g;
+    var capitalPass = document.getElementById("capitalPass");
+
+    firstN.onfocus = () => {
+        messageNameValidate.style.display = "block";
+        messagePasswordValidate.style.display = "none";
+    }
+    firstN.onblur = () => {
+        messageNameValidate.style.display = "none";
+        messagePasswordValidate.style.display = "none";
+    }
+    
+    lastN.onfocus = () => {
+        messageNameValidate.style.display = "block";
+        messagePasswordValidate.style.display = "none";
+    }
+    lastN.onblur = () => {
+        messageNameValidate.style.display = "none";
+        messagePasswordValidate.style.display = "none";
+    }
+    
+    pass.onfocus = () => {
+        messageNameValidate.style.display = "none";
+        messagePasswordValidate.style.display = "block";
+    }
+    pass.onblur = () => {
+        messageNameValidate.style.display = "none";
+        messagePasswordValidate.style.display = "none";
+    }
+
+    firstN.onkeyup = () => {
+
+    }
+
+    lastN.onkeypress = () => {
+
+    }
+
+    pass.onkeyup = () => {
+        if (pass.value.length >= 8) {
+            lengthPass.classList.remove("invalid-validate");
+            lengthPass.classList.add("valid-validate");
+        }
+        else {
+            lengthPass.classList.remove("valid-validate");
+            lengthPass.classList.add("invalid-validate");
+        }
+
+        if (pass.value.match(numbers)) {  
+            numberPass.classList.remove("invalid-validate");
+            numberPass.classList.add("valid-validate");
+        } else {
+            numberPass.classList.remove("valid-validate");
+            numberPass.classList.add("invalid-validate");
+        }
+
+        if (pass.value.match(upperCaseLetters)) {  
+            capitalPass.classList.remove("invalid-validate");
+            capitalPass.classList.add("valid-validate");
+        } else {
+            capitalPass.classList.remove("valid-validate");
+            capitalPass.classList.add("invalid-validate");
+        }
+    }    
+
+    //-----------------------------------------
+
+    class MyGlobalScopeClass {
+        constructor() {
+        this.myProp = "prop";
+        }
+
+        getMyProp() {
+            return this.myProp;
+        }
+
+        setMyProp(val) {
+            this.myProp = val;
+        }
+    };
+
+</script>
+</body>
+</html>
