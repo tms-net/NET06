@@ -25,15 +25,6 @@ $color-green2: #84c754;
     padding: 10px;   
 }
 
-@mixin messages-validate {
-    display:none;
-    background: #f1f1f1;
-    color: #000;
-    //position: relative;
-    padding: 20px;
-    margin-top: 10px;
-}
-
 .style2 body {
     font-family: "Times New Roman", Times, serif;
 }
@@ -147,12 +138,13 @@ h3.header-validate {
     box-sizing: border-box;
 }
 
-.message-name-validate {
-    @include messages-validate;
-}
-
-.message-password-validate {
-    @include messages-validate;
+.messages-validate {
+    display:none;
+    background: #f1f1f1;
+    color: #000;
+    //position: relative;
+    padding: 20px;
+    margin-top: 10px;
 }
 
 .validate-content p {

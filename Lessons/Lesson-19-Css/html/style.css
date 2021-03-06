@@ -128,15 +128,7 @@ h3.header-validate {
           box-sizing: border-box;
 }
 
-.message-name-validate {
-  display: none;
-  background: #f1f1f1;
-  color: #000;
-  padding: 20px;
-  margin-top: 10px;
-}
-
-.message-password-validate {
+.messages-validate {
   display: none;
   background: #f1f1f1;
   color: #000;

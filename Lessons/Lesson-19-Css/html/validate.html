@@ -46,15 +46,23 @@
             
         </form>
         <div>
-            <div class="message-name-validate" id="message-name-validate">
-                <h3>Selected name must contain the following:</h3>                
+            <div class="messages-validate" id="message-firstname-validate">
+                <h3>Selected first name must contain the following:</h3>                
                 <p id="firstUpperName" class="invalid-validate">Only first <b>capital (uppercase)</b> letter</p>
-                <p id="lowersName" class="invalid-validate">Second and other letters only <b>lowercase</b></p>
-                <p id="notUseSpecSymbol" class="invalid-validate">Don`t use special symbol, <b>only english</b> letters</p>
+                <p id="someLowerName" class="invalid-validate">Second and other letters only <b>lowercase</b></p>
+                <p id="firstNotUseSpecSymbol" class="invalid-validate">Don`t use special symbol, <b>only english</b> letters</p>
             </div>
         </div>
         <div>
-            <div class="message-password-validate" id="message-password-validate">
+            <div class="messages-validate" id="message-lastname-validate">
+                <h3>Selected last name must contain the following:</h3>                
+                <p id="firstUpperName" class="invalid-validate">Only first <b>capital (uppercase)</b> letter</p>
+                <p id="firstLowerName" class="invalid-validate">Second and other letters only <b>lowercase</b></p>
+                <p id="firstNotUseSpecSymbol" class="invalid-validate">Don`t use special symbol, <b>only english</b> letters</p>
+            </div>
+        </div>
+        <div>
+            <div class="messages-validate" id="message-password-validate">
                 <h3>Password must contain the following:</h3>
                 <p id="capitalPass" class="invalid-validate">Minimum <b>one capital (uppercase)</b> letter</p>
                 <p id="numberPass" class="invalid-validate">Minimum <b>one number</b></p>
@@ -87,51 +95,119 @@
     var firstN = document.getElementById('first_name');
     var lastN = document.getElementById('last_name');
     var pass = document.getElementById('password');
-    var messageNameValidate = document.getElementById("message-name-validate");
+    var messageFirstNameValidate = document.getElementById("message-firstname-validate");
+    var messageLastNameValidate = document.getElementById("message-lastname-validate");
     var messagePasswordValidate = document.getElementById("message-password-validate");
     var lengthPass = document.getElementById("lengthPass");
     var numbers = /[0-9]/g;
     var numberPass = document.getElementById("numberPass");
     var upperCaseLetters = /[A-Z]/g;
+    //var upperCaseFirstLetters = /[A-Z]./;
+    var lowerCaseLetters = /[a-z]/g;
+    var specSimbolLetters = /^[a-zA-Z]/g;
+    //var allLowerLetters = /[.?a-z]/g;
     var capitalPass = document.getElementById("capitalPass");
+    var firstUpperName = document.getElementById("firstUpperName");
+    var someLowerName = document.getElementById("someLowerName");
+    var firstNotUseSpecSymbol = document.getElementById("firstNotUseSpecSymbol");
+
+    function hiddenAllMessages() {
+        messageFirstNameValidate.style.display = "none";
+        messagePasswordValidate.style.display = "none";
+        messageLastNameValidate.style.display = "none";
+    }
 
     firstN.onfocus = () => {
-        messageNameValidate.style.display = "block";
+        messageFirstNameValidate.style.display = "block";
         messagePasswordValidate.style.display = "none";
+        messageLastNameValidate.style.display = "none";
     }
     firstN.onblur = () => {
-        messageNameValidate.style.display = "none";
-        messagePasswordValidate.style.display = "none";
+        hiddenAllMessages();
     }
     
     lastN.onfocus = () => {
-        messageNameValidate.style.display = "block";
+        messageLastNameValidate.style.display = "block";
+        messageFirstNameValidate.style.display = "none";
         messagePasswordValidate.style.display = "none";
     }
     lastN.onblur = () => {
-        messageNameValidate.style.display = "none";
-        messagePasswordValidate.style.display = "none";
+        hiddenAllMessages();
     }
     
     pass.onfocus = () => {
-        messageNameValidate.style.display = "none";
+        messageFirstNameValidate.style.display = "none";
         messagePasswordValidate.style.display = "block";
+        messageLastNameValidate.style.display = "none";
     }
     pass.onblur = () => {
-        messageNameValidate.style.display = "none";
-        messagePasswordValidate.style.display = "none";
+        hiddenAllMessages();
     }
 
     firstN.onkeyup = () => {
+        
+        console.log(firstN.value[0]);
+        console.log("firstN.value " + firstN.value);  
+        console.log("firstN.value.length " + firstN.value.length);   
+        let inputString = firstN.value;
+        let smallInputString;
 
+        if (inputString.length > 1) {
+            let smallInputString = inputString.slice(1, inputString.length)
+            console.log("smallInputString: " + smallInputString);
+            
+            if (smallInputString.match(lowerCaseLetters)) {
+                someLowerName.classList.remove("invalid-validate");
+                someLowerName.classList.add("valid-validate");
+            }
+            else {
+                someLowerName.classList.remove("valid-validate");
+                someLowerName.classList.add("invalid-validate");                
+            }
+
+            /*if ((smallInputString.match(lowerCaseLetters)) && (smallInputString.match(upperCaseLetters))) {
+                firstNotUseSpecSymbol.classList.remove("invalid-validate");
+                firstNotUseSpecSymbol.classList.add("valid-validate");
+            }
+            else {
+                firstNotUseSpecSymbol.classList.remove("valid-validate");
+                firstNotUseSpecSymbol.classList.add("invalid-validate");  
+            }*/
+        }
+        else {
+            someLowerName.classList.remove("valid-validate");
+            someLowerName.classList.add("invalid-validate");     
+        }
+
+        if ((inputString.length > 0) && (inputString[0] !== undefined) && (inputString[0].match(upperCaseLetters))) {
+                firstUpperName.classList.remove("invalid-validate");
+                firstUpperName.classList.add("valid-validate");  
+        }
+        else {
+            firstUpperName.classList.add("invalid-validate");
+            firstUpperName.classList.remove("valid-validate");   
+        }      
+        
+        console.log("inputString: " + inputString);
+        console.log("specSimbolLetters: " + specSimbolLetters);
+        console.log("inputString.match(specSimbolLetters): " + inputString.match(specSimbolLetters));
+
+        if ((inputString.length > 0) && (inputString !== undefined) && (inputString.match(specSimbolLetters))) {
+                firstNotUseSpecSymbol.classList.remove("invalid-validate");
+                firstNotUseSpecSymbol.classList.add("valid-validate");
+            }
+        else {
+            firstNotUseSpecSymbol.classList.remove("valid-validate");
+            firstNotUseSpecSymbol.classList.add("invalid-validate");  
+        }
     }
 
     lastN.onkeypress = () => {
 
     }
 
-    pass.onkeyup = () => {
-        if (pass.value.length >= 8) {
+    pass.onkeyup = () => {        
+        if (pass.value.match(/\b\w{8,}\b/g)) {
             lengthPass.classList.remove("invalid-validate");
             lengthPass.classList.add("valid-validate");
         }
@@ -156,6 +232,8 @@
             capitalPass.classList.add("invalid-validate");
         }
     }    
+
+
 
     //-----------------------------------------
 
