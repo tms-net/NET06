@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="validate-content">        
-        <form id="formValid" class="form-validate">
+        <form id="formValid" class="form-validate" onsubmit="return validate();">
             <div>
                 <h3 class="header-validate">Registration information</h3>
             </div>
@@ -20,7 +20,7 @@
             <div>
                 <label for="first_name">First Name:</label> 
                 <label ></label>
-                <input class="text-validate" required type="text" name="first_name" id="first_name" placeholder="First name"/>
+                <input class="text-validate" type="text" name="first_name" id="first_name" placeholder="First name"/>
             </div>
             
             <div>
@@ -30,6 +30,7 @@
 
             <div>
                 <label for="password">Password:</label>
+                <label for="password" class="invalid-res-check" id="errorPassword"> - There are some mistakes.</label>
                 <input class="text-validate" type="password" name="password" id="password" placeholder="Password"/>
             </div>
 
@@ -88,29 +89,53 @@
         body.className += " " + styleAttr;
     }
     //----------------------------------------
-    var firstN = document.getElementById('first_name');
-    var lastN = document.getElementById('last_name');
-    var pass = document.getElementById('password');
-    var messageFirstNameValidate = document.getElementById("message-firstname-validate");
-    var messageLastNameValidate = document.getElementById("message-lastname-validate");
-    var messagePasswordValidate = document.getElementById("message-password-validate");
-    var lengthPass = document.getElementById("lengthPass");
-    var numbers = /[0-9]/g;
-    var numberPass = document.getElementById("numberPass");
-    var upperCaseLetters = /[A-Z]/g;
-    var upperCaseLettersReverse = /[^A-Z]/g;
-    var lowerCaseLetters = /[a-z]/g;
-    var lowerCaseLettersReverse = /[^a-z]/g;
-    var specSimbolLetters = /[^a-zA-Z]/g;
-    var capitalPass = document.getElementById("capitalPass");
-    var firstUpperName = document.getElementById("firstUpperName");
-    var someLowerName = document.getElementById("someLowerName");
-    var lastNotUseSpecSymbol = document.getElementById("lastNotUseSpecSymbol");
+    let firstN = document.getElementById('first_name');
+    let lastN = document.getElementById('last_name');
+    let pass = document.getElementById('password');
+    let messageFirstNameValidate = document.getElementById("message-firstname-validate");
+    let messageLastNameValidate = document.getElementById("message-lastname-validate");
+    let messagePasswordValidate = document.getElementById("message-password-validate");
+    let lengthPass = document.getElementById("lengthPass");
+    let numbers = /[0-9]/g;
+    let numberPass = document.getElementById("numberPass");
+    let upperCaseLetters = /[A-Z]/g;
+    let upperCaseLettersReverse = /[^A-Z]/g;
+    let lowerCaseLetters = /[a-z]/g;
+    let lowerCaseLettersReverse = /[^a-z]/g;
+    let specSimbolLetters = /[^a-zA-Z]/g;
+    let capitalPass = document.getElementById("capitalPass");
+    let firstUpperName = document.getElementById("firstUpperName");
+    let someLowerName = document.getElementById("someLowerName");
+    let lastNotUseSpecSymbol = document.getElementById("lastNotUseSpecSymbol");
+    let errorPassword = document.getElementById("errorPassword");
+
+    class CheckValuePassword {  
+        checkMaxLength(newPass) {
+            if (newPass.value.length >= 8) {
+                return true;
+            }
+        }
+
+        checkExistNumber(newPass) {
+            if (newPass.value.match(numbers)) {
+                return true;
+            }
+        }
+
+        checkUpperCase(newPass) {
+            if (newPass.value.match(upperCaseLetters)) { 
+                return true;
+            } 
+        }
+    }
+
+    const classCheckPass = new CheckValuePassword(pass);
 
     function hiddenAllMessages() {
         messageFirstNameValidate.style.display = "none";
         messagePasswordValidate.style.display = "none";
         messageLastNameValidate.style.display = "none";
+        //errorPassword.style.display = "none";
     }
 
     firstN.onfocus = () => {
@@ -135,6 +160,7 @@
         messageFirstNameValidate.style.display = "none";
         messagePasswordValidate.style.display = "block";
         messageLastNameValidate.style.display = "none";
+        //errorPassword.style.display = "none";
     }
     pass.onblur = () => {
         hiddenAllMessages();
@@ -184,8 +210,9 @@
         }
     }
 
-    pass.onkeyup = () => {        
-        if (pass.value.match(/\b\w{8,}\b/g)) {
+    pass.onkeyup = () => {  
+        //if (pass.value.match(/\b\w{8,}\b/g)) {
+        if (classCheckPass.checkMaxLength(pass) === true) {
             lengthPass.classList.remove("invalid-validate");
             lengthPass.classList.add("valid-validate");
         }
@@ -194,7 +221,8 @@
             lengthPass.classList.add("invalid-validate");
         }
 
-        if (pass.value.match(numbers)) {  
+        //if (pass.value.match(numbers)) {  
+        if (classCheckPass.checkExistNumber(pass) === true) {
             numberPass.classList.remove("invalid-validate");
             numberPass.classList.add("valid-validate");
         } else {
@@ -202,7 +230,8 @@
             numberPass.classList.add("invalid-validate");
         }
 
-        if (pass.value.match(upperCaseLetters)) {  
+        //if (pass.value.match(upperCaseLetters)) {  
+        if (classCheckPass.checkUpperCase(pass) === true) {
             capitalPass.classList.remove("invalid-validate");
             capitalPass.classList.add("valid-validate");
         } else {
@@ -211,21 +240,14 @@
         }
     }    
 
-    //-----------------------------------------
-
-    class MyGlobalScopeClass {
-        constructor() {
-        this.myProp = "prop";
+    function validate(evt) {
+        if (classCheckPass.checkExistNumber(pass) && classCheckPass.checkMaxLength(pass) && classCheckPass.checkUpperCase(pass)) {            
+            alert("Information sent.")
         }
-
-        getMyProp() {
-            return this.myProp;
+        else {
+            errorPassword.style.display = "inline";
         }
-
-        setMyProp(val) {
-            this.myProp = val;
-        }
-    };
+    }
 
 </script>
 </body>
