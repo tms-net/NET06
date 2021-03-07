@@ -7,21 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="javascript" href="all.js">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Source Code Pro" rel="stylesheet"> -->
 </head>
-<body class="body">
+<body>
    <div class="main">
         <header class="header">
             <h1>Welcome to nbrb.by</h1>
             <p>Наш банк самый лучший</p>            
         </header>        
         <div class="content">
-            <nav class="main-menu">
-                <ul>
-                    <li><a class="link" href="#" data-style="style1" onclick="onLinkClicked(this);">Стиль 1</a></li>
-                    <li><a class="link" href="#" data-style="style2" onclick="onLinkClicked(this);">Стиль 2</a></li>
-                </ul>
+           <nav class="main-menu">
+            <ul>
+                <li class = "menu-item"><a href="#" data-style="style1" onclick="onLinkClicked(this);">Главная</a></li>
+                <li class = "menu-item"><a href="#" data-style="style2" onclick="onLinkClicked(this);">Валюты</a></li>
+            </ul>
+                
             </nav>
             <div class="main-description">
                 <div class="main-decription-item">
@@ -33,37 +34,44 @@
                     <p>Что мы порешали тогда</p>
                 </div>
             </div>
-
-            <div class="main-content">
-                <h3>Register</h3>
+            <div class="registration">
+                <h4>Register</h4>
                 <form id="myForm" class="form" onsubmit="return validate();">
                     <fieldset>
-                        <label for="name">Name:</label>
-                        <input required type="text" name="name" id="name"/>
-                        
-                        <label for="last_name">Last Name:</label>
-                        <input type="text" name="last_name" id="last_name"/>
-                    
-                        <label for="accept">Accept terms and conditions.</label>
-                        <input type="checkbox" name="accept" id="accept"/>
-                    </fieldset>
+                        <fieldData>
+                            <label for="name">Name:</label>
+                            <input required type="text" name="name" id="name"/>
+                            
+                            <label for="last_name">Last Name:</label>
+                            <input type="text" name="last_name" id="last_name"/>
+                        </fieldData>
+                        <fieldOther>
+                            <input type="checkbox" name="accept" id="accept"/> 
+                            <label for="accept">Accept terms and conditions.</label>   
+                        </fieldButtons>                    
+                     </fieldset>
                     
                     <input type="submit" value="Submit" />
                 </form>
             </div>
         </div>
    </div>
+<!--JS--JS--JS--JS--JS--JS--JS--JS--JS-->
    <script type="text/javascript">
     var allStyles = [];
-    window.onload = function() {
-        for(var elem of document.getElementsByClassName("link")) {
+    window.onload = function() 
+    {    for(var elem of document.getElementsByTagName("a"))
+        //for(var elem of document.getElementsByClassName("link")) 
+        {
             allStyles.push(elem.getAttribute('data-style'));
         }
     }
 
-    function onLinkClicked(link) {
+    function onLinkClicked(link) 
+    {
         var body = document.getElementsByTagName("body")[0];
-        for(let i=0; i<allStyles.length; i++) {
+        for(let i=0; i<allStyles.length; i++)
+        {
             body.className = body.className.replace(allStyles[i], "");
         }
 
@@ -73,23 +81,58 @@
         body.className += " " + styleAttr;
     }
 
-    class MyGlobalScopeClass {
-        constructor() {
-          this.myProp = "prop";
-        }
+    function validate(evt) 
+    {
+        let inputNameResult =  ValidateInput('name');
+        if (!inputNameResult) return false;
 
-        getMyProp() {
-            return this.myProp;
-        }
+        let inputLastNameResult =  ValidateInput('last_name');
+        if (!inputLastNameResult) return false;
 
-        setMyProp(val) {
-            this.myProp = val;
-        }
-    };
+        let checkboxEl = document.getElementById('accept');
+        if (!checkboxEl.checked)
+         {
+            alert("you must accept terms and conditions!");
+            return false;
+         }
 
-    function validate(evt) {
-        return confirm("are you sure?");
+
+        return true;
+        //return confirm("are you sure?");
+    }
+
+    function ValidateInput(id)
+    {
+        let inputEl = document.getElementById(id);
+        if (inputEl == undefined) return true;
+        let inputValue = inputEl.value;
+        if (inputValue.trim() == "") 
+        {
+            alert(id + " cannot be empty!");
+            return false;
+        }
+        let arrNumber = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        let arrForbiddenSymbols = ["+", "<", ">", "^", "@", "\"", "\'", ",", ";", ":", "[", "]", "}", "{"];
+        //check  1-st symbol
+        let nameFirstSymbol = inputValue[0];
+        if (arrNumber.indexOf(Number(nameFirstSymbol)) !== -1)
+        {
+            alert(id + ": the first character must not be a number!");
+            return false;
+        }
+        //check forbidden symbols
+        for (let index = 0; index < inputValue.length; index++) 
+        {
+            if (arrForbiddenSymbols.indexOf(inputValue[index]) !== -1)
+            {
+                alert(id + ": symbol "+ inputValue[index]+ " cannot be used!");
+                return false;
+            }
+            
+        }
+        return true;
     }
    </script>
+   <!--JS--JS--JS--JS--JS--JS--JS--JS--JS-->
 </body>
 </html>
