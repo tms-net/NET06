@@ -179,7 +179,11 @@ h3.header-validate {
 .error-text {
     color: red;
     font-size: 14px;
-    display: none;
+    display: none;    
+}
+
+.error-text::before {
+    content: " - There are some mistakes.";
 }
 
 //------------------------------------------------

@@ -19,7 +19,7 @@
 
             <div>
                 <label for="first_name">First Name:</label> 
-                <label ></label>
+                <label for="first_name" class="error-text" id="error-firstName"></label>
                 <input class="text-validate" type="text" name="first_name" id="first_name" placeholder="First name"/>
             </div>
             
@@ -30,7 +30,7 @@
 
             <div>
                 <label for="password">Password:</label>
-                <label for="password" class="error-text" id="error-password"> - There are some mistakes.</label>
+                <label for="password" class="error-text" id="error-password"></label>
                 <input class="text-validate" type="password" name="password" id="password" placeholder="Password"/>
             </div>
 
@@ -108,6 +108,7 @@
     let someLowerName = document.getElementById("someLowerName");
     let lastNotUseSpecSymbol = document.getElementById("lastNotUseSpecSymbol");
     let errorPassword = document.getElementById("error-password");
+    let errorFirstName = document.getElementById("error-firstName");
 
     class CheckValuePassword {  
         checkMaxLength(newPass) {
@@ -129,7 +130,23 @@
         }
     }
 
-    const classCheckPass = new CheckValuePassword(pass);
+    const classCheckPass = new CheckValuePassword();
+
+    class CheckValueFirstName {
+        checkSomeLower(newFName) {
+            if (newFName.match(lowerCaseLettersReverse)) {
+                return true;
+            }
+        }
+
+        checkFirstUpper(newName) {
+            if ((newName.length > 0) && (newName[0] !== undefined) && (newName[0].match(upperCaseLetters))) {
+            return true;
+            }
+        }
+    }
+
+    const classCheckFirstName = new CheckValueFirstName();
 
     function hiddenAllMessages() {
         messageFirstNameValidate.style.display = "none";
@@ -141,6 +158,7 @@
         messageFirstNameValidate.style.display = "block";
         messagePasswordValidate.style.display = "none";
         messageLastNameValidate.style.display = "none";
+        errorFirstName.style.display = "none";
     }
     firstN.onblur = () => {
         hiddenAllMessages();
@@ -168,14 +186,15 @@
     firstN.onkeyup = () => {        
         let inputString = firstN.value;
         let smallInputString;
-
+        
         if (inputString.length > 1) {
             let smallInputString = inputString.slice(1, inputString.length);
 
-            if (smallInputString.match(lowerCaseLettersReverse)) {
-                someLowerName.classList.remove("valid-validate");
-                someLowerName.classList.add("invalid-validate");
-            }
+            //if (smallInputString.match(lowerCaseLettersReverse)) {
+            if (classCheckFirstName.checkSomeLower(smallInputString) === true) {
+                    someLowerName.classList.remove("valid-validate");
+                    someLowerName.classList.add("invalid-validate");
+                }
             else {
                 someLowerName.classList.remove("invalid-validate");
                 someLowerName.classList.add("valid-validate");                
@@ -186,7 +205,8 @@
             someLowerName.classList.add("invalid-validate");     
         }
 
-        if ((inputString.length > 0) && (inputString[0] !== undefined) && (inputString[0].match(upperCaseLetters))) {
+        //if ((inputString.length > 0) && (inputString[0] !== undefined) && (inputString[0].match(upperCaseLetters))) {
+        if (classCheckFirstName.checkFirstUpper(inputString)) {
             firstUpperName.classList.remove("invalid-validate");
             firstUpperName.classList.add("valid-validate");  
         }
@@ -240,13 +260,21 @@
     }    
 
     function validate(evt) {
+        if (classCheckFirstName.checkFirstUpper(firstN) && classCheckFirstName.checkSomeLower(firstN)) {
+            return true;
+        } 
+        else {
+            errorFirstName.style.display = "inline";
+            return false;
+        }
+
         if (classCheckPass.checkExistNumber(pass) && classCheckPass.checkMaxLength(pass) && classCheckPass.checkUpperCase(pass)) {  
             return true;
         }
         else {
             errorPassword.style.display = "inline";
             return false;
-        }
+        }        
 
         alert("Information sent.")
     }

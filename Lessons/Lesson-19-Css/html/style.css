@@ -171,6 +171,10 @@ h3.header-validate {
   display: none;
 }
 
+.error-text::before {
+  content: " - There are some mistakes.";
+}
+
 .style1 .content, .style4 .content {
   position: relative;
 }
