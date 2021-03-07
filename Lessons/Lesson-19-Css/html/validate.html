@@ -30,7 +30,7 @@
 
             <div>
                 <label for="password">Password:</label>
-                <label for="password" class="invalid-res-check" id="errorPassword"> - There are some mistakes.</label>
+                <label for="password" class="error-text" id="error-password"> - There are some mistakes.</label>
                 <input class="text-validate" type="password" name="password" id="password" placeholder="Password"/>
             </div>
 
@@ -107,7 +107,7 @@
     let firstUpperName = document.getElementById("firstUpperName");
     let someLowerName = document.getElementById("someLowerName");
     let lastNotUseSpecSymbol = document.getElementById("lastNotUseSpecSymbol");
-    let errorPassword = document.getElementById("errorPassword");
+    let errorPassword = document.getElementById("error-password");
 
     class CheckValuePassword {  
         checkMaxLength(newPass) {
@@ -135,7 +135,6 @@
         messageFirstNameValidate.style.display = "none";
         messagePasswordValidate.style.display = "none";
         messageLastNameValidate.style.display = "none";
-        //errorPassword.style.display = "none";
     }
 
     firstN.onfocus = () => {
@@ -160,7 +159,7 @@
         messageFirstNameValidate.style.display = "none";
         messagePasswordValidate.style.display = "block";
         messageLastNameValidate.style.display = "none";
-        //errorPassword.style.display = "none";
+        errorPassword.style.display = "none"
     }
     pass.onblur = () => {
         hiddenAllMessages();
@@ -241,12 +240,15 @@
     }    
 
     function validate(evt) {
-        if (classCheckPass.checkExistNumber(pass) && classCheckPass.checkMaxLength(pass) && classCheckPass.checkUpperCase(pass)) {            
-            alert("Information sent.")
+        if (classCheckPass.checkExistNumber(pass) && classCheckPass.checkMaxLength(pass) && classCheckPass.checkUpperCase(pass)) {  
+            return true;
         }
         else {
             errorPassword.style.display = "inline";
+            return false;
         }
+
+        alert("Information sent.")
     }
 
 </script>

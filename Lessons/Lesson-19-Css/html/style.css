@@ -165,7 +165,7 @@ h3.header-validate {
   margin: 10px;
 }
 
-.invalid-res-check {
+.error-text {
   color: red;
   font-size: 14px;
   display: none;
