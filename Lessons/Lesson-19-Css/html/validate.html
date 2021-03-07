@@ -25,6 +25,7 @@
             
             <div>
                 <label for="last_name">Last Name:</label>
+                <label for="last_name" class="error-text" id="error-lastName"></label>
                 <input class="text-validate" type="text" name="last_name" id="last_name" placeholder="Last name"/>
             </div>
 
@@ -37,6 +38,7 @@
             <div>
                 <label for="accept">Accept terms and conditions.</label>
                 <input class="checkbox-validate" type="checkbox" name="accept" id="accept"/>
+                <label for="checkbox" class="error-text" id="error-accept"></label>
             </div>
 
             <div class="buttons-validate">
@@ -109,6 +111,9 @@
     let lastNotUseSpecSymbol = document.getElementById("lastNotUseSpecSymbol");
     let errorPassword = document.getElementById("error-password");
     let errorFirstName = document.getElementById("error-firstName");
+    let errorLastName = document.getElementById("error-lastName");
+    let accept = document.getElementById("accept");
+    let errorAccept = document.getElementById("error-accept");
 
     class CheckValuePassword {  
         checkMaxLength(newPass) {
@@ -148,6 +153,16 @@
 
     const classCheckFirstName = new CheckValueFirstName();
 
+    class CheckValueLastName {
+        checkAllLettersWithoutSpecSimbols(newName) {
+            if (newName.value.match(specSimbolLetters)) {
+                return true;
+            }
+        }
+    }
+
+    const classCheckLastName = new CheckValueLastName();
+
     function hiddenAllMessages() {
         messageFirstNameValidate.style.display = "none";
         messagePasswordValidate.style.display = "none";
@@ -168,6 +183,7 @@
         messageLastNameValidate.style.display = "block";
         messageFirstNameValidate.style.display = "none";
         messagePasswordValidate.style.display = "none";
+        errorLastName.style.display = "none";
     }
     lastN.onblur = () => {
         hiddenAllMessages();
@@ -191,7 +207,7 @@
             let smallInputString = inputString.slice(1, inputString.length);
 
             //if (smallInputString.match(lowerCaseLettersReverse)) {
-            if (classCheckFirstName.checkSomeLower(smallInputString) === true) {
+            if (classCheckFirstName.checkSomeLower(smallInputString)) {
                     someLowerName.classList.remove("valid-validate");
                     someLowerName.classList.add("invalid-validate");
                 }
@@ -217,9 +233,8 @@
     }
 
     lastN.onkeyup = () => {
-        let inputString = lastN.value;
-
-        if (inputString.match(specSimbolLetters)) {
+        //if (inputString.value.match(specSimbolLetters)) {
+        if (classCheckLastName.checkAllLettersWithoutSpecSimbols(lastN)) {
             lastNotUseSpecSymbol.classList.remove("valid-validate");
             lastNotUseSpecSymbol.classList.add("invalid-validate");
             }
@@ -231,7 +246,7 @@
 
     pass.onkeyup = () => {  
         //if (pass.value.match(/\b\w{8,}\b/g)) {
-        if (classCheckPass.checkMaxLength(pass) === true) {
+        if (classCheckPass.checkMaxLength(pass)) {
             lengthPass.classList.remove("invalid-validate");
             lengthPass.classList.add("valid-validate");
         }
@@ -241,7 +256,7 @@
         }
 
         //if (pass.value.match(numbers)) {  
-        if (classCheckPass.checkExistNumber(pass) === true) {
+        if (classCheckPass.checkExistNumber(pass)) {
             numberPass.classList.remove("invalid-validate");
             numberPass.classList.add("valid-validate");
         } else {
@@ -259,8 +274,14 @@
         }
     }    
 
+    accept.onclick = () => {
+        errorAccept.style.display = "none";
+    }
+
     function validate(evt) {
-        if (classCheckFirstName.checkFirstUpper(firstN) && classCheckFirstName.checkSomeLower(firstN)) {
+        let res = true;
+
+        /*if (classCheckFirstName.checkFirstUpper(firstN) && classCheckFirstName.checkSomeLower(firstN)) {
             return true;
         } 
         else {
@@ -274,9 +295,79 @@
         else {
             errorPassword.style.display = "inline";
             return false;
-        }        
+        }  
+        
+        if (classCheckLastName.checkAllLettersWithoutSpecSimbols(lastN)) {
+            return true;
+        }
+        else {
+            errorLastName.style.display = "inline";
+            return false;
+        }
 
-        alert("Information sent.")
+        if (accept.checked) {
+            return true;
+        }
+        else {
+            errorAccept.style.display = "inline";
+            return false;
+        }*/
+
+        console.log("pass " + pass.value);
+        console.log("firstN " + firstN.value);
+        console.log("lastN " + lastN.value);
+        console.log("classCheckPass.checkExistNumber(pass) " + classCheckPass.checkExistNumber(pass));
+        console.log("classCheckFirstName.checkSomeLower(firstN)" + classCheckFirstName.checkSomeLower(firstN));
+
+        if ((classCheckFirstName.checkFirstUpper(firstN.value) && classCheckFirstName.checkSomeLower(firstN.value)) !== true) {
+            errorFirstName.style.display = "inline";
+            res = false;
+        }
+
+        if ((classCheckPass.checkExistNumber(pass) && classCheckPass.checkMaxLength(pass) && classCheckPass.checkUpperCase(pass)) !== true) {  
+
+            errorPassword.style.display = "inline";
+            res = false;
+        }  
+        
+        if (classCheckLastName.checkAllLettersWithoutSpecSimbols(lastN) !== true) {
+            errorLastName.style.display = "inline";
+            res = false;
+        }
+
+        if (!accept.checked) {
+            errorAccept.style.display = "inline";
+            res = false;
+        }
+
+        /*console.log((classCheckFirstName.checkFirstUpper(firstN) && classCheckFirstName.checkSomeLower(firstN)) === false);
+
+        if ((classCheckFirstName.checkFirstUpper(firstN) && classCheckFirstName.checkSomeLower(firstN)) === false) {
+            res = false;
+            errorFirstName.style.display = "inline";
+        } 
+
+        if ((classCheckPass.checkExistNumber(pass) && classCheckPass.checkMaxLength(pass) && classCheckPass.checkUpperCase(pass)) === false) {  
+            res = false;     
+            errorPassword.style.display = "inline";
+        }  
+        
+        if ((classCheckLastName.checkAllLettersWithoutSpecSimbols(lastN)) === false) {
+            res = false;
+            errorLastName.style.display = "inline";
+        }
+
+        return res;*/
+
+        if (res) {
+            alert("Information sent.")
+            return true;
+        }
+        else {
+            alert("BAD");
+            return false;
+        }
+
     }
 
 </script>
