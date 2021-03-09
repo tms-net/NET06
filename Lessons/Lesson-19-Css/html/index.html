@@ -10,14 +10,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
 </head>
 <body class="style1">
-   <div class="main">
+    <div class="main">
         <header class="header">
             <div>
                 <h1>Welcome to nbrb.by</h1>
                 <p>Our bank is very populare bank in the world...</p>   
             </div>     
             <button type="button" class="button-validate">
-                <a href="file:///D:\Progs\GitHub\NET06\Lessons\Lesson-19-Css\html\validate.html">Registration</a>
+                <a href="validate.html">Registration</a>
             </button>    
         </header>        
         <div class="content">
@@ -64,14 +64,32 @@
         </div>
     </div>
     <script type="text/javascript">
-    function onLinkClicked(link) {
+
+    /*function onLinkClicked(link) {
         var body = document.getElementsByTagName("body")[0];
-        var styleAttr = link.getAttribute("data-style");
-        body.className = '';
-        //if (styleAttr !== 'nostyle') {       
-            body.className += " " + styleAttr;
-        //}
+        body.className = '';     
+        body.className += " " + link.getAttribute("data-style");
+    }*/
+
+    let allStyles = [];
+    window.onload = function() {
+        for(let elem of document.getElementsByClassName("linkcolor")) {
+            allStyles.push(elem.getAttribute('data-style'));
+        }
     }
+
+    function onLinkClicked(link) {
+        let body = document.getElementsByTagName("body")[0];
+        for(let i=0; i<allStyles.length; i++) {
+            body.className = body.className.replace(allStyles[i], "");
+        }
+
+        body.className = body.className.trim();
+
+        //let styleAttr = link.getAttribute("data-style");
+        body.className += " " + link.getAttribute("data-style");
+    }
+
     </script>
 </body>
 </html>
