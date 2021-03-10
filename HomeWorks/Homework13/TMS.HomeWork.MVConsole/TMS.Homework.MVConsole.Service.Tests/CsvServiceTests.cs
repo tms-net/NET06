@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using Microsoft.VisualBasic.FileIO;
 using NUnit.Framework;
 
@@ -41,24 +42,52 @@ namespace TMS.Homework.MVConsole.Service.Tests
 		public void SaveToCSVShouldCreateValidCsvFileFormat()
 		{
 			// TODO: https://appm.import2.com/csv_file_checker
+			// https://csvlint.io/
 
 			// arrange
+			var service = new CsvService();
+            var fileName = Guid.NewGuid().ToString("N");
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), $"{fileName}.csv");
+            var models = new[] { new { PropertyWithCommas = "Property,With,Commas" } };
 
 			// act
+            service.SaveToCSV(models, Directory.GetCurrentDirectory(), fileName);
 
 			//assert
+
+			//Must be magic to working with API here
+
 			Assert.Fail();
 		}
 
-		[Test]
-		public void SaveToCSVShouldSerializeOnlyPublicInstanceProperties()
-		{
-			// arrange
+        /// <summary>
+        /// Method is checking exported file earlier on contain spetific field.
+        /// Spetific filed has not public modifier.
+        /// </summary>
+        [Test]
+        public void SaveToCSVShouldSerializeOnlyPublicInstanceProperties()
+        {
+            // arrange
+            var service = new CsvService();
+            var fileName = Guid.NewGuid().ToString("N");
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), $"{fileName}.csv");
+            var models = new[] { new { FirstName = "Ella", LastName = "Griboedova", Age = 44 } };
 
-			// act
+            // act
+            service.SaveToCSV(models, Directory.GetCurrentDirectory(), fileName);
 
-			//assert
-			Assert.Fail();
-		}
+            //assert
+            using var parser = new TextFieldParser(filePath) { TextFieldType = FieldType.Delimited };
+            parser.SetDelimiters(",");
+
+            var arrayFields = parser.ReadFields();
+            var check = arrayFields!
+                .Where(
+                    (t, i) =>
+                        Equals("Age", (string)arrayFields.GetValue(i))
+                ).Any();
+
+            Assert.IsFalse(check);
+        }
 	}
 }
