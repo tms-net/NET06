@@ -1,0 +1,26 @@
+{
+  "name": "net06",
+  "version": "1.0.0",
+  "description": "Sample repository for NET06 group",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "jasmine": "^3.6.4",
+    "webpack": "^5.24.4"
+  },
+  "scripts": {
+    "publish": "",
+    "build": "babel src --out-dir lib",
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tms-net/NET06.git"
+  },
+  "author": "Dmitry",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tms-net/NET06/issues"
+  },
+  "homepage": "https://github.com/tms-net/NET06#readme"
+}

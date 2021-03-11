@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="javascript" href="all.js">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
+    
 </head>
 <body class="body">
    <div class="main">
@@ -36,10 +36,10 @@
 
             <div class="main-content">
                 <h3>Register</h3>
-                <form id="myForm" class="form" onsubmit="return validate();">
+                <form id="myForm" class="form">
                     <fieldset>
                         <label for="name">Name:</label>
-                        <input required type="text" name="name" id="name"/>
+                        <input data-required type="text" name="name" id="name"/>
                         
                         <label for="last_name">Last Name:</label>
                         <input type="text" name="last_name" id="last_name"/>
@@ -53,42 +53,25 @@
             </div>
         </div>
    </div>
-   <script type="text/javascript">
+   <script type="module">
+
+    import { FieldValidator } from './fieldValidator.js';
+
+    var allValidators = [
+        new FieldValidator("name", [FieldValidator.Required, FieldValidator.RegExp("/[a-z   ]?/")]),        
+        new FieldValidator("last_name", [FieldValidator.RegExp("/[a-zA-Z]?/")]),
+        new FieldValidator("accept", [FieldValidator.Required]),
+    ];
+
     var allStyles = [];
     window.onload = function() {
-        for(var elem of document.getElementsByClassName("link")) {
-            allStyles.push(elem.getAttribute('data-style'));
-        }
+        allValidators.forEach(validator => validator.initialize());
+        document.getElementById("myForm").onsubmit = () => validate();
     }
-
-    function onLinkClicked(link) {
-        var body = document.getElementsByTagName("body")[0];
-        for(let i=0; i<allStyles.length; i++) {
-            body.className = body.className.replace(allStyles[i], "");
-        }
-
-        body.className = body.className.trim();
-
-        var styleAttr = link.getAttribute("data-style");
-        body.className += " " + styleAttr;
-    }
-
-    class MyGlobalScopeClass {
-        constructor() {
-          this.myProp = "prop";
-        }
-
-        getMyProp() {
-            return this.myProp;
-        }
-
-        setMyProp(val) {
-            this.myProp = val;
-        }
-    };
 
     function validate(evt) {
-        return confirm("are you sure?");
+        allValidators.forEach(validator => validator.validate());
+        return !allValidators.some(validator => !validator.isValid());
     }
    </script>
 </body>
