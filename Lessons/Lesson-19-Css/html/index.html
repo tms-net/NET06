@@ -6,9 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="javascript" href="all.js">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong" />
+    <script type="text/javascript" src="all.js"></script>
+    <!-- <script type="module" src="all.js"></script> -->
 </head>
 <body class="body">
    <div class="main">
@@ -37,15 +38,16 @@
             <div class="main-content">
                 <h3>Register</h3>
                 <form id="myForm" class="form" onsubmit="return validate();">
+                <!-- <form id="myForm" class="form"> -->
                     <fieldset>
                         <label for="name">Name:</label>
-                        <input required type="text" name="name" id="name"/>
+                        <input type="text" name="name" id="name"/>
                         
                         <label for="last_name">Last Name:</label>
                         <input type="text" name="last_name" id="last_name"/>
                     
                         <label for="accept">Accept terms and conditions.</label>
-                        <input type="checkbox" name="accept" id="accept"/>
+                        <input type="checkbox" name="accept" id="cb_accept"/>
                     </fieldset>
                     
                     <input type="submit" value="Submit" />
@@ -53,12 +55,28 @@
             </div>
         </div>
    </div>
+    <!-- <script type="module"> -->
    <script type="text/javascript">
+    //import {FieldValidator} from './all.js';
+
+    var allFields = [
+        new FieldValidator("name", [FieldValidator.Required, FieldValidator.RegExp("/[A-a]?/")]),
+        new FieldValidator("last_name", [FieldValidator.RegExp("/[A-a]?/")]),
+        new FieldValidator("cb_accept", [FieldValidator.Required])
+    ];
     var allStyles = [];
     window.onload = function() {
+
+        console.log('initializing');
+
+        allFields.forEach(f => f.initialize());
+
         for(var elem of document.getElementsByClassName("link")) {
             allStyles.push(elem.getAttribute('data-style'));
         }
+
+        // var form = document.getElementById('myForm');
+        // form.onsubmit = () => validate();
     }
 
     function onLinkClicked(link) {
@@ -88,7 +106,9 @@
     };
 
     function validate(evt) {
-        return confirm("are you sure?");
+        console.log('validating');
+        allFields.forEach(f => f.validate());
+        return !allFields.some(f => !f.isValid());
     }
    </script>
 </body>

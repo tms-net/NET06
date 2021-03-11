@@ -37,3 +37,9 @@ nav ul {
     border: none;
     padding: 0;
 }
+
+.form fieldset .error {
+    margin-left: 10px;
+    font-size: 0.8em;
+    color: red;
+}
