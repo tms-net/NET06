@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+    class Clock extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {date: new Date()};
+      }
+
+      componentDidMount() {
+        this.timerID = setInterval(
+          () => this.tick(),
+          1000
+        );
+      }
+
+      componentWillUnmount() {
+        clearInterval(this.timerID);
+      }
+
+      tick() {
+        this.setState({
+          date: new Date()
+        });
+      }
+
+      render() {
+        return (
+          <div>
+            <h1>Привет, мир!</h1>
+            <h2>Сейчас {this.state.date.toLocaleTimeString()}.</h2>
+          </div>
+        );
+      }
+    }
+
+      ReactDOM.render(
+        <div>
+          <Clock />
+          <p>Терерь будет другой клок!</p>
+          <Clock />
+        </div>,
+        document.getElementById('root')
+      );
+
+      function formatName(name) {
+        return <b>{name}</b>;
+      }
+
+      class GreetingClass extends React.Component {
+        render() {
+          if (this.props.user) {
+            return <h1>Здравствуй, {formatName(this.props.user)}!</h1>;
+          }
+          this.props.user = "unknown";
+          return <h1>Здравствуй, {this.props.user}.</h1>;
+        }
+      }
+
+      function Greeting(props) {
+        if (props.user) {
+          return <h1>Здравствуй, {formatName(props.user)}!</h1>;
+        }
+        return <h1>Здравствуй, незнакомец.</h1>;
+      }
+
+      // ReactDOM.render(
+      //   <div>
+      //    <GreetingClass user="dmitry" />
+      //    <Greeting user="nikita" />
+      //    <GreetingClass user="" />
+      //    </div>,
+      //   document.getElementById('root')
+      // );
+
+    </script>
+    <!--
+      Note: this page is a great way to try React but it's not suitable for production.
+      It slowly compiles JSX with Babel in the browser and uses a large development build of React.
+
+      Read this section for a production-ready setup with JSX:
+      https://reactjs.org/docs/add-react-to-a-website.html#add-jsx-to-a-project
+
+      In a larger project, you can use an integrated toolchain that includes JSX instead:
+      https://reactjs.org/docs/create-a-new-react-app.html
+
+      You can also use React without JSX, in which case you can remove Babel:
+      https://reactjs.org/docs/react-without-jsx.html
+    -->
+  </body>
+</html>
