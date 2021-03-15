@@ -11,7 +11,8 @@ describe("FieldValidatorTests", function() {
         const form = document.createElement('form');
         form.innerHTML = `
           <label for="username">Username</label>
-          <input id="username" />
+          <input type="text" id="username" />
+          <input type="checkbox" id="checkbox" />
           <button>Print Username</button>
         `;
 
@@ -31,21 +32,34 @@ describe("FieldValidatorTests", function() {
     it("should not check empty fields for RegExp validation", function() {
         //arrage
         var validator = new FieldValidator("username", [FieldValidator.RegExp("\d+")]);
-        validator.initialize();
 
         //act
+        validator.initialize();
         validator.validate();
 
         //assert
         expect(validator.isValid()).toBe(true);
+        expect(document.getElementById("username").parentElement.tagName).toBe("SPAN");
     });
 
     it("should correctly check checkbox input field for Required validation", function() {
         // TODO: test functionality with DOM
     });
 
-    it("should correctly check text input field for Required validation", function() {
-        // TODO: test functionality with DOM
+    ["username", "checkbox"].forEach((id) => {
+        it(`should correctly check text ${id} field for Required validation`, function() {
+            //arrage
+            var validator = new FieldValidator(id, [FieldValidator.Required]);
+            validator.initialize();
+
+            //act
+            validator.validate();
+    
+            //assert
+            expect(validator.isValid()).toBe(false);
+            expect(document.getElementById(id).parentElement.tagName).toBe("SPAN");
+            expect(document.getElementById(id).nextSibling.tagName).toBe("SPAN");
+        });
     });
     
     it("should check all provided validators", function() {

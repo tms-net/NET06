@@ -31,7 +31,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|mjs)$/,
         exclude: /(node_modules|bower_components)/,
         loader: "babel-loader",
         options: { presets: ["@babel/env"] }
@@ -52,8 +52,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       favicon: 'public/favicon.ico',
       title: "Learn Javascript",
-      template: path.resolve(__dirname, "public/index.html"),
-      //excludeAssets: [/bundle.*.js/]
+      template: path.resolve(__dirname, "public/index.html")
     }),
     new HtmlWebpackRemovePlugin(/<\s*script[^>]*?src="\.\..*?\.js.*?>\s*<\s*\/\s*script>/),
     new HtmlWebpackRemovePlugin(/<link.*?href="\.\..*?\.css".*?\/>/),

@@ -1,5 +1,13 @@
 function RequiredValidator(element) {
-    return !!(element && element.value);
+    if (!element) {
+        return true;
+    }
+    switch(element.getAttribute("type")) {
+        case "checkbox":
+            return element.checked;
+        default:
+            !!element.value;
+    }
 }
 RequiredValidator.errorText = "is required";
 
