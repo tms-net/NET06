@@ -30,14 +30,7 @@ class FieldValidator {
         this._validators = validators;
         this._isValid = true;
     }
-
-    initialize() {        
-        this._element = document.getElementById(this._id);
-        var wrapper = document.createElement("span");
-        this._element.replaceWith(wrapper);
-        wrapper.appendChild(this._element);
-    }
-
+    
     validate() {
         this._clearErrors();
         if (this._validators) {
