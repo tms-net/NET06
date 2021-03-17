@@ -1,5 +1,5 @@
-
-/*function RequiredValidator(element) {
+import React from 'react'
+function RequiredValidator(element) {
     if (!element) {
         return true;
     }
@@ -14,14 +14,10 @@ RequiredValidator.errorText = "is required";
 
 function RegExpValidator(element, regExp) {
     return !element || !element.value || regExp.test(element.value);
-}*/
+}
 
-function FieldValidator(props) {
-    console.log(props);
-    //console.log(props.FieldValidator.value)
-
-
-    /*static Required = RequiredValidator;
+class FieldValidator extends React.Component {
+    static Required = RequiredValidator;
 
     static RegExp(regExp) {
         var regExpObject = regExp instanceof RegExp ? regExp : new RegExp(regExp);
@@ -66,7 +62,7 @@ function FieldValidator(props) {
         errorElem.className = "error";
         errorElem.innerText = error;
         this._element.parentElement.appendChild(errorElem);
-    }*/
+    }
 }
 
 export default FieldValidator

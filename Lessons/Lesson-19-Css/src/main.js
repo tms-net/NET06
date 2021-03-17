@@ -8,7 +8,11 @@ class Form extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            errors: {}
+            errors: {
+                
+            },
+            firstName: 'First Name',
+            lastName: 'Last Name'
         }        
     }
 
@@ -46,7 +50,7 @@ class Form extends React.Component {
                     {/* error should be here */}
 
                     <label htmlFor="last_name">Last Name:</label>
-                    <input type="text" name="last_name" id="last_name"/>            
+                    <input value={this.state.lastName} type="text" name="last_name" id="last_name"/>            
                     {/* error should be here */}
 
                     <label htmlFor="accept">Accept terms and conditions.</label>
@@ -57,7 +61,7 @@ class Form extends React.Component {
                 <input type="submit" value="Submit" />
             </form>
         );
-    }
+    }    
 }
 
 ReactDOM.render(
