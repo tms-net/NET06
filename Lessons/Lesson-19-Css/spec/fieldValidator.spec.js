@@ -1,4 +1,4 @@
-import { FieldValidator } from "../src/fieldValidator.js";
+import { FieldValidator } from "../src/fieldValidator.mjs";
 
 // these tests will be run in browser environment, so DOM API will be available and it will allow to test DOM manipulation
 // although tests will run much slower that regular unit tests, so they should be executed more rearly.

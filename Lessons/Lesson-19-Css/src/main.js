@@ -1,7 +1,7 @@
 import './style.css'
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { FieldValidator } from './fieldValidator';
+import { FieldValidator } from './fieldValidator.mjs';
 
 class Form extends React.Component {
     constructor(props) {

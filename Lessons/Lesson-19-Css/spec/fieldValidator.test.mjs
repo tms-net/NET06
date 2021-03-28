@@ -1,4 +1,4 @@
-import { FieldValidator } from "../src/fieldValidator";
+import { FieldValidator } from "../src/fieldValidator.mjs";
 
 // these tests will be run in Node.js environment, so DOM elements and window context won't be available
 // it will allow to run tests fast and as many times as possible
