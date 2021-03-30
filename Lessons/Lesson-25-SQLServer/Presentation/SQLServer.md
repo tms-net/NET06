@@ -411,8 +411,8 @@ Database Engine Isolation Levels:
  - **Repeatable read** - the SQL Server Database Engine keeps read and write locks that are acquired on selected data until the end of the transaction.
  - **Serializable** - the highest level where transactions are completely isolated from one another. The SQL Server Database Engine keeps read and write locks acquired on selected data to be released at the end of the transaction.
 
-Isolation level | Dirty read | Nonrepeatable read	| Phantom
---- | --- | --- |
+Isolation level | Dirty read | Nonrepeatable read | Phantom
+--- | --- | --- | ---
 **Read uncommitted** | Yes | Yes | Yes
 **Read committed**	| No | Yes | Yes
 **Repeatable read**	| No | No | Yes
