@@ -55,8 +55,8 @@ The following software is required to use EF Core: [.NET Core SDK](https://www.m
 
 ## Create a new project
 ```
-dotnet new console -o EFGetStarted
-cd EFGetStarted
+dotnet new console -o TMS.NET06.Lesson26.EFCore
+cd TMS.NET06.Lesson26.EFCore
 ```
 
 ## Install Entity Framework Core
