@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.Lesson14.Serializ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.Lesson14.Reflection", "Lesson-14-Nuget-Serialization-Reflection\TMS.NET06.Lesson14.Reflection\TMS.NET06.Lesson14.Reflection.csproj", "{810E1F5C-8D1D-4541-B276-7366B7AC2D4B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.Lesson26.EFCore", "Lesson-26-EntityFramework\TMS.NET06.Lesson26.EFCore\TMS.NET06.Lesson26.EFCore.csproj", "{7C888172-1105-43C5-B857-6199106043FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{810E1F5C-8D1D-4541-B276-7366B7AC2D4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{810E1F5C-8D1D-4541-B276-7366B7AC2D4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{810E1F5C-8D1D-4541-B276-7366B7AC2D4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C888172-1105-43C5-B857-6199106043FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C888172-1105-43C5-B857-6199106043FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C888172-1105-43C5-B857-6199106043FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C888172-1105-43C5-B857-6199106043FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

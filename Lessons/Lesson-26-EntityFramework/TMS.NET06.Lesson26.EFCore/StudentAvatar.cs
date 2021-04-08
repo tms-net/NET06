@@ -12,6 +12,6 @@ namespace TMSStudens
         public byte[] Image { get; set; }
         public string Caption { get; set; }
 
-        public Student Student { get; set; }
+        public /*virtual*/ Student Student { get; set; }
 	}
 }

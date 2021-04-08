@@ -24,11 +24,13 @@ namespace TMSStudens
 		[NotMapped]
 		public string PullRequest { get; set; }
 		public DateTime Created { get; set; }
-		public Student Student { get; set; } // Inverse Navigation Property
+		public /*virtual*/ Student Student { get; set; } // Inverse Navigation Property
 
 		public ICollection<Tag> Tags { get; set; }
 
 		public HomeworkType Type { get; set; }
+
+		public virtual Student Reviewer { get; set; }
 	}
 
 	public enum HomeworkType

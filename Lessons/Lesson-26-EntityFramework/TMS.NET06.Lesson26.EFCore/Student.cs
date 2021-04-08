@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Internal;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,6 +11,20 @@ namespace TMSStudens
 {
     public class Student
     {
+		private ICollection<Homework> _homeworks;
+
+		public Student()
+		{
+            Homeworks = new List<Homework>();
+		}
+
+        private Student(Action<object, string> lazyLoader)
+        {
+            LazyLoader = lazyLoader;
+        }
+
+		private Action<object, string> LazyLoader { get; }
+
         public int StudentId { get; set; }
 
         [Required]
@@ -22,15 +37,25 @@ namespace TMSStudens
 
         public DateTime BirthDate { get; set; }
 
-        public List<Homework> Homeworks { get; set; } // Collection Navigation Property
-		public StudentAvatar Avatar { get; set; }
+        public ICollection<Homework> Homeworks
+        {
+            get => LazyLoader.Load(this, ref _homeworks);
+            set => _homeworks = value;
+        } // Collection Navigation Property
+
+		public /*virtual*/ StudentAvatar Avatar { get; set; }
 
         public Address Address { get; set; }
-    }
+
+		public string ShortBio { get; set; }
+
+		public string FullName { get; set; }
+	}
 
     public class StudentHomeworksCount
     {
         public string StudentName { get; set; }
         public int HomeworksCount { get; set; }
     }
+
 }

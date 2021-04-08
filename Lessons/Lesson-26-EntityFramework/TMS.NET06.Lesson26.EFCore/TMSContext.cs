@@ -19,8 +19,10 @@ namespace TMSStudens
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseSqlServer(
-				_connectionString ?? @"Data Source=.\SQLExpress;Initial Catalog=TMS3;Integrated Security=True");
+			optionsBuilder
+				//.UseLazyLoadingProxies()
+				.UseSqlServer(
+					_connectionString ?? @"Data Source=.\SQLExpress;Initial Catalog=TMS5;Integrated Security=True");
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -51,6 +53,7 @@ namespace TMSStudens
 				.IsRequired()
 				.HasForeignKey("NewStudentId")
 				.OnDelete(DeleteBehavior.Restrict);
+				//.OnDelete(DeleteBehavior.Cascade);
 
 			modelBuilder.Entity<DiplomaWork>()
 				//.HasBaseType((Type)null)
@@ -101,6 +104,8 @@ namespace TMSStudens
 					student.Property(h => h.BirthDate).HasColumnType("nvarchar(150)");
 
 					student.OwnsOne(p => p.Address);
+
+					student.Property(s => s.ShortBio).HasMaxLength(500);
 				});
 
 			//.ToTable("Home_Works");

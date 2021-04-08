@@ -5,7 +5,7 @@ theme: uncover
 
 ![bg](img/title_page_bg.jpg)
 
-# Entity Framework Core
+# Entity Framework Core Querying
 
 ---
 <!-- _class: slide -->
@@ -32,9 +32,9 @@ Add-Migration InitialCreate
 
 Three files are added to your project under the Migrations directory:
 
- - XXXXXXXXXXXXXX_InitialCreate.cs -The main migrations file. Contains the operations necessary to apply the migration (in Up) and to revert it (in Down).
- - XXXXXXXXXXXXXX_InitialCreate.Designer.cs -The migrations metadata file. Contains information used by EF.
- -TMSContextModelSnapshot.cs--A snapshot of your current model. Used to determine what changed when adding the next migration.
+ - XXXXXXXXXXXXXX_InitialCreate.cs - The main migrations file. Contains the operations necessary to apply the migration (in Up) and to revert it (in Down).
+ - XXXXXXXXXXXXXX_InitialCreate.Designer.cs - The migrations metadata file. Contains information used by EF.
+ - TMSContextModelSnapshot.cs - A snapshot of your current model. Used to determine what changed when adding the next migration.
 
 Alternatively, you can specify the directory at generation time as follows:
 ```
