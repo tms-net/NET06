@@ -22,7 +22,7 @@ namespace TMSStudens
 			optionsBuilder
 				//.UseLazyLoadingProxies()
 				.UseSqlServer(
-					_connectionString ?? @"Data Source=.\SQLExpress;Initial Catalog=TMS5;Integrated Security=True");
+					_connectionString ?? @"Data Source=.\SQLExpress;Initial Catalog=TMS;Integrated Security=True");
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)

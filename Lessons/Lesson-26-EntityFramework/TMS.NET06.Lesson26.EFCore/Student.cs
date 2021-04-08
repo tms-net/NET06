@@ -33,6 +33,7 @@ namespace TMSStudens
 
         [Column("last_name")]
         [MaxLength(300)]
+        [ConcurrencyCheck]
         public string LastName { get; set; }
 
         public DateTime BirthDate { get; set; }

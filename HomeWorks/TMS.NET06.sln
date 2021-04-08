@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.FitnessTracker", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.ShopSimulator", "HomeWork11\TMS.ShopSimulator\TMS.NET06.ShopSimulator.csproj", "{91DD9B21-5780-4420-97CD-4B4383524E16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.NET06.HttpClientApp", "TMS.NET06.HttpClientApp\TMS.NET06.HttpClientApp.csproj", "{B52798A1-9104-45AD-A17D-2657EC396E53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.HttpClientApp", "TMS.NET06.HttpClientApp\TMS.NET06.HttpClientApp.csproj", "{B52798A1-9104-45AD-A17D-2657EC396E53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.NET06.HttpClientApp.Tests", "TMS.NET06.HttpClientApp.Tests\TMS.NET06.HttpClientApp.Tests.csproj", "{46572339-11C0-43B0-A710-37D4B0AD2277}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.HttpClientApp.Tests", "TMS.NET06.HttpClientApp.Tests\TMS.NET06.HttpClientApp.Tests.csproj", "{46572339-11C0-43B0-A710-37D4B0AD2277}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.NET06.BookingSystem", "TMS.NET06.BookingSystem\TMS.NET06.BookingSystem.csproj", "{DA8D49A6-D301-46F0-8119-710D65EF794C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{46572339-11C0-43B0-A710-37D4B0AD2277}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46572339-11C0-43B0-A710-37D4B0AD2277}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46572339-11C0-43B0-A710-37D4B0AD2277}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA8D49A6-D301-46F0-8119-710D65EF794C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA8D49A6-D301-46F0-8119-710D65EF794C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA8D49A6-D301-46F0-8119-710D65EF794C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA8D49A6-D301-46F0-8119-710D65EF794C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
