@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 
 namespace TMS.NET06.BookingSystem
 {
-    interface IBookingRepository
+    public interface IBookingRepository
     {
         IEnumerable<Service> GetServices();
-        IEnumerable<BookEntry> GetBookingEntries(DateTime start, DateTime end, BookingStatus? status = null);
+        
+        IEnumerable<Client> GetClients();
+        Client GetClient(int clientId);
+        int AddClient(Client client);
 
+        IEnumerable<BookEntry> GetBookingEntries(DateTime start, DateTime end, BookingStatus? status = null);
+        IEnumerable<BookEntry> GetClientBookings(int clientId);
         int AddBookingEntry(int serviceId, int clientId, DateTime bookingDate);
+        void SaveEntry(BookEntry entry);
     }
 }
