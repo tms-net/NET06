@@ -6,13 +6,23 @@ using System.Threading.Tasks;
 
 namespace TMS.NET06.BookingSystem.Notificator
 {
-    internal class NotificationService
+    public class NotificationService
     {
         private readonly IBookingRepository _bookingRepository;
         private readonly IEmailService _emailService;
         private readonly ISmsService _smsService;
 
-        internal void SendNotifications(TimeSpan period)
+        public NotificationService(
+                IBookingRepository bookingRepository,
+                IEmailService emailService,
+                ISmsService smsService)
+        {
+            _bookingRepository = bookingRepository;
+            _emailService = emailService;
+            _smsService = smsService;
+        }
+
+        public void SendNotifications(TimeSpan period)
         {
             var now = DateTime.UtcNow;
             var entries = _bookingRepository
@@ -20,14 +30,14 @@ namespace TMS.NET06.BookingSystem.Notificator
 
             foreach (BookEntry entry in entries)
             {
-                if (!string.IsNullOrEmpty(entry.Client.ContactInformation.Email) &&
+                if (!string.IsNullOrEmpty(entry.Client?.ContactInformation?.Email) &&
                     entry.NotificationInfo?.EmailSentDate == null)
                 {
                     var text = $"You have appointment for {entry.Service.Name} on {entry.VisitDate:g}";
                     try
                     {
                         _emailService.SendEmail(
-                            entry.Client.ContactInformation.Email,
+                            entry.Client?.ContactInformation.Email,
                             "Katcherlash appointment",
                             text);
                         entry.NotificationInfo.EmailSentDate = DateTime.UtcNow;
@@ -38,7 +48,7 @@ namespace TMS.NET06.BookingSystem.Notificator
                     }
                 }
 
-                if (!string.IsNullOrEmpty(entry.Client.ContactInformation.PhoneNumber) &&
+                if (!string.IsNullOrEmpty(entry.Client?.ContactInformation?.PhoneNumber) &&
                     entry.NotificationInfo?.EmailSentDate == null)
                 {
                     try

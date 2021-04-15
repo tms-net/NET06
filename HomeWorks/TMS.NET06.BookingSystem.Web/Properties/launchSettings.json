@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:27381",
-      "sslPort": 44328
+      "applicationUrl": "http://localhost:50267",
+      "sslPort": 44355
     }
   },
   "profiles": {
@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "TMS.NET06.BookingService.Web": {
+    "TMS.NET06.BookingSystem.Web": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

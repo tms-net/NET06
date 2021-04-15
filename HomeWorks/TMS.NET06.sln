@@ -13,9 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.HttpClientApp.Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.BookingSystem", "TMS.NET06.BookingSystem\TMS.NET06.BookingSystem.csproj", "{DA8D49A6-D301-46F0-8119-710D65EF794C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.NET06.BookingSystem.Notificator", "TMS.NET06.BookingSystem.Notificator\TMS.NET06.BookingSystem.Notificator.csproj", "{40FE1611-AB3D-4F7B-B6BF-D2597C5C76B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.BookingSystem.Notificator", "TMS.NET06.BookingSystem.Notificator\TMS.NET06.BookingSystem.Notificator.csproj", "{40FE1611-AB3D-4F7B-B6BF-D2597C5C76B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.NET06.BookingSystem.Notificator.Tests", "TMS.NET06.Notificator.Tests\TMS.NET06.BookingSystem.Notificator.Tests.csproj", "{80B7BDCA-4585-48B2-929B-BE7D084CC0F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.BookingSystem.Notificator.Tests", "TMS.NET06.Notificator.Tests\TMS.NET06.BookingSystem.Notificator.Tests.csproj", "{80B7BDCA-4585-48B2-929B-BE7D084CC0F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.NET06.BookingSystem.Web", "TMS.NET06.BookingSystem.Web\TMS.NET06.BookingSystem.Web.csproj", "{9A325F1E-C3DC-4E15-BE7A-3624A8B9B201}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{80B7BDCA-4585-48B2-929B-BE7D084CC0F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80B7BDCA-4585-48B2-929B-BE7D084CC0F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80B7BDCA-4585-48B2-929B-BE7D084CC0F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A325F1E-C3DC-4E15-BE7A-3624A8B9B201}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A325F1E-C3DC-4E15-BE7A-3624A8B9B201}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A325F1E-C3DC-4E15-BE7A-3624A8B9B201}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A325F1E-C3DC-4E15-BE7A-3624A8B9B201}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
