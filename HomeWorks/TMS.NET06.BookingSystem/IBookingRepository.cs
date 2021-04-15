@@ -11,13 +11,17 @@ namespace TMS.NET06.BookingSystem
         Task<IEnumerable<Service>> GetServicesAsync();
         Task<int> AddServiceAsync(Service service);
 
-        IEnumerable<Client> GetClients();
-        Client GetClient(int clientId);
-        int AddClient(Client client);
+        Task<IEnumerable<Client>> GetClientsAsync();
+        Task<Client> GetClientAsync(int clientId);
+        
+        Task<int> AddClientAsync(Client client);
 
-        IEnumerable<BookEntry> GetBookingEntries(DateTime start, DateTime end, BookingStatus? status = null);
-        IEnumerable<BookEntry> GetClientBookings(int clientId);
-        int AddBookingEntry(int serviceId, int clientId, DateTime bookingDate);
+        Task<IEnumerable<BookEntry>> GetBookingEntriesAsync(DateTime start, DateTime end, BookingStatus? status = null);
+        
+        Task<IEnumerable<BookEntry>> GetClientBookingsAsync(int clientId);
+        
+        Task<int> AddBookingEntryAsync(int serviceId, int clientId, DateTime bookingDate);
+
         void SaveEntry(BookEntry entry);
     }
 }

@@ -29,14 +29,14 @@ namespace TMS.NET06.Notificator.Tests
         }
 
         [Test]
-        public void SendNotificationsShouldSaveUpdatedEntry()
+        public async void SendNotificationsShouldSaveUpdatedEntry()
         {
             // arrange
             var bookingRepo = new Mock<IBookingRepository>();
-            bookingRepo
-                .Setup(repo => repo.GetBookingEntries(
+            await bookingRepo
+                .Setup(repo => repo.GetBookingEntriesAsync(
                     It.IsAny<DateTime>(), It.IsAny<DateTime>(), It.IsAny<BookingStatus?>()))
-                .Returns(new[] { new BookEntry() });
+                .ReturnsAsync(new[] { new BookEntry() });
             var emailService = new Mock<IEmailService>();
             var smsService = new Mock<ISmsService>();
             var notificator = new NotificationService(

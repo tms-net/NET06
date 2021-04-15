@@ -22,11 +22,11 @@ namespace TMS.NET06.BookingSystem.Notificator
             _smsService = smsService;
         }
 
-        public void SendNotifications(TimeSpan period)
+        public async void SendNotifications(TimeSpan period)
         {
             var now = DateTime.UtcNow;
-            var entries = _bookingRepository
-                .GetBookingEntries(now, now + period, BookingStatus.Confirmed);
+            var entries = await _bookingRepository
+                .GetBookingEntriesAsync(now, now + period, BookingStatus.Confirmed);
 
             foreach (BookEntry entry in entries)
             {

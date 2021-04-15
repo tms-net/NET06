@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,53 +27,60 @@ namespace TMS.NET06.BookingSystem
             }
         }
 
-        public int AddBookingEntry(int serviceId, int clientId, DateTime bookingDate)
+        public async Task<int> AddBookingEntryAsync(int serviceId, int clientId, DateTime bookingDate)
         {
-            throw new NotImplementedException();
+            await using var context = CreateContext();
+
+            var searchClient = await context.Clients.FindAsync(clientId);
+            var searchService = await context.Services.FindAsync(serviceId);
+
+            var newBookEntry = new BookEntry {Client = searchClient, Service = searchService, VisitDate = bookingDate, Status = BookingStatus.WaitingForConfirmation, Comment = "Need much beer"};
+
+            var result = await context.BookingEntries.AddAsync(newBookEntry);
+            return result.Entity.BookId;
         }
 
-        public int AddClient(Client client)
+        public async Task<int> AddClientAsync(Client client)
         {
-            throw new NotImplementedException();
+            await using var context = CreateContext();
+            var result = await context.Clients.AddAsync(client);
+            return result.Entity.ClientId;
         }
 
-        public IEnumerable<BookEntry> GetBookingEntries(DateTime start, DateTime end, BookingStatus? status = null)
+        public async Task<IEnumerable<BookEntry>> GetBookingEntriesAsync(DateTime start, DateTime end, BookingStatus? status = null)
         {
-            throw new NotImplementedException();
+            await using var context = CreateContext();
+            return await context.BookingEntries
+                .Where(s => ((s.VisitDate > start) && (s.VisitDate < end) && (s.Status == status)))
+                .ToListAsync();
         }
 
-        public Client GetClient(int clientId)
+        public async Task<Client> GetClientAsync(int clientId)
         {
-            using (var context = CreateContext())
+            await using var context = CreateContext();
+            return await context.Clients.FindAsync(clientId);
+        }
+
+        public async Task<IEnumerable<BookEntry>> GetClientBookingsAsync(int clientId)
+        {
+            await using (var context = CreateContext())
             {
-                return context.Clients.Find(clientId);
-            }
-        }
-
-        public IEnumerable<BookEntry> GetClientBookings(int clientId)
-        {
-            using (var context = CreateContext())
-            {
-                return context.BookingEntries
+                return await context.BookingEntries
                     .Where(be => be.Client.ClientId == clientId)
-                    .ToArray();
+                    .ToListAsync();
             }
         }
 
-        public IEnumerable<Client> GetClients()
+        public async Task<IEnumerable<Client>> GetClientsAsync()
         {
-            using (var context = CreateContext())
-            {
-                return context.Clients.ToArray();
-            }
+            await using var context = CreateContext();
+            return await context.Clients.ToListAsync();
         }
 
         public async Task<IEnumerable<Service>> GetServicesAsync()
         {
-            using(var context = CreateContext())
-            {
-                return await context.Services.ToListAsync();
-            }
+            await using var context = CreateContext();
+            return await context.Services.ToListAsync();
         }
 
         public void SaveEntry(BookEntry entry)
