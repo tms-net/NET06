@@ -22,6 +22,8 @@ namespace TMS.NET06.BookingSystem
         
         Task<int> AddBookingEntryAsync(int serviceId, int clientId, DateTime bookingDate);
 
-        void SaveEntry(BookEntry entry);
+        Task<bool> SaveEntryAsync(BookEntry entry);
+
+        Task<BookEntry> GetBookingAsync (int bookingid);
     }
 }

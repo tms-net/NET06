@@ -150,6 +150,29 @@ namespace TMS.NET06.BookingSystem.Web
                         await context.Response.WriteAsync("Nothing information to view.");
                     }
                 });
+
+                endpoints.MapGet("/savebooking", async context =>
+                {
+
+                    if (int.TryParse(context.Request.Query["bookingid"], out var bookingid))
+                    {
+                        var comm = context.Request.Query["comment"];
+
+                        var repo = context.RequestServices.GetService<IBookingRepository>();
+
+                        var oldBooking = await repo.GetBookingAsync(bookingid);
+
+                        oldBooking.Comment = comm;
+
+                        if (await repo.SaveEntryAsync(oldBooking))
+                            await context.Response.WriteAsync($"Information update for bookingid = {bookingid}.\n");
+                        else await context.Response.WriteAsync($"Information don`t update for bookingid = {bookingid}.\n");
+                    }
+                    else
+                    {
+                        await context.Response.WriteAsync("Nothing information to save.");
+                    }
+                });
             });
         }
     }

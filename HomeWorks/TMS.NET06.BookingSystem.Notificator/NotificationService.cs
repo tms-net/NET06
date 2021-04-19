@@ -36,11 +36,11 @@ namespace TMS.NET06.BookingSystem.Notificator
                     var text = $"You have appointment for {entry.Service.Name} on {entry.VisitDate:g}";
                     try
                     {
-                        _emailService.SendEmail(
+                        var resSendEmail = _emailService.SendEmail(
                             entry.Client?.ContactInformation.Email,
                             "Katcherlash appointment",
                             text);
-                        entry.NotificationInfo.EmailSentDate = DateTime.UtcNow;
+                        if (resSendEmail) entry.NotificationInfo.EmailSentDate = DateTime.UtcNow;
                     }
                     catch(Exception ex)
                     {
@@ -64,7 +64,7 @@ namespace TMS.NET06.BookingSystem.Notificator
                     }
                 }
 
-                _bookingRepository.SaveEntry(entry);
+                await _bookingRepository.SaveEntryAsync(entry);
             }
         }
     }

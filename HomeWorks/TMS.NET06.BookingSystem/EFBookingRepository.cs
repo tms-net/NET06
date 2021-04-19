@@ -83,9 +83,22 @@ namespace TMS.NET06.BookingSystem
             return await context.Services.ToListAsync();
         }
 
-        public void SaveEntry(BookEntry entry)
+        public async Task<bool> SaveEntryAsync(BookEntry entry)
         {
-            throw new NotImplementedException();
+            await using (var context = CreateContext())
+            {
+                if (entry == null) return false;
+                //context.BookingEntries.Attach(entry);
+                context.Entry(entry).State = EntityState.Modified;
+                await context.SaveChangesAsync();
+                return true;
+            }
+        }
+
+        public async Task<BookEntry> GetBookingAsync(int bookingid)
+        {
+            await using var context = CreateContext();
+            return await context.BookingEntries.FindAsync(bookingid);
         }
 
         private BookingContext CreateContext()
