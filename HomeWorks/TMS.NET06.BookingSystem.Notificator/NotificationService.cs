@@ -36,11 +36,11 @@ namespace TMS.NET06.BookingSystem.Notificator
                     var text = $"You have appointment for {entry.Service.Name} on {entry.VisitDate:g}";
                     try
                     {
-                        var resSendEmail = _emailService.SendEmail(
+                        _emailService.SendEmail(
                             entry.Client?.ContactInformation.Email,
                             "Katcherlash appointment",
                             text);
-                        if (resSendEmail) entry.NotificationInfo.EmailSentDate = DateTime.UtcNow;
+                        entry.NotificationInfo.EmailSentDate = DateTime.UtcNow;
                     }
                     catch(Exception ex)
                     {

@@ -18,11 +18,19 @@ namespace TMS.NET06.BookingSystem
             _configuration = configuration;
         }
 
+        public async Task InitAsync()
+        {
+            using var context = CreateContext();
+            await context.Database.EnsureCreatedAsync();
+            await context.Database.MigrateAsync();
+        }
+
         public async Task<int> AddServiceAsync(Service service)
         {
             using (var context = CreateContext())
             {
                 var result = await context.Services.AddAsync(service);
+                await context.SaveChangesAsync();
                 return result.Entity.ServiceId;
             }
         }

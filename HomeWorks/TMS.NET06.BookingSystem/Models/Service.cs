@@ -11,5 +11,7 @@ namespace TMS.NET06.BookingSystem
         public decimal Cost { get; set; }
 
         public TimeSpan Duration { get; set; }
+
+        public string BarberName { get; set; }
     }
 }

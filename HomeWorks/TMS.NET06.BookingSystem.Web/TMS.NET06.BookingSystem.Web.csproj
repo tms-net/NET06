@@ -8,4 +8,6 @@
     <ProjectReference Include="..\TMS.NET06.BookingSystem\TMS.NET06.BookingSystem.csproj" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1development_1json__JsonSchema="https://json.schemastore.org/dotnetcli.host.json" /></VisualStudio></ProjectExtensions>
+
 </Project>

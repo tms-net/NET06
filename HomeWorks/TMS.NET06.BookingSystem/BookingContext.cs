@@ -13,6 +13,10 @@ namespace TMS.NET06.BookingSystem
         public DbSet<Service> Services { get; set; }
         public DbSet<Client> Clients { get; internal set; }
 
+        public BookingContext()
+        {
+        }
+
         public BookingContext(string connectionString)
         {
             this._connectionString = connectionString;
@@ -20,7 +24,11 @@ namespace TMS.NET06.BookingSystem
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase("BookingSystem");
+            //optionsBuilder.UseInMemoryDatabase("BookingSystem");
+            if (!string.IsNullOrEmpty(_connectionString))
+                optionsBuilder.UseSqlServer(_connectionString);
+            else
+                optionsBuilder.UseInMemoryDatabase("BookingSystem");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

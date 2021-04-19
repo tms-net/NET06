@@ -8,6 +8,8 @@ namespace TMS.NET06.BookingSystem
 {
     public interface IBookingRepository
     {
+        Task InitAsync();
+
         Task<IEnumerable<Service>> GetServicesAsync();
         Task<int> AddServiceAsync(Service service);
 
