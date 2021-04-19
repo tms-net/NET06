@@ -22,11 +22,11 @@ namespace TMS.NET06.BookingSystem.Notificator
             _smsService = smsService;
         }
 
-        public void SendNotifications(TimeSpan period)
+        public async void SendNotifications(TimeSpan period)
         {
             var now = DateTime.UtcNow;
-            var entries = _bookingRepository
-                .GetBookingEntries(now, now + period, BookingStatus.Confirmed);
+            var entries = await _bookingRepository
+                .GetBookingEntriesAsync(now, now + period, BookingStatus.Confirmed);
 
             foreach (BookEntry entry in entries)
             {
@@ -36,11 +36,11 @@ namespace TMS.NET06.BookingSystem.Notificator
                     var text = $"You have appointment for {entry.Service.Name} on {entry.VisitDate:g}";
                     try
                     {
-                        _emailService.SendEmail(
+                        var resSendEmail = _emailService.SendEmail(
                             entry.Client?.ContactInformation.Email,
                             "Katcherlash appointment",
                             text);
-                        entry.NotificationInfo.EmailSentDate = DateTime.UtcNow;
+                        if (resSendEmail) entry.NotificationInfo.EmailSentDate = DateTime.UtcNow;
                     }
                     catch(Exception ex)
                     {
@@ -64,7 +64,7 @@ namespace TMS.NET06.BookingSystem.Notificator
                     }
                 }
 
-                _bookingRepository.SaveEntry(entry);
+                await _bookingRepository.SaveEntryAsync(entry);
             }
         }
     }
