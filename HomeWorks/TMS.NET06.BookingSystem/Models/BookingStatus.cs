@@ -9,6 +9,6 @@ namespace TMS.NET06.BookingSystem
         WaitingForConfirmation = 1,
         Confirmed = 2,
         Cancelled = 4,
-        Failed
+        Failed = 8
     }
 }

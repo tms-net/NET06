@@ -1,6 +1,6 @@
 ﻿namespace TMS.NET06.BookingSystem.Notificator
 {
-    internal interface ISmsService
+    public interface ISmsService
     {
         void SendSms(string phoneNumber, string text);
     }
