@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.BookingSystem.Not
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.BookingSystem.Web", "TMS.NET06.BookingSystem.Web\TMS.NET06.BookingSystem.Web.csproj", "{9A325F1E-C3DC-4E15-BE7A-3624A8B9B201}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.NET06.BookingService.Spa", "TMS.NET06.BookingService.Spa\TMS.NET06.BookingService.Spa.csproj", "{9B6F2D9D-955E-47D9-85BC-0634B42519AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.BookingService.Spa", "TMS.NET06.BookingService.Spa\TMS.NET06.BookingService.Spa.csproj", "{9B6F2D9D-955E-47D9-85BC-0634B42519AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.NET06.Eos.Razor", "TMS.NET06.Eos.Razor\TMS.NET06.Eos.Razor.csproj", "{BC80C500-60FE-4B7C-A058-6CCF78E05265}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{9B6F2D9D-955E-47D9-85BC-0634B42519AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B6F2D9D-955E-47D9-85BC-0634B42519AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B6F2D9D-955E-47D9-85BC-0634B42519AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC80C500-60FE-4B7C-A058-6CCF78E05265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC80C500-60FE-4B7C-A058-6CCF78E05265}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC80C500-60FE-4B7C-A058-6CCF78E05265}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC80C500-60FE-4B7C-A058-6CCF78E05265}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
