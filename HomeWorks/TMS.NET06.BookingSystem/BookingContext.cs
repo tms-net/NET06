@@ -5,17 +5,13 @@ using TMS.NET06.BookingSystem.Models;
 
 namespace TMS.NET06.BookingSystem
 {
-    internal class BookingContext : DbContext
+    public class BookingContext : DbContext
     {
         private readonly string _connectionString;
 
         public DbSet<BookEntry> BookingEntries { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<Client> Clients { get; internal set; }
-
-        public BookingContext()
-        {
-        }
 
         public BookingContext(string connectionString)
         {

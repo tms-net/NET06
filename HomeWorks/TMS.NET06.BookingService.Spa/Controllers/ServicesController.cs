@@ -28,5 +28,12 @@ namespace TMS.NET06.BookingService.Spa.Controllers
         {
             return await _bookingRepository.GetServicesAsync();
         }
+
+        [HttpPost]
+        [Route("[action]")]
+        public Task<IEnumerable<DateTime>> AvailableDatesAsync(int serviceId)
+        {
+            return Task.FromResult(new[] { DateTime.Now.Date }.AsEnumerable());
+        }
     }
 }

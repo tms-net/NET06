@@ -44,7 +44,11 @@ namespace TMS.NET06.BookingSystem.Web
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
+            app.Use(async (context, next) => {
+                await next();
+            });
+
+                app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context =>
                 {
@@ -66,7 +70,18 @@ namespace TMS.NET06.BookingSystem.Web
                             string.Join("\n", (await repo.GetServicesAsync()).Select(s => s.Name))
                         );
                 });
-                
+
+                endpoints.MapGet("/services/{serviceId:int}", async context =>
+                {
+                    var serviceId = context.Request.RouteValues["serviceId"];
+                    var repo = context.RequestServices.GetService<IBookingRepository>();
+                    var service = await repo.GetServiceAsync(int.Parse(serviceId.ToString()));
+                    if (service == null)
+                        context.Response.StatusCode = 404;
+                    else
+                        await context.Response.WriteAsync(service.Name);
+                });
+
                 endpoints.MapGet("/addservice", async context =>
                 {
                     if (context.Request.Query.ContainsKey("name"))

@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
+import { Calendar } from './Calendar';
 
 export class BookingService extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { services: [], loading: true };
+        this.state = { services: [], loading: true, selectedServiceId: null };
     }
 
     selectService(service) {
         console.log(service.serviceId);
+        this.setState({ selectedServiceId: service.serviceId });
     }
 
     componentDidMount() {
@@ -19,6 +21,10 @@ export class BookingService extends Component {
     render() {
         if (this.state.loading){
             return <p><em>Loading...</em></p>
+        }
+
+        if (this.state.selectedServiceId) {
+            return (<Calendar serviceId={ this.state.selectedServiceId }/>)
         }
 
         return (

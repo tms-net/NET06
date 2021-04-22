@@ -109,6 +109,12 @@ namespace TMS.NET06.BookingSystem
             return await context.BookingEntries.FindAsync(bookingid);
         }
 
+        public async Task<Service> GetServiceAsync(int serviceId)
+        {
+            await using var context = CreateContext();
+            return await context.FindAsync<Service>(serviceId);
+        }
+
         private BookingContext CreateContext()
         {
             return new BookingContext(_configuration.GetConnectionString("BookingDb"));
