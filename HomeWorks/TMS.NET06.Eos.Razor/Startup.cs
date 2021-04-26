@@ -8,6 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using TMS.NET06.Eos.Razor.Data;
+using TMS.NET06.Eos.Razor.Filters;
 
 namespace TMS.NET06.Eos.Razor
 {
@@ -23,7 +26,16 @@ namespace TMS.NET06.Eos.Razor
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            services
+                .AddRazorPages(options => {
+                    options.Conventions.AuthorizeFolder("/Products");
+                })
+                .AddMvcOptions(options => {
+                    options.Filters.Add<AddMatrasHeaderFilter>();
+                });
+
+            services.AddDbContext<EosContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("EosContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +62,7 @@ namespace TMS.NET06.Eos.Razor
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+
             });
         }
     }

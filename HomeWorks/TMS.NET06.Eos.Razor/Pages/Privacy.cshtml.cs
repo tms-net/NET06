@@ -19,6 +19,7 @@ namespace TMS.NET06.Eos.Razor.Pages
 
         public void OnGet()
         {
+            ViewData["Title"] = "Privacy from view model";
         }
     }
 }
