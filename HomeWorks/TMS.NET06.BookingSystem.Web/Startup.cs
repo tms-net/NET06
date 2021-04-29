@@ -48,7 +48,7 @@ namespace TMS.NET06.BookingSystem.Web
                 await next();
             });
 
-                app.UseEndpoints(endpoints =>
+            app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context =>
                 {

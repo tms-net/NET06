@@ -1,0 +1,44 @@
+﻿@model IList<ProductRow>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+@using (Html.BeginForm())
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">@Html.DisplayNameFor(model => model.First().Name)</th>
+                            <th scope="col">@Html.DisplayNameFor(model => model.First().Mass)</th>
+                            <th scope="col">@Html.DisplayNameFor(model => model.First().Calories)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model?.Count; i++)
+                        {
+                            <tr>
+                                <td>@(i+1)</td>
+                                <td>@Html.EditorFor(model => model[i].Name)</td>
+                                <td>@Html.EditorFor(model => model[i].Mass)</td>
+                                <td>@Html.EditorFor(model => model[i].Calories)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <button type="submit" class="btn btn-light">Добавить продукт</button>
+            </div>
+        </div>
+    </div>
+}
+
+

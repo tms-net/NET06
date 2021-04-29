@@ -8,11 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using TMS.NET06.Eos.Razor.Data;
-using TMS.NET06.Eos.Razor.Filters;
 
-namespace TMS.NET06.Eos.Razor
+namespace TMS.NET06.CaloriesCounter.MVC
 {
     public class Startup
     {
@@ -26,16 +23,7 @@ namespace TMS.NET06.Eos.Razor
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddRazorPages(options => {
-                   // options.Conventions.AuthorizeFolder("/Products");
-                })
-                .AddMvcOptions(options => {
-                    options.Filters.Add<AddMatrasHeaderFilter>();
-                });
-
-            services.AddDbContext<EosContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("EosContext")));
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,11 +35,10 @@ namespace TMS.NET06.Eos.Razor
             }
             else
             {
-                app.UseExceptionHandler("/Error");
+                app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -61,7 +48,9 @@ namespace TMS.NET06.Eos.Razor
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
