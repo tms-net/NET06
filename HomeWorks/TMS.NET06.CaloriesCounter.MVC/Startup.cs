@@ -1,6 +1,9 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TMS.NET06.CaloriesCounter.MVC.Data;
 
 namespace TMS.NET06.CaloriesCounter.MVC
 {
@@ -24,6 +28,12 @@ namespace TMS.NET06.CaloriesCounter.MVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddRazorPages();
+            services.AddDbContext<CaloriesCounterContext>(
+                options => options.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=CaloriesCounter;Integrated Security=True;"));
+            //services.AddDefaultIdentity<IdentityUser>(options =>
+            //{ 
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +54,8 @@ namespace TMS.NET06.CaloriesCounter.MVC
 
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -51,6 +63,8 @@ namespace TMS.NET06.CaloriesCounter.MVC
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapRazorPages();
             });
         }
     }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,12 +9,16 @@ using TMS.NET06.CaloriesCounter.MVC.Models;
 
 namespace TMS.NET06.CaloriesCounter.MVC.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AnalizationController : Controller
     {
         [HttpGet]
         [ActionName("Index")]
         public ActionResult GetIndex()
         {
+            var list = TempData["DataBetweenRequests"];
+            if (list != null)
+                return View(list as IList<ProductRow>);
             return View();
         }
 
@@ -22,7 +27,19 @@ namespace TMS.NET06.CaloriesCounter.MVC.Controllers
         public ActionResult PostIndex(IList<ProductRow> entries)
         {
             entries.Add(new ProductRow());
-            return View(entries);
+            TempData["DataBetweenRequests"] = entries.ToArray();
+            return Redirect("Index");
+            //return View(entries);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteLastRow(IList<ProductRow> entries)
+        {
+            if (entries.Count > 0)
+                entries.RemoveAt(entries.Count - 1);
+
+            return Redirect("Index");
+            //return View("Index", entries);
         }
 
         // GET: AnalizationController/Details/5
