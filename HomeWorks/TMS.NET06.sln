@@ -23,9 +23,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.BookingService.Sp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.Eos.Razor", "TMS.NET06.Eos.Razor\TMS.NET06.Eos.Razor.csproj", "{BC80C500-60FE-4B7C-A058-6CCF78E05265}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.NET06.TestServer", "TMS.NET06.TestServer\TMS.NET06.TestServer.csproj", "{BBEEBE70-AB15-494C-8F54-C15686A07287}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.TestServer", "TMS.NET06.TestServer\TMS.NET06.TestServer.csproj", "{BBEEBE70-AB15-494C-8F54-C15686A07287}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.NET06.CaloriesCounter.MVC", "TMS.NET06.CaloriesCounter.MVC\TMS.NET06.CaloriesCounter.MVC.csproj", "{79FFD5DB-B621-4ECD-B420-9EAB00015E47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.CaloriesCounter.MVC", "TMS.NET06.CaloriesCounter.MVC\TMS.NET06.CaloriesCounter.MVC.csproj", "{79FFD5DB-B621-4ECD-B420-9EAB00015E47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.NET06.Parfume.Web", "TMS.NET06.Parfume.Web\TMS.NET06.Parfume.Web.csproj", "{7CA216B5-B0A1-4802-80CA-1F570568CCEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,10 @@ Global
 		{79FFD5DB-B621-4ECD-B420-9EAB00015E47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79FFD5DB-B621-4ECD-B420-9EAB00015E47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79FFD5DB-B621-4ECD-B420-9EAB00015E47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CA216B5-B0A1-4802-80CA-1F570568CCEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CA216B5-B0A1-4802-80CA-1F570568CCEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CA216B5-B0A1-4802-80CA-1F570568CCEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CA216B5-B0A1-4802-80CA-1F570568CCEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
