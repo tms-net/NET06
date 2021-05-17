@@ -27,7 +27,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.TestServer", "TMS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.CaloriesCounter.MVC", "TMS.NET06.CaloriesCounter.MVC\TMS.NET06.CaloriesCounter.MVC.csproj", "{79FFD5DB-B621-4ECD-B420-9EAB00015E47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.NET06.Parfume.Web", "TMS.NET06.Parfume.Web\TMS.NET06.Parfume.Web.csproj", "{7CA216B5-B0A1-4802-80CA-1F570568CCEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS.NET06.Parfume.Web", "TMS.NET06.Parfume.Web\TMS.NET06.Parfume.Web.csproj", "{7CA216B5-B0A1-4802-80CA-1F570568CCEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMS.NET06.Parfume.Manager.MVC", "TMS.NET06.Parfume.Manager.MVC\TMS.NET06.Parfume.Manager.MVC.csproj", "{2394225A-7E96-46D8-A942-BF78663DD7B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{7CA216B5-B0A1-4802-80CA-1F570568CCEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CA216B5-B0A1-4802-80CA-1F570568CCEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CA216B5-B0A1-4802-80CA-1F570568CCEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2394225A-7E96-46D8-A942-BF78663DD7B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2394225A-7E96-46D8-A942-BF78663DD7B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2394225A-7E96-46D8-A942-BF78663DD7B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2394225A-7E96-46D8-A942-BF78663DD7B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
