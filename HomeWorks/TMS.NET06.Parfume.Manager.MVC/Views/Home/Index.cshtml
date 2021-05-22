@@ -1,8 +1,27 @@
-﻿@{
+﻿@model TMS.NET06.Parfume.Manager.MVC.Models.HomeViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- Product Catagories Area Start -->
+<div class="products-catagories-area clearfix">
+    <div class="amado-pro-catagory clearfix">
+
+        @foreach (var block in Model.HomeBlocks)
+        {
+            <!-- Single Catagory -->
+            <div class="single-products-catagory clearfix">
+                <a href="@block.PageUrl">
+                    <img src="@Url.Content(block.ImageUrl)" alt="">
+                    <!-- Hover Content -->
+                    <div class="hover-content">
+                        <div class="line"></div>
+                        <p>From $@block.PriceFrom.ToString()</p>
+                        <h4>@block.Title</h4>
+                    </div>
+                </a>
+            </div>
+        }
+        </div>
 </div>
+<!-- Product Catagories Area End -->
