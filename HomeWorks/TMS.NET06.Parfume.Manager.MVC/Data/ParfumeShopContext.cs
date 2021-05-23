@@ -10,6 +10,8 @@ namespace TMS.NET06.Parfume.Manager.MVC.Data
 {
     public class ParfumeShopContext : DbContext
     {
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Product> Products { get; set; }
         public ParfumeShopContext (DbContextOptions<ParfumeShopContext> options)
             : base(options)
         {
@@ -24,6 +26,12 @@ namespace TMS.NET06.Parfume.Manager.MVC.Data
             {
                 brandBuilder.HasKey(b => b.BrandId);
             });
+
+            modelBuilder.Entity<Product>()
+               .HasOne(p => p.Brand)
+               .WithMany(b => b.Products)
+               .HasForeignKey("BrandId")
+               .OnDelete(DeleteBehavior.Cascade);
         }
 
         //private void BuildBrand(EntityTypeBuilder<Brand> parameterName)
@@ -31,6 +39,6 @@ namespace TMS.NET06.Parfume.Manager.MVC.Data
         //    throw new NotImplementedException();
         //}
 
-        public DbSet<Brand> Brand { get; set; }
+        
     }
 }

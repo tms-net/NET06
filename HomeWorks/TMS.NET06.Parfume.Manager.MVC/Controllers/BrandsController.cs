@@ -22,7 +22,7 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
         // GET: Brands
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Brand.ToListAsync());
+            return View(await _context.Brands.ToListAsync());
         }
 
         // GET: Brands/Details/5
@@ -33,7 +33,7 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
                 return NotFound();
             }
 
-            var brand = await _context.Brand
+            var brand = await _context.Brands
                 .FirstOrDefaultAsync(m => m.BrandId == id);
             if (brand == null)
             {
@@ -73,7 +73,7 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
                 return NotFound();
             }
 
-            var brand = await _context.Brand.FindAsync(id);
+            var brand = await _context.Brands.FindAsync(id);
             if (brand == null)
             {
                 return NotFound();
@@ -124,7 +124,7 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
                 return NotFound();
             }
 
-            var brand = await _context.Brand
+            var brand = await _context.Brands
                 .FirstOrDefaultAsync(m => m.BrandId == id);
             if (brand == null)
             {
@@ -139,15 +139,15 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var brand = await _context.Brand.FindAsync(id);
-            _context.Brand.Remove(brand);
+            var brand = await _context.Brands.FindAsync(id);
+            _context.Brands.Remove(brand);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool BrandExists(int id)
         {
-            return _context.Brand.Any(e => e.BrandId == id);
+            return _context.Brands.Any(e => e.BrandId == id);
         }
     }
 }

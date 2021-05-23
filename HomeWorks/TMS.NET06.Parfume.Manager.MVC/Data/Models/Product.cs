@@ -12,5 +12,6 @@ namespace TMS.NET06.Parfume.Manager.MVC.Data.Models
         public string Name { get; set; }
 
         public int BrandId { get; set; }
+        public Brand Brand { get; set; }
     }
 }
