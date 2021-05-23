@@ -40,6 +40,59 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
             return View(homeViewModel);
         }
 
+        public IActionResult ProductDetails()
+        {
+          
+            var productViewModel = new ProductDetailsViewModel();
+
+            productViewModel.Name = "Chanel #5";
+            productViewModel.Price = 55;
+            productViewModel.Volume = 50;
+            productViewModel.PageUrl = "/";
+            productViewModel.ImageUrls.Add("~/img/product-img/pro-big-1.jpg");
+            productViewModel.ImageUrls.Add("~/img/product-img/pro-big-2.jpg");
+            productViewModel.ImageUrls.Add("~/img/product-img/pro-big-3.jpg");
+            productViewModel.ImageUrls.Add("~/img/product-img/pro-big-4.jpg");
+
+            foreach (var imageUrl in productViewModel.ImageUrls)
+            {
+                string imageStr = imageUrl.Replace("~", "");
+                productViewModel.ImageCarousel.Add(imageStr);
+            }
+
+            productViewModel.ParentsNodeUrls.Add("Women");
+            productViewModel.ParentsNodeUrls.Add("Chanel");
+           // productViewModel.RefPath.Add("Chanel #5");
+
+            productViewModel.Overview = "Духи Chanel № 5 заслуженно носят звание лучших в мире. Они проверены временем, но не подвластны ему. Его называют таинственным, роскошным. Его ощущение на себе повышает настроение, он нравится и мужчинам. Большинство людей говорит о нем, как о приятном, но слегка терпком аромате, который слышно на протяжении 3 – 6 часов, что зависит и от погоды, от того из какого материала одежда и личного восприятия человека. Однозначно то, что они пахнут женщиной, о чем говорила и Коко Шанель.";
+            productViewModel.Rating = 5;
+            productViewModel.Avaibility = true;
+            productViewModel.ReviewUrl = "/";
+
+            return View(productViewModel);
+        }
+
+        public IActionResult Shop()
+        {
+
+            var shopViewModel = new ShopViewModel();
+
+            shopViewModel.Brands = db.Brands.ToList();
+
+            var shortProductViewModel = new ShortProductViewModel();
+
+            shortProductViewModel.Name = "Chanel #5";
+            shortProductViewModel.Price = 55;
+
+            shortProductViewModel.ImageUrl = "~/img/product-img/product1.jpg";
+            shortProductViewModel.HoverImageUrl = "~/img/product-img/product2.jpg";
+            shortProductViewModel.Rating = 5;
+            shortProductViewModel.ProductDetailsUrl = "/";
+
+            shopViewModel.Products.Add(shortProductViewModel);
+            return View(shopViewModel);
+        }
+
         public IActionResult Privacy()
         {
             return View();
