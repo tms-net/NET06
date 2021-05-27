@@ -7,7 +7,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using TMS.NET06.Parfume.Manager.MVC.Data;
+using TMS.NET06.Parfume.Manager.MVC.Data.Models;
 using TMS.NET06.Parfume.Manager.MVC.Models;
+
 
 namespace TMS.NET06.Parfume.Manager.MVC.Controllers
 {
@@ -72,14 +74,46 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
             return View(productViewModel);
         }
 
-        public IActionResult Shop()
+        public IActionResult Shop(int? brandID = null, string category = null)
         {
-
             var shopViewModel = new ShopViewModel();
 
             shopViewModel.Brands = db.Brands.ToList();
 
             var shortProductViewModel = new ShortProductViewModel();
+
+            string imagePath = "~/img/product-img/product";
+
+            brandID = 5;
+            List < Product > products  = null;
+            if (brandID != null) { 
+                products = db.Products.Where(p => p.BrandId == brandID).ToList();
+                foreach (var product in products)
+                {
+                    shortProductViewModel.Name = product.Name;
+                    shortProductViewModel.Price = product.Price;
+
+                    shortProductViewModel.ImageUrl = imagePath + product.ImageId.ToString()+ ".jpg";
+
+
+                    string hoverImageUrl = imagePath + product.ImageId.ToString() + "_h.jpg";
+                    if (System.IO.File.Exists(hoverImageUrl))
+                        shortProductViewModel.HoverImageUrl = hoverImageUrl;
+                    else
+                        shortProductViewModel.HoverImageUrl = shortProductViewModel.ImageUrl;
+
+                    shortProductViewModel.Rating = 5;
+                    shortProductViewModel.ProductDetailsUrl = "/";
+
+                    shopViewModel.Products.Add(shortProductViewModel);
+                  
+                }
+                return View(shopViewModel);
+
+            }
+
+            //====================
+         
 
             shortProductViewModel.Name = "Chanel #5";
             shortProductViewModel.Price = 55;
