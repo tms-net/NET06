@@ -74,57 +74,75 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
             return View(productViewModel);
         }
 
-        public IActionResult Shop(int? brandID = null, string category = null)
+    public IActionResult Shop(ShopViewRequest request)
         {
             var shopViewModel = new ShopViewModel();
 
-            shopViewModel.Brands = db.Brands.ToList();
+            var brands = db.Brands.ToList();
 
-            var shortProductViewModel = new ShortProductViewModel();
+            foreach (var brand in brands)
+            {
+                shopViewModel.Brands.Add(new MenuBrandViewModel { 
+                    Name = brand.Name,
+                    Id = brand.BrandId.ToString(),
+                    IsChecked = request.SelectedBrands != null && request.SelectedBrands.Contains(brand.BrandId.ToString())
+                }) ;
+            }
+
+
+           
 
             string imagePath = "~/img/product-img/product";
 
-            brandID = 5;
-            List < Product > products  = null;
-            if (brandID != null) { 
-                products = db.Products.Where(p => p.BrandId == brandID).ToList();
-                foreach (var product in products)
-                {
-                    shortProductViewModel.Name = product.Name;
-                    shortProductViewModel.Price = product.Price;
+            //string p = HttpContext.Current.Server.MapPath("/UploadedFiles");
 
-                    shortProductViewModel.ImageUrl = imagePath + product.ImageId.ToString()+ ".jpg";
+           
+            List <Product> products  = null;
+            //if (brandID != null) { 
+            if (request.SelectedBrands != null)
+                products = db.Products.Where(p => request.SelectedBrands.Contains(p.BrandId.ToString())).ToList();
+            else
+                products = db.Products.ToList();
+
+            foreach (var product in products)
+            {
+                var shortProductViewModel = new ShortProductViewModel();
+
+                shortProductViewModel.Name = product.Name;
+                shortProductViewModel.Price = product.Price;
+
+                shortProductViewModel.ImageUrl = imagePath + product.ImageId.ToString() + ".jpg";
 
 
-                    string hoverImageUrl = imagePath + product.ImageId.ToString() + "_h.jpg";
-                    if (System.IO.File.Exists(hoverImageUrl))
-                        shortProductViewModel.HoverImageUrl = hoverImageUrl;
-                    else
-                        shortProductViewModel.HoverImageUrl = shortProductViewModel.ImageUrl;
+                string hoverImageUrl = imagePath + product.ImageId.ToString() + "_h.jpg";
+                if (System.IO.File.Exists(hoverImageUrl))
+                    shortProductViewModel.HoverImageUrl = hoverImageUrl;
+                else
+                    shortProductViewModel.HoverImageUrl = shortProductViewModel.ImageUrl;
 
-                    shortProductViewModel.Rating = 5;
-                    shortProductViewModel.ProductDetailsUrl = "/";
+                shortProductViewModel.Rating = 5;
+                shortProductViewModel.ProductDetailsUrl = "/";
 
-                    shopViewModel.Products.Add(shortProductViewModel);
-                  
-                }
-                return View(shopViewModel);
+                shopViewModel.Products.Add(shortProductViewModel);
 
             }
-
-            //====================
-         
-
-            shortProductViewModel.Name = "Chanel #5";
-            shortProductViewModel.Price = 55;
-
-            shortProductViewModel.ImageUrl = "~/img/product-img/product1.jpg";
-            shortProductViewModel.HoverImageUrl = "~/img/product-img/product2.jpg";
-            shortProductViewModel.Rating = 5;
-            shortProductViewModel.ProductDetailsUrl = "/";
-
-            shopViewModel.Products.Add(shortProductViewModel);
             return View(shopViewModel);
+
+            //}
+
+            ////====================
+            //var shortProductViewModel = new ShortProductViewModel();
+
+            //shortProductViewModel.Name = "Chanel #5";
+            //shortProductViewModel.Price = 55;
+
+            //shortProductViewModel.ImageUrl = "~/img/product-img/product1.jpg";
+            //shortProductViewModel.HoverImageUrl = "~/img/product-img/product2.jpg";
+            //shortProductViewModel.Rating = 5;
+            //shortProductViewModel.ProductDetailsUrl = "/";
+
+            //shopViewModel.Products.Add(shortProductViewModel);
+            //return View(shopViewModel);
         }
 
         public IActionResult Privacy()
