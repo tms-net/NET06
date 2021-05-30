@@ -54,7 +54,7 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BrandId")] Brand brand)
+        public async Task<IActionResult> Create(Brand brand)//([Bind("BrandId")] Brand brand)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BrandId")] Brand brand)
+        public async Task<IActionResult> Edit(int id, Brand brand) //[Bind("BrandId")] Brand brand)
         {
             if (id != brand.BrandId)
             {

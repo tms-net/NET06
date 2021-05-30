@@ -17,10 +17,11 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr><td>@item.BrandId</td> 
+            <td>@item.Name</td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.BrandId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BrandId">Details</a> |
+                <a asp-action="Edit" asp-route-id="@item.BrandId">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.BrandId">Details</a>
                 <a asp-action="Delete" asp-route-id="@item.BrandId">Delete</a>
             </td>
         </tr>

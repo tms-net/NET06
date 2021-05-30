@@ -18,12 +18,14 @@
             <div class="catagories-menu">
                 <ul>
                     <!--<li><a href="#" name="gender" onclick="submitForm();">Men&Women</a></li>
-                        <li><a href="#" name="gender" value="men" onclick="submitForm();">Men</a></li>
-                        <li><a href="#" name="gender" value="women" onclick="submitForm();">Women</a></li>-->
+    <li><a href="#" name="gender" value="men" onclick="submitForm();">Men</a></li>
+    <li><a href="#" name="gender" value="women" onclick="submitForm();">Women</a></li>-->
+                    @*<li><a name="gender" onclick="submitForm();">Men&Women</a></li>
+        <li><a name="gender" value="@Gender.men" onclick="submitForm();">Men</a></li>
+        <li><a name="gender" value="@Gender.women" onclick="submitForm();">Women</a></li>*@
                     <li><a href="@MyHelper.GenderUrl(Html, Gender.men)">Men&Women</a></li>
                     <li><a href="@MyHelper.GenderUrl(Html, Gender.men)">Men</a></li>
                     <li><a href="@MyHelper.GenderUrl(Html, Gender.men)">Women</a></li>
-
                 </ul>
             </div>
         </div>
