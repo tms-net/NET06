@@ -32,6 +32,15 @@ namespace TMS.NET06.Parfume.Manager.MVC.Data
                .WithMany(b => b.Products)
                .HasForeignKey("BrandId")
                .OnDelete(DeleteBehavior.Cascade);
+
+
+            modelBuilder.Entity<Product>()
+           .Property(p => p.Gender)
+           .IsRequired(false);
+
+            modelBuilder.Entity<Product>()
+          .Property(p => p.ImageId)
+          .IsRequired(false);
         }
 
         //private void BuildBrand(EntityTypeBuilder<Brand> parameterName)

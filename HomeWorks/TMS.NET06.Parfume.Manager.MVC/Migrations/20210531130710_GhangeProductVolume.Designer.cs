@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TMS.NET06.Parfume.Manager.MVC.Data;
 
 namespace TMS.NET06.Parfume.Manager.MVC.Migrations
 {
     [DbContext(typeof(ParfumeShopContext))]
-    partial class ParfumeShopContextModelSnapshot : ModelSnapshot
+    [Migration("20210531130710_GhangeProductVolume")]
+    partial class GhangeProductVolume
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
