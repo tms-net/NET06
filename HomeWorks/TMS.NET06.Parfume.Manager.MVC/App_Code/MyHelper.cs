@@ -8,7 +8,7 @@ namespace TMS.NET06.Parfume.Manager.MVC.App_Code
     {
         public static string GenderUrl(this IHtmlHelper html,  Gender gender)
         {
-            var context = html.ViewContext.HttpContext;
+            var queryString = html.ViewContext.HttpContext.Request.QueryString;
             
             return "/home/shop?gender=" + gender.ToString();
         }
