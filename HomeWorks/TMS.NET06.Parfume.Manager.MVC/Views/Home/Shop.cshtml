@@ -17,16 +17,11 @@
             <!--  Catagories  -->
             <div class="catagories-menu">
                 <ul>
-                    <!--<li><a href="#" name="gender" onclick="submitForm();">Men&Women</a></li>
-    <li><a href="#" name="gender" value="men" onclick="submitForm();">Men</a></li>
-    <li><a href="#" name="gender" value="women" onclick="submitForm();">Women</a></li>-->
-                    @*<li><a name="gender" onclick="submitForm();">Men&Women</a></li>
-        <li><a name="gender" value="@Gender.men" onclick="submitForm();">Men</a></li>
-        <li><a name="gender" value="@Gender.women" onclick="submitForm();">Women</a></li>*@
-                    <li><a href="@MyHelper.GenderUrl(Html, Gender.men)">Men&Women</a></li>
-                    <li><a href="@MyHelper.GenderUrl(Html, Gender.men)">Men</a></li>
-                    <li><a href="@MyHelper.GenderUrl(Html, Gender.men)">Women</a></li>
+                    <li class="@(Model.SelectedGender==Gender.men ? "active":"")"><a href="@MyHelper.GenderUrl(Html, Gender.men)">Men</a></li>
+                    <li class="@(Model.SelectedGender==Gender.women ? "active":"")"><a href="@MyHelper.GenderUrl(Html, Gender.women)">Women</a></li>
                 </ul>
+
+                <input type="hidden" name="gender" id="gender" value="@Model.SelectedGender">
             </div>
         </div>
 
@@ -192,5 +187,9 @@
 <script>
     function submitForm() {
         document.getElementById("myForm").submit();
+    }
+
+    function sethiddengender(value) {
+        document.getElementById("gender").value = value;
     }
 </script>

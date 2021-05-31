@@ -24,7 +24,7 @@ namespace TMS.NET06.Parfume.Manager.MVC.Data.Models
 
     public enum Gender 
     {
-        men,
+        men = 1,
         women
     }
 }

@@ -20,6 +20,8 @@ namespace TMS.NET06.Parfume.Manager.MVC.Models
 
         public IList<ShortProductViewModel> Products { get; set; }
 
+        public Gender? SelectedGender { get; set; }
+
     }
     public class ShortProductViewModel
     {

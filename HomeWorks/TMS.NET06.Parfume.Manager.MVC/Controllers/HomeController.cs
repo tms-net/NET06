@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using TMS.NET06.Parfume.Manager.MVC.Data;
@@ -18,10 +20,13 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
         private readonly ILogger<HomeController> _logger;
 
         private ParfumeShopContext db;
-        public HomeController(ILogger<HomeController> logger, ParfumeShopContext context)
+
+        private readonly IWebHostEnvironment _env;
+        public HomeController(IWebHostEnvironment env, ILogger<HomeController> logger, ParfumeShopContext context)
         {
             _logger = logger;
             db = context;
+            _env = env;
         }
 
         //public IActionResult Index()
@@ -90,9 +95,15 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
             }
 
 
-           
+            string webRootPath = _env.WebRootPath;
 
             string imagePath = "~/img/product-img/product";
+
+            string imagePath1 = "/img/product-img/product";
+
+            var path = Path.Combine(_env.WebRootPath, imagePath1);
+
+            
 
             //string p = HttpContext.Current.Server.MapPath("/UploadedFiles");
 
@@ -125,7 +136,11 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
 
                 shopViewModel.Products.Add(shortProductViewModel);
 
+                
+
             }
+
+            shopViewModel.SelectedGender = request.SelectedGender;
             return View(shopViewModel);
 
             //}
