@@ -17,6 +17,7 @@
             <!--  Catagories  -->
             <div class="catagories-menu">
                 <ul>
+                    @*<li><a href="@MyHelper.GenderUrl(Html, Gender.men)">Men&Women</a></li>*@
                     <li class="@(Model.SelectedGender==Gender.men ? "active":"")"><a href="@MyHelper.GenderUrl(Html, Gender.men)">Men</a></li>
                     <li class="@(Model.SelectedGender==Gender.women ? "active":"")"><a href="@MyHelper.GenderUrl(Html, Gender.women)">Women</a></li>
                 </ul>
