@@ -15,8 +15,10 @@ namespace TMS.NET06.Parfume.Manager.MVC.Models
         [BindProperty(Name = "gender", SupportsGet = true)]
         public Gender? SelectedGender { get; set; }
 
+        [BindProperty(Name = "pricemin", SupportsGet = true)]
         public decimal? PriceMin { get; set; }
 
+        [BindProperty(Name = "pricemax", SupportsGet = true)]
         public decimal? PriceMax { get; set; }
     }
 }

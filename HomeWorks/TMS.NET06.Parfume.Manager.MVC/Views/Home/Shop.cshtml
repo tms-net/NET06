@@ -73,7 +73,7 @@
 
             <div class="widget-desc">
                 <div class="slider-range">
-                    <div data-min="10" data-max="1000" data-unit="$" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="10" data-value-max="1000" data-label-result="">
+                    <div name="price" id="price" data-min="10" data-max="1000" data-unit="$" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="10" data-value-max="1000" data-label-result="" onchange="setPrice();">
                         <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
                         <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
                         <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
@@ -82,6 +82,12 @@
                 </div>
             </div>
         </div>
+        @*<input type="hidden" name="pricemin" id="pricemin" value="@Model.PriceMin">
+        <input type="hidden" name="pricemax" id="pricemax" value="@Model.PriceMax">*@
+
+        <input type="hidden" name="pricemin" id="pricemin">
+        <input type="hidden" name="pricemax" id="pricemax">
+
     </div>
 
 </form>
@@ -190,7 +196,12 @@
         document.getElementById("myForm").submit();
     }
 
-    function sethiddengender(value) {
-        document.getElementById("gender").value = value;
+    function setPrice() {
+       let el = document.getElementById("price");
+       let elmin = document.getElementById("pricemin"); 
+       let elmax = document.getElementById("pricemax"); 
+        elmin.value = el["data - value - min"];
+        elmax.value = el["data - value - max"];
+        document.getElementById("myForm").submit();
     }
 </script>
