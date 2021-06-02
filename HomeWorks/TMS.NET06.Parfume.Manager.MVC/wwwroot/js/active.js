@@ -116,4 +116,15 @@
         });
     });
 
+    $("#sliderprice").on("slidechange", function (event, ui)
+    { 
+        var valuemin = $("#sliderprice").slider("values", 0);
+        var valuemax = $("#sliderprice").slider("values", 1);
+        let elmin = document.getElementById("pricemin");
+        let elmax = document.getElementById("pricemax");
+        elmin.value = valuemin;
+        elmax.value = valuemax;
+        document.getElementById("myForm").submit();
+    });
+
 })(jQuery);

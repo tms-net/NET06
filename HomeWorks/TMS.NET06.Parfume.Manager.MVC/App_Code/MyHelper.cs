@@ -22,7 +22,7 @@ namespace TMS.NET06.Parfume.Manager.MVC.App_Code
     //        return res;
     //    }
 
-         public static string GenderUrl(this IHtmlHelper html,  Gender gender)
+         public static string GenderUrl(this IHtmlHelper html,  Gender? gender)
         {
             var queryString = html.ViewContext.HttpContext.Request.QueryString;
 

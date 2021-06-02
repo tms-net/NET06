@@ -110,8 +110,12 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
            
             List <Product> products  = null;
             //if (brandID != null) { 
-            if (request.SelectedBrands != null)
+            if (request.SelectedBrands != null && request.SelectedGender != null)
+                products = db.Products.Where(p => (request.SelectedBrands.Contains(p.BrandId.ToString()) && p.Gender == request.SelectedGender)).ToList();
+            else if (request.SelectedBrands != null && request.SelectedGender == null)
                 products = db.Products.Where(p => request.SelectedBrands.Contains(p.BrandId.ToString())).ToList();
+            else if (request.SelectedBrands == null && request.SelectedGender != null)
+                products = db.Products.Where(p => (p.Gender == request.SelectedGender)).ToList();
             else
                 products = db.Products.ToList();
 
@@ -140,6 +144,7 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
 
             }
 
+            //  shopViewModel.SelectedGender = request.SelectedGender!=null ? request.SelectedGender : Gender.men;
             shopViewModel.SelectedGender = request.SelectedGender;
             return View(shopViewModel);
 
