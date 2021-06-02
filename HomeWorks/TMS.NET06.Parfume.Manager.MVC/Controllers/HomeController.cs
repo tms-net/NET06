@@ -147,8 +147,8 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
             //  shopViewModel.SelectedGender = request.SelectedGender!=null ? request.SelectedGender : Gender.men;
             shopViewModel.SelectedGender = request.SelectedGender;
 
-            //shopViewModel.PriceMin = request.PriceMin;
-            //shopViewModel.PriceMax = request.PriceMax;
+            shopViewModel.PriceMin = request.PriceMin;
+            shopViewModel.PriceMax = request.PriceMax;
             return View(shopViewModel);
 
             //}

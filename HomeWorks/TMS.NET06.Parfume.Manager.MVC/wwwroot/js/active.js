@@ -132,7 +132,14 @@
         let elmin = document.getElementById("pricemin");
         let elmax = document.getElementById("pricemax");
 
-        $("#sliderprice").slider("values", [elmin, elmax]);
+        //$("#sliderprice").slider("values", [elmin.value, elmax.value]);
+
+        // Getter
+        var values = $("#sliderprice").slider("option", "values");
+
+        // Setter
+        $("#sliderprice").slider("option", "values", [elmin.value, elmax.value]);
+
 
     });
 
