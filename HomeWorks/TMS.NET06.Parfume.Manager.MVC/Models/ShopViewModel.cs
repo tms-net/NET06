@@ -22,9 +22,9 @@ namespace TMS.NET06.Parfume.Manager.MVC.Models
 
         public Gender? SelectedGender { get; set; }
 
-        //public decimal? PriceMin { get; set; }
+        public decimal? PriceMin { get; set; }
 
-        //public decimal? PriceMax { get; set; }
+        public decimal? PriceMax { get; set; }
 
     }
     public class ShortProductViewModel
@@ -36,6 +36,7 @@ namespace TMS.NET06.Parfume.Manager.MVC.Models
         public string ProductDetailsUrl { get; set; }
         public string ImageUrl { get; set; }
         public string HoverImageUrl { get; set; }
+        
     }
 
     //public class MenuSelectViewModel

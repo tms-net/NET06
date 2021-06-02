@@ -127,4 +127,14 @@
         document.getElementById("myForm").submit();
     });
 
+    $("#sliderprice").on("slidecreate", function (event, ui)
+    {
+        let elmin = document.getElementById("pricemin");
+        let elmax = document.getElementById("pricemax");
+
+        $("#sliderprice").slider("values", [elmin, elmax]);
+
+    });
+
+
 })(jQuery);
