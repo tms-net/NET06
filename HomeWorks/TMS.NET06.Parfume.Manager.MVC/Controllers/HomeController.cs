@@ -124,7 +124,7 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
                 var shortProductViewModel = new ShortProductViewModel();
 
                 shortProductViewModel.Name = product.Name;
-                shortProductViewModel.Price = product.Price;
+                shortProductViewModel.Price = (int)product.Price;
 
                 shortProductViewModel.ImageUrl = imagePath + product.ImageId.ToString() + ".jpg";
 

@@ -78,7 +78,7 @@
                         <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
                         <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
                     </div>
-                    <div class="range-price">$10 - $1000</div>
+                    <div class="range-price" id="rangeprice">$10 - $1000</div>
                 </div>
             </div>
         </div>
@@ -193,4 +193,21 @@
     function submitForm() {
         document.getElementById("myForm").submit();
     }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        let elmin = document.getElementById("pricemin");
+        let elmax = document.getElementById("pricemax");
+
+        minvalue = Number(elmin.value);
+        maxvalue = Number(elmax.value);
+        if (maxvalue == 0) maxvalue = 1000;
+        $("#sliderprice").slider("values", [minvalue, maxvalue]);
+        
+        //$("#sliderprice").find('.range-price').html(result);
+        if (elmin.value != "" && elmax.value != "") {
+            var result = "$" + elmin.value + ' - ' + "$" + elmax.value;
+            let ellabel = document.getElementById("rangeprice");
+            ellabel.innerHTML = result;
+        }
+    });
 </script>

@@ -116,8 +116,8 @@
         });
     });
 
-    $("#sliderprice").on("slidechange", function (event, ui)
-    { 
+  
+    $("#sliderprice").on("slidestop", function (event, ui) {
         var valuemin = $("#sliderprice").slider("values", 0);
         var valuemax = $("#sliderprice").slider("values", 1);
         let elmin = document.getElementById("pricemin");
@@ -126,22 +126,5 @@
         elmax.value = valuemax;
         document.getElementById("myForm").submit();
     });
-
-    $("#sliderprice").on("slidecreate", function (event, ui)
-    {
-        let elmin = document.getElementById("pricemin");
-        let elmax = document.getElementById("pricemax");
-
-        //$("#sliderprice").slider("values", [elmin.value, elmax.value]);
-
-        // Getter
-        var values = $("#sliderprice").slider("option", "values");
-
-        // Setter
-        $("#sliderprice").slider("option", "values", [elmin.value, elmax.value]);
-
-
-    });
-
 
 })(jQuery);
