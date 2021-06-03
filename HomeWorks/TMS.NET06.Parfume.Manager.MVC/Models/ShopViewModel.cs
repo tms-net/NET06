@@ -33,7 +33,7 @@ namespace TMS.NET06.Parfume.Manager.MVC.Models
         public decimal Price { get; set; }
         public int Rating { get; set; }
 
-        public string ProductDetailsUrl { get; set; }
+        public int ProductId { get; set; }
         public string ImageUrl { get; set; }
         public string HoverImageUrl { get; set; }
         

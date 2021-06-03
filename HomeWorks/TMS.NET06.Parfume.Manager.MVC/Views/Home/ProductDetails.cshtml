@@ -42,15 +42,17 @@
                                         <img class="d-block w-100" src="@Url.Content(Model.ImageUrls[0])" alt="First slide">
                                     </a>
                                 </div>
-                                <div class="carousel-item">
-                                    @for (int i = 1; i < Model.ImageUrls.Count; i++)
-                                    {
-                                     <a class="gallery_img" href="@Model.ImageUrls[i]">
-                                        <img class="d-block w-100" src="@Url.Content(Model.ImageUrls[i])" alt="@i slide">
-                                     </a>
-                                    }
+                                @for (int i = 1; i < Model.ImageUrls.Count; i++)
+                                {
+                                 <div class="carousel-item">
+
+                                    <a class="gallery_img" href="@Model.ImageUrls[i]">
+                                    <img class="d-block w-100" src="@Url.Content(Model.ImageUrls[i])" alt="@i slide">
+                                    </a>
+                                        
+                                 </div>
+                                }
                                 </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -84,7 +86,7 @@
                         </div>
 
                         <!-- Add to Cart Form -->
-                        <form class="cart clearfix" method="post">
+                        <!--<form class="cart clearfix" method="post">
                             <div class="cart-btn d-flex mb-50">
                                 <p>Qty</p>
                                 <div class="quantity">
@@ -94,7 +96,7 @@
                                 </div>
                             </div>
                             <button type="submit" name="addtocart" value="5" class="btn amado-btn">Add to cart</button>
-                        </form>
+                        </form>-->
 
                     </div>
                 </div>

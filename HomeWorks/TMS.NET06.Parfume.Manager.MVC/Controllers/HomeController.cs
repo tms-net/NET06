@@ -47,14 +47,16 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
             return View(homeViewModel);
         }
 
-        public IActionResult ProductDetails()
+        public IActionResult ProductDetails(int id)
         {
-          
+           Product product = db.Products.Where(p => p.ProductId == id).First();
+            product.Brand = db.Brands.Where(b => b.BrandId == product.BrandId).First();
+
             var productViewModel = new ProductDetailsViewModel();
 
-            productViewModel.Name = "Chanel #5";
-            productViewModel.Price = 55;
-            productViewModel.Volume = 50;
+            productViewModel.Name = product.Name;
+            productViewModel.Price = product.Price;
+            productViewModel.Volume = product.Volume;
             productViewModel.PageUrl = "/";
             productViewModel.ImageUrls.Add("~/img/product-img/pro-big-1.jpg");
             productViewModel.ImageUrls.Add("~/img/product-img/pro-big-2.jpg");
@@ -67,11 +69,11 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
                 productViewModel.ImageCarousel.Add(imageStr);
             }
 
-            productViewModel.ParentsNodeUrls.Add("Women");
-            productViewModel.ParentsNodeUrls.Add("Chanel");
+            productViewModel.ParentsNodeUrls.Add(product.Gender.ToString());
+            productViewModel.ParentsNodeUrls.Add(product.Brand.Name);
            // productViewModel.RefPath.Add("Chanel #5");
 
-            productViewModel.Overview = "Духи Chanel № 5 заслуженно носят звание лучших в мире. Они проверены временем, но не подвластны ему. Его называют таинственным, роскошным. Его ощущение на себе повышает настроение, он нравится и мужчинам. Большинство людей говорит о нем, как о приятном, но слегка терпком аромате, который слышно на протяжении 3 – 6 часов, что зависит и от погоды, от того из какого материала одежда и личного восприятия человека. Однозначно то, что они пахнут женщиной, о чем говорила и Коко Шанель.";
+            productViewModel.Overview = "Духи " + product.Name + " заслуженно носят звание лучших в мире. Они проверены временем, но не подвластны ему. Его называют таинственным, роскошным. Его ощущение на себе повышает настроение, он нравится и мужчинам. Большинство людей говорит о нем, как о приятном, но слегка терпком аромате, который слышно на протяжении 3 – 6 часов, что зависит и от погоды, от того из какого материала одежда и личного восприятия человека. Однозначно то, что они пахнут женщиной, о чем говорила и Коко Шанель.";
             productViewModel.Rating = 5;
             productViewModel.Avaibility = true;
             productViewModel.ReviewUrl = "/";
@@ -136,7 +138,7 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
                     shortProductViewModel.HoverImageUrl = shortProductViewModel.ImageUrl;
 
                 shortProductViewModel.Rating = 5;
-                shortProductViewModel.ProductDetailsUrl = "/";
+                shortProductViewModel.ProductId = product.ProductId;
 
                 shopViewModel.Products.Add(shortProductViewModel);
 

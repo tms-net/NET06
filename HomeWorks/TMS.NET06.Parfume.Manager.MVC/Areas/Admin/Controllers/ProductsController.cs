@@ -8,24 +8,26 @@ using Microsoft.EntityFrameworkCore;
 using TMS.NET06.Parfume.Manager.MVC.Data;
 using TMS.NET06.Parfume.Manager.MVC.Data.Models;
 
-namespace TMS.NET06.Parfume.Manager.MVC.Controllers
+namespace TMS.NET06.Parfume.Manager.MVC.Areas.Admin.Controllers
 {
-    public class BrandsController : Controller
+    [Area("Admin")]
+    public class ProductsController : Controller
     {
         private readonly ParfumeShopContext _context;
 
-        public BrandsController(ParfumeShopContext context)
+        public ProductsController(ParfumeShopContext context)
         {
             _context = context;
         }
 
-        // GET: Brands
+        // GET: Products
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Brands.ToListAsync());
+            var parfumeShopContext = _context.Products.Include(p => p.Brand);
+            return View(await parfumeShopContext.ToListAsync());
         }
 
-        // GET: Brands/Details/5
+        // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +35,42 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
                 return NotFound();
             }
 
-            var brand = await _context.Brands
-                .FirstOrDefaultAsync(m => m.BrandId == id);
-            if (brand == null)
+            var product = await _context.Products
+                .Include(p => p.Brand)
+                .FirstOrDefaultAsync(m => m.ProductId == id);
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(brand);
+            return View(product);
         }
 
-        // GET: Brands/Create
+        // GET: Products/Create
         public IActionResult Create()
         {
+            ViewData["BrandId"] = new SelectList(_context.Brands, "BrandId", "Name");
             return View();
         }
 
-        // POST: Brands/Create
+        // POST: Products/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Brand brand)//([Bind("BrandId")] Brand brand)
+        public async Task<IActionResult> Create([Bind("ProductId,Name,Price,BrandId,Gender,Volume,ImageId")] Product product)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(brand);
+                _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(brand);
+            ViewData["BrandId"] = new SelectList(_context.Brands, "BrandId", "Name", product.BrandId);
+            return View(product);
         }
 
-        // GET: Brands/Edit/5
+        // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +78,23 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
                 return NotFound();
             }
 
-            var brand = await _context.Brands.FindAsync(id);
-            if (brand == null)
+            var product = await _context.Products.FindAsync(id);
+            if (product == null)
             {
                 return NotFound();
             }
-            return View(brand);
+            ViewData["BrandId"] = new SelectList(_context.Brands, "BrandId", "Name", product.BrandId);
+            return View(product);
         }
 
-        // POST: Brands/Edit/5
+        // POST: Products/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Brand brand) //[Bind("BrandId")] Brand brand)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductId,Name,Price,BrandId,Gender,Volume,ImageId")] Product product)
         {
-            if (id != brand.BrandId)
+            if (id != product.ProductId)
             {
                 return NotFound();
             }
@@ -97,12 +103,12 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
             {
                 try
                 {
-                    _context.Update(brand);
+                    _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BrandExists(brand.BrandId))
+                    if (!ProductExists(product.ProductId))
                     {
                         return NotFound();
                     }
@@ -113,10 +119,11 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(brand);
+            ViewData["BrandId"] = new SelectList(_context.Brands, "BrandId", "Name", product.BrandId);
+            return View(product);
         }
 
-        // GET: Brands/Delete/5
+        // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +131,31 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
                 return NotFound();
             }
 
-            var brand = await _context.Brands
-                .FirstOrDefaultAsync(m => m.BrandId == id);
-            if (brand == null)
+            var product = await _context.Products
+                .Include(p => p.Brand)
+                .FirstOrDefaultAsync(m => m.ProductId == id);
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(brand);
+            return View(product);
         }
 
-        // POST: Brands/Delete/5
+        // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var brand = await _context.Brands.FindAsync(id);
-            _context.Brands.Remove(brand);
+            var product = await _context.Products.FindAsync(id);
+            _context.Products.Remove(product);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool BrandExists(int id)
+        private bool ProductExists(int id)
         {
-            return _context.Brands.Any(e => e.BrandId == id);
+            return _context.Products.Any(e => e.ProductId == id);
         }
     }
 }

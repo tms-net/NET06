@@ -48,9 +48,9 @@
         </div>
 
         <!-- ##### Single Widget ##### -->
-        <div class="widget color mb-50">
+        <!--<div class="widget color mb-50">-->
             <!-- Widget Title -->
-            <h6 class="widget-title mb-30">Color</h6>
+            <!--<h6 class="widget-title mb-30">Color</h6>
 
             <div class="widget-desc">
                 <ul class="d-flex">
@@ -64,7 +64,7 @@
                     <li><a href="#" class="color8"></a></li>
                 </ul>
             </div>
-        </div>
+        </div>-->
 
         <!-- ##### Single Widget ##### -->
         <div class="widget price mb-50">
@@ -151,7 +151,8 @@
                             <div class="product-meta-data">
                                 <div class="line"></div>
                                 <p class="product-price">$@product.Price.ToString()</p>
-                                <a href="@product.ProductDetailsUrl">
+                                @*<a href="@product.ProductDetailsUrl">*@
+                                <a href="@Url.Action("ProductDetails", "Home", new {id = product.ProductId})">
                                     <h6>@product.Name</h6>
                                 </a>
                             </div>
