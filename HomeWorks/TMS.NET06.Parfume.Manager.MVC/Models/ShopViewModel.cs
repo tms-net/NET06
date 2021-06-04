@@ -28,7 +28,7 @@ namespace TMS.NET06.Parfume.Manager.MVC.Models
 
         public int[] QuantityOnPage = new int[] { 12, 24, 48, 96 };
 
-        public int SelectedQuantityOnPage;
+        public int SelectedQuantityOnPage { get; set; }
 
     }
     public class ShortProductViewModel

@@ -13,7 +13,7 @@ namespace TMS.NET06.Parfume.Manager.MVC.Models
         {
             PriceMin = 0;
             PriceMax = 200;
-            SelectedQuantityOnPage = 12;
+            //SelectedQuantityOnPage = 12;
         }
 
         [BindProperty(Name = "brand", SupportsGet = true)]

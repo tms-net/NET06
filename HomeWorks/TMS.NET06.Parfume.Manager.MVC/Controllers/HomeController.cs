@@ -156,6 +156,7 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
 
             shopViewModel.PriceMin = request.PriceMin;
             shopViewModel.PriceMax = request.PriceMax;
+            shopViewModel.SelectedQuantityOnPage = request.SelectedQuantityOnPage;
             return View(shopViewModel);
 
             //}

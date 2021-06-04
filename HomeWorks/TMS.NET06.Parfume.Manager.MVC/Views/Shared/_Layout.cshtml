@@ -28,6 +28,7 @@
         </div>
     </div>
     <!-- Search Wrapper Area End -->
+    <form id="myForm" method="get" action="@Url.Action()">
     <!-- ##### Main Content Wrapper Start ##### -->
     <div class="main-content-wrapper d-flex clearfix">
 
@@ -60,7 +61,7 @@
                     <li><a href="@Url.Action("Shop", "Home")">Shop</a></li>
                     @*<li><a href="@Url.Action("ProductDetails", "Home")">Product</a></li>*@
                     @*<li><a href="cart.html">Cart</a></li>
-                    <li><a href="checkout.html">Checkout</a></li>*@
+                        <li><a href="checkout.html">Checkout</a></li>*@
                 </ul>
             </nav>
             <!-- Button Group -->
@@ -87,6 +88,7 @@
         @RenderBody()
         <!-- Product Catagories Area End -->
     </div>
+     </form>
     <!-- ##### Main Content Wrapper End ##### -->
     <!-- ##### Newsletter Area Start ##### -->
     <section class="newsletter-area section-padding-100-0">
@@ -148,14 +150,14 @@
                                             <a class="nav-link" href="shop.html">Shop</a>
                                         </li>
                                         @*<li class="nav-item">
-                                            <a class="nav-link" href="product-details.html">Product</a>
-                                        </li>*@
+                                                <a class="nav-link" href="product-details.html">Product</a>
+                                            </li>*@
                                         @*<li class="nav-item">
-                                            <a class="nav-link" href="cart.html">Cart</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="checkout.html">Checkout</a>
-                                        </li>*@
+                                                <a class="nav-link" href="cart.html">Cart</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="checkout.html">Checkout</a>
+                                            </li>*@
                                     </ul>
                                 </div>
                             </nav>
@@ -182,4 +184,6 @@
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
+
 </html>
