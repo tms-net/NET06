@@ -108,17 +108,17 @@
                         <div class="sort-by-date d-flex align-items-center mr-15">
                             <p>Sort by</p>
                             <form action="#" method="get">
-                                <select name="select" id="sortBydate">
-                                    <option value="value">Date</option>
-                                    <option value="value">Newest</option>
-                                    <option value="value">Popular</option>
+                                <select name="selectsort" id="sortBydate">
+                                    <option value="value">Price ascending</option>
+                                    <option value="value">Price descending</option>
+                                    <option value="value">Popular first</option>
                                 </select>
                             </form>
                         </div>
                         <div class="view-product d-flex align-items-center">
                             <p>View</p>
                             @*<form action="@Url.Action()" method="get">*@
-                            <select name="select" id="viewProduct" onchange="submitForm();">
+                            <select name="selectedquantity" onchange="submitForm();">
                                     @foreach (var q in Model.QuantityOnPage)
                                     {
                                         @if (q == Model.SelectedQuantityOnPage)

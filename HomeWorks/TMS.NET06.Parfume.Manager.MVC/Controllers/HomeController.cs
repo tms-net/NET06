@@ -105,26 +105,26 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
 
             var path = Path.Combine(_env.WebRootPath, imagePath1);
 
-            
+
 
             //string p = HttpContext.Current.Server.MapPath("/UploadedFiles");
 
-           
+            int SelectedQuantityOnPage = request.SelectedQuantityOnPage;
             List <Product> products  = null;
             //if (brandID != null) { 
             if (request.SelectedBrands != null && request.SelectedGender != null)
-                products = db.Products.Where(p => (request.SelectedBrands.Contains(p.BrandId.ToString()) 
+                products = db.Products.Take(SelectedQuantityOnPage).Where(p => (request.SelectedBrands.Contains(p.BrandId.ToString())
                 && p.Gender == request.SelectedGender)
-                &&p.Price<=request.PriceMax&& p.Price >= request.PriceMin).ToList();
+                && p.Price <= request.PriceMax && p.Price >= request.PriceMin).ToList();
             else if (request.SelectedBrands != null && request.SelectedGender == null)
-                products = db.Products.Where(p => request.SelectedBrands.Contains(p.BrandId.ToString())
+                products = db.Products.Take(SelectedQuantityOnPage).Where(p => request.SelectedBrands.Contains(p.BrandId.ToString())
                  && p.Price <= request.PriceMax && p.Price >= request.PriceMin).ToList();
             else if (request.SelectedBrands == null && request.SelectedGender != null)
-                products = db.Products.Where(p => (p.Gender == request.SelectedGender)
+                products = db.Products.Take(SelectedQuantityOnPage).Where(p => (p.Gender == request.SelectedGender)
                  && p.Price <= request.PriceMax && p.Price >= request.PriceMin).ToList();
             else
-                // products = db.Products.ToList();
-                products = db.Products.Where(p => p.Price <= request.PriceMax && p.Price >= request.PriceMin).ToList();
+               // products = db.Products.ToList();
+                products = db.Products.Take(SelectedQuantityOnPage).Where(p => p.Price <= request.PriceMax && p.Price >= request.PriceMin).ToList();
 
             foreach (var product in products)
             {
@@ -156,7 +156,7 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
 
             shopViewModel.PriceMin = request.PriceMin;
             shopViewModel.PriceMax = request.PriceMax;
-            shopViewModel.SelectedQuantityOnPage = request.SelectedQuantityOnPage;
+            shopViewModel.SelectedQuantityOnPage = SelectedQuantityOnPage;
             return View(shopViewModel);
 
             //}
