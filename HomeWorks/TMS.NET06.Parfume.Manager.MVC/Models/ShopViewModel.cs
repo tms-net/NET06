@@ -26,17 +26,20 @@ namespace TMS.NET06.Parfume.Manager.MVC.Models
 
         public decimal? PriceMax { get; set; }
 
+        public int[] QuantityOnPage = new int[] { 12, 24, 48, 96 };
+
+        public int SelectedQuantityOnPage;
+
     }
     public class ShortProductViewModel
     {
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int Rating { get; set; }
-
         public int ProductId { get; set; }
         public string ImageUrl { get; set; }
         public string HoverImageUrl { get; set; }
-        
+
     }
 
     //public class MenuSelectViewModel
@@ -54,6 +57,5 @@ namespace TMS.NET06.Parfume.Manager.MVC.Models
 
     }
 
-   
 }
 
