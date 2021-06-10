@@ -1,13 +1,11 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using TMS.NET06.Parfume.Manager.MVC.Data;
 using TMS.NET06.Parfume.Manager.MVC.Data.Models;
 using TMS.NET06.Parfume.Manager.MVC.Models;
@@ -34,7 +32,7 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
         //    return View(db.Brand.ToList());
         //}
 
-        public  IActionResult Index()
+        public IActionResult Index()
         {
             //return View(await db.Brand.ToListAsync());
             var homeViewModel = new HomeViewModel();
@@ -49,7 +47,7 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
 
         public IActionResult ProductDetails(int id)
         {
-           Product product = db.Products.Where(p => p.ProductId == id).First();
+            Product product = db.Products.Where(p => p.ProductId == id).First();
             product.Brand = db.Brands.Where(b => b.BrandId == product.BrandId).First();
 
             var productViewModel = new ProductDetailsViewModel();
@@ -71,7 +69,7 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
 
             productViewModel.ParentsNodeUrls.Add(product.Gender.ToString());
             productViewModel.ParentsNodeUrls.Add(product.Brand.Name);
-           // productViewModel.RefPath.Add("Chanel #5");
+            // productViewModel.RefPath.Add("Chanel #5");
 
             productViewModel.Overview = "Духи " + product.Name + " заслуженно носят звание лучших в мире. Они проверены временем, но не подвластны ему. Его называют таинственным, роскошным. Его ощущение на себе повышает настроение, он нравится и мужчинам. Большинство людей говорит о нем, как о приятном, но слегка терпком аромате, который слышно на протяжении 3 – 6 часов, что зависит и от погоды, от того из какого материала одежда и личного восприятия человека. Однозначно то, что они пахнут женщиной, о чем говорила и Коко Шанель.";
             productViewModel.Rating = 5;
@@ -81,7 +79,7 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
             return View(productViewModel);
         }
 
-    public IActionResult Shop(ShopViewRequest request)
+        public IActionResult Shop(ShopViewRequest request)
         {
             var shopViewModel = new ShopViewModel();
 
@@ -89,11 +87,12 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
 
             foreach (var brand in brands)
             {
-                shopViewModel.Brands.Add(new MenuBrandViewModel { 
+                shopViewModel.Brands.Add(new MenuBrandViewModel
+                {
                     Name = brand.Name,
                     Id = brand.BrandId.ToString(),
                     IsChecked = request.SelectedBrands != null && request.SelectedBrands.Contains(brand.BrandId.ToString())
-                }) ;
+                });
             }
 
 
@@ -106,26 +105,35 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
             var path = Path.Combine(_env.WebRootPath, imagePath1);
 
 
-
             //string p = HttpContext.Current.Server.MapPath("/UploadedFiles");
 
-            int SelectedQuantityOnPage = request.SelectedQuantityOnPage;
-            List <Product> products  = null;
-            //if (brandID != null) { 
+            int selectedQuantityOnPage = request.SelectedQuantityOnPage;
+            int selectedSort = request.SelectedSort;
+            int selectedPage = request.SelectedPage;
+
+            List<Product> products = null;
+          
             if (request.SelectedBrands != null && request.SelectedGender != null)
-                products = db.Products.Take(SelectedQuantityOnPage).Where(p => (request.SelectedBrands.Contains(p.BrandId.ToString())
+                products = db.Products.Where(p => (request.SelectedBrands.Contains(p.BrandId.ToString())
                 && p.Gender == request.SelectedGender)
                 && p.Price <= request.PriceMax && p.Price >= request.PriceMin).ToList();
+
             else if (request.SelectedBrands != null && request.SelectedGender == null)
-                products = db.Products.Take(SelectedQuantityOnPage).Where(p => request.SelectedBrands.Contains(p.BrandId.ToString())
+             
+                    products = db.Products.Where(p => request.SelectedBrands.Contains(p.BrandId.ToString())
                  && p.Price <= request.PriceMax && p.Price >= request.PriceMin).ToList();
+                
             else if (request.SelectedBrands == null && request.SelectedGender != null)
-                products = db.Products.Take(SelectedQuantityOnPage).Where(p => (p.Gender == request.SelectedGender)
+                products = db.Products.Where(p => (p.Gender == request.SelectedGender)
                  && p.Price <= request.PriceMax && p.Price >= request.PriceMin).ToList();
             else
-               // products = db.Products.ToList();
-                products = db.Products.Take(SelectedQuantityOnPage).Where(p => p.Price <= request.PriceMax && p.Price >= request.PriceMin).ToList();
+                products = db.Products.Where(p => p.Price <= request.PriceMax && p.Price >= request.PriceMin).ToList();
 
+            shopViewModel.QuantityOfPages = (int)Math.Ceiling(products.Count / (double)selectedQuantityOnPage);
+
+            shopViewModel.TotalProductsCount = products.Count;
+           
+            Random rnd = new Random();
             foreach (var product in products)
             {
                 var shortProductViewModel = new ShortProductViewModel();
@@ -133,47 +141,63 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
                 shortProductViewModel.Name = product.Name;
                 shortProductViewModel.Price = (int)product.Price;
 
-                shortProductViewModel.ImageUrl = imagePath + product.ImageId.ToString() + ".jpg";
+                //shortProductViewModel.ImageUrl = product.Images[0];//imagePath + product.ImageId.ToString() + ".jpg";
 
 
-                string hoverImageUrl = imagePath + product.ImageId.ToString() + "_h.jpg";
+                //string hoverImageUrl = imagePath + product.Images[0] + "_h.jpg";//product.ImageId.ToString() + "_h.jpg";
+
+                shortProductViewModel.ImageUrl = imagePath + 1.ToString() + ".jpg";
+
+
+                string hoverImageUrl = imagePath + 1.ToString() + "_h.jpg";
+
                 if (System.IO.File.Exists(hoverImageUrl))
                     shortProductViewModel.HoverImageUrl = hoverImageUrl;
                 else
                     shortProductViewModel.HoverImageUrl = shortProductViewModel.ImageUrl;
 
-                shortProductViewModel.Rating = 5;
+                shortProductViewModel.Rating = rnd.Next(1, 5);
                 shortProductViewModel.ProductId = product.ProductId;
 
                 shopViewModel.Products.Add(shortProductViewModel);
 
-                
+
 
             }
 
-            //  shopViewModel.SelectedGender = request.SelectedGender!=null ? request.SelectedGender : Gender.men;
+            if (selectedSort == 1)
+            {
+                //var ps = shopViewModel.Products;
+                //ps = (from p in ps
+                //      orderby p.Price
+                //      select p).ToList();
+
+                //shopViewModel.Products = ps;
+
+                shopViewModel.Products = shopViewModel.Products.OrderBy(p => p.Price).ToList();
+            }
+             
+            else if (selectedSort == 2)
+            {
+                shopViewModel.Products = shopViewModel.Products.OrderByDescending(p => p.Price).ToList();
+            }
+           
+            else if (selectedSort == 3)
+            {
+                shopViewModel.Products = shopViewModel.Products.OrderByDescending(p => p.Rating).ToList();
+            }
+
+            shopViewModel.Products = shopViewModel.Products.Skip((selectedPage - 1) * selectedQuantityOnPage).Take(selectedQuantityOnPage).ToList();
+
             shopViewModel.SelectedGender = request.SelectedGender;
 
             shopViewModel.PriceMin = request.PriceMin;
             shopViewModel.PriceMax = request.PriceMax;
-            shopViewModel.SelectedQuantityOnPage = SelectedQuantityOnPage;
+            shopViewModel.SelectedQuantityOnPage = selectedQuantityOnPage;
+            shopViewModel.SelectedPage = selectedPage;
+            shopViewModel.SelectedSort = selectedSort;
             return View(shopViewModel);
 
-            //}
-
-            ////====================
-            //var shortProductViewModel = new ShortProductViewModel();
-
-            //shortProductViewModel.Name = "Chanel #5";
-            //shortProductViewModel.Price = 55;
-
-            //shortProductViewModel.ImageUrl = "~/img/product-img/product1.jpg";
-            //shortProductViewModel.HoverImageUrl = "~/img/product-img/product2.jpg";
-            //shortProductViewModel.Rating = 5;
-            //shortProductViewModel.ProductDetailsUrl = "/";
-
-            //shopViewModel.Products.Add(shortProductViewModel);
-            //return View(shopViewModel);
         }
 
         public IActionResult Privacy()

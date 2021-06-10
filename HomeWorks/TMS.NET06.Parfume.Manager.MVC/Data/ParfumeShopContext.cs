@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TMS.NET06.Parfume.Manager.MVC.Data.Models;
 
@@ -39,8 +41,30 @@ namespace TMS.NET06.Parfume.Manager.MVC.Data
            .IsRequired(false);
 
             modelBuilder.Entity<Product>()
-          .Property(p => p.ImageId)
+          .Property(p => p.Images)
           .IsRequired(false);
+
+            modelBuilder.Entity<Product>()
+              .Property(p => p.Images)
+              .HasConversion(
+                  v => JsonSerializer.Serialize(v, null),
+                  v => JsonSerializer.Deserialize<string[]>(v, null));
+
+            //var valueComparer = new ValueComparer<List<int>>(
+            //(c1, c2) => c1.SequenceEqual(c2),
+            //c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
+            //c => c.ToList());
+
+            //var valueComparer = new ValueComparer<string[]>(
+            //(c1, c2) => c1.SequenceEqual(c2),
+            //c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
+            //c => c.ToHashSet().ToArray<String>());
+
+            //modelBuilder
+            //    .Entity<Product>()
+            //    .Property(p => p.Images)
+            //    .Metadata
+            //    .SetValueComparer(valueComparer);
         }
 
         //private void BuildBrand(EntityTypeBuilder<Brand> parameterName)

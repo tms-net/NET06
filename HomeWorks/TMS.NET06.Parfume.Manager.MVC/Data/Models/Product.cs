@@ -18,8 +18,7 @@ namespace TMS.NET06.Parfume.Manager.MVC.Data.Models
         public Gender? Gender { get; set; }
 
         public int Volume { get; set; }
-        public int? ImageId { get; set; }
-
+        public string[] Images { get; set; }
     }
 
     public enum Gender 

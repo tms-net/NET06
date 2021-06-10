@@ -97,7 +97,7 @@
                 <div class="product-topbar d-xl-flex align-items-end justify-content-between">
                     <!-- Total Products -->
                     <div class="total-products">
-                        <p>Showing 1-8 of @Model.Products.Count</p>
+                        <p>Showing 1-@Model.SelectedQuantityOnPage of @Model.TotalProductsCount</p>
                         <div class="view d-flex">
                             <a href="#"><i class="fa fa-th-large" aria-hidden="true"></i></a>
                             <a href="#"><i class="fa fa-bars" aria-hidden="true"></i></a>
@@ -106,12 +106,20 @@
                     <!-- Sorting -->
                     <div class="product-sorting d-flex">
                         <div class="sort-by-date d-flex align-items-center mr-15">
-                            <p>Sort by</p>
+                            <p>Sort by<div>     </div></p>
                             <form action="#" method="get">
-                                <select name="selectsort" id="sortBydate">
-                                    <option value="value">Price ascending</option>
-                                    <option value="value">Price descending</option>
-                                    <option value="value">Popular first</option>
+                                <select name="selectedsort" onchange="submitForm();">
+                                    @foreach (var s in Model.SortValues)
+                                    {
+                                        @if (s.Key == Model.SelectedSort)
+                                        {
+                                            <option value="@s.Key" selected>@s.Value</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@s.Key">@s.Value</option>
+                                        }
+                                    }
                                 </select>
                             </form>
                         </div>
@@ -186,10 +194,22 @@
                 <!-- Pagination -->
                 <nav aria-label="navigation">
                     <ul class="pagination justify-content-end mt-50">
-                        <li class="page-item active"><a class="page-link" href="#">01.</a></li>
-                        <li class="page-item"><a class="page-link" href="#">02.</a></li>
-                        <li class="page-item"><a class="page-link" href="#">03.</a></li>
-                        <li class="page-item"><a class="page-link" href="#">04.</a></li>
+
+                        @for (int i = 1; i <= Model.QuantityOfPages; i++)
+                        {
+                            @if (i == Model.SelectedPage)
+                            {
+                                <li class="page-item active"><a href="@MyHelper.PageUrl(Html, i)" class="page-link">@String.Format("{0:d2}", i).</a></li>
+
+                            }
+                            else
+                            {
+                                <li class="page-item"><a href="@MyHelper.PageUrl(Html, i)" class="page-link">@String.Format("{0:d2}", i).</a></li>
+                            }
+
+                            @*<li class="page-item" + @(Model.SelectedPage==i ? " active":"")><a href="@MyHelper.PageUrl(Html, i)" class="page-link">@String.Format("{0:d2}", i).</a></li>*@
+                        }
+
                     </ul>
                 </nav>
             </div>

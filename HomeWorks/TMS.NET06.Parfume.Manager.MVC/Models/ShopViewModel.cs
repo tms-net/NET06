@@ -12,6 +12,14 @@ namespace TMS.NET06.Parfume.Manager.MVC.Models
         {
             Products = new List<ShortProductViewModel>();
             Brands = new List<MenuBrandViewModel>();
+
+            SortValues.Add(1, "Price ascending");
+            SortValues.Add(2, "Price descending");
+            SortValues.Add(3, "Popular first");
+
+            SelectedPage = 1;
+            SelectedSort = 1;
+
         }
 
         // public IList<MenuSelectViewModel> MenuSelect { get; set; }
@@ -26,9 +34,19 @@ namespace TMS.NET06.Parfume.Manager.MVC.Models
 
         public decimal? PriceMax { get; set; }
 
-        public int[] QuantityOnPage = new int[] { 12, 24, 48, 96 };
+        public int[] QuantityOnPage = new int[] { 4, 24, 48, 96 };
 
         public int SelectedQuantityOnPage { get; set; }
+
+        public Dictionary<int, string> SortValues = new Dictionary<int, string>(5);
+
+        public int SelectedSort { get; set; }
+
+        public int QuantityOfPages { get; set; }
+
+        public int SelectedPage { get; set; }
+
+        public int TotalProductsCount { get; set; }
 
     }
     public class ShortProductViewModel
