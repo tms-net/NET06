@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using TMS.NET06.Parfume.Manager.MVC.Data;
 using TMS.NET06.Parfume.Manager.MVC.Data.Models;
 
@@ -15,10 +16,18 @@ namespace TMS.NET06.Parfume.Manager.MVC.Areas.Admin.Controllers
     public class ProductsController : Controller
     {
         private readonly ParfumeShopContext _context;
+        private readonly IWebHostEnvironment _env;
 
-        public ProductsController(ParfumeShopContext context)
+        //public ProductsController(IWebHostEnvironment env, ParfumeShopContext context)
+        //{
+        //    _context = context;
+        //    _env = env;
+        //}
+
+        public ProductsController(ParfumeShopContext context, IWebHostEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         // GET: Products
@@ -93,12 +102,50 @@ namespace TMS.NET06.Parfume.Manager.MVC.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,Name,Price,BrandId,Gender,Volume")] Product product, [Bind]IList<IFormFile> uploadImages)
+        public async Task<IActionResult> Edit(int id, [Bind("ProductId,Name,Price,BrandId,Gender,Volume")] Product product, [Bind] IList<IFormFile> uploadImages, [Bind] IList<IFormFile> uploadImagesSmall)
         {
             if (id != product.ProductId)
             {
                 return NotFound();
             }
+
+            string directoryPath = Path.Combine(_env.WebRootPath, "img", "prod-img", id.ToString());
+            CopyFiles(directoryPath, uploadImages);
+            //DirectoryInfo dirInfo = new DirectoryInfo(directoryPath);
+            //if (!dirInfo.Exists)
+            //{
+            //    dirInfo.Create();
+            //}
+            //foreach (IFormFile file in uploadImages)
+            //{
+            //    if (file.Length > 0)
+            //    {
+            //        string filePath = Path.Combine(directoryPath, file.FileName);
+            //        using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+            //        {
+            //            await file.CopyToAsync(fileStream);
+            //        }
+            //    }
+            //}
+
+            string directoryPathSmall = Path.Combine(directoryPath, "small");
+            CopyFiles(directoryPathSmall, uploadImagesSmall);
+            //dirInfo = new DirectoryInfo(directoryPathSmall);
+            //if (!dirInfo.Exists)
+            //{
+            //    dirInfo.Create();
+            //}
+            //foreach (IFormFile file in uploadImagesSmall)
+            //{
+            //    if (file.Length > 0)
+            //    {
+            //        string filePath = Path.Combine(directoryPathSmall, file.FileName);
+            //        using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+            //        {
+            //            await file.CopyToAsync(fileStream);
+            //        }
+            //    }
+            //}
 
             if (ModelState.IsValid)
             {
@@ -158,5 +205,26 @@ namespace TMS.NET06.Parfume.Manager.MVC.Areas.Admin.Controllers
         {
             return _context.Products.Any(e => e.ProductId == id);
         }
+
+        private async void CopyFiles(string directoryPath, IList<IFormFile> uploadImages)
+        {
+            DirectoryInfo dirInfo = new DirectoryInfo(directoryPath);
+            if (!dirInfo.Exists)
+            {
+                dirInfo.Create();
+            }
+            foreach (IFormFile file in uploadImages)
+            {
+                if (file.Length > 0)
+                {
+                    string filePath = Path.Combine(directoryPath, file.FileName);
+                    using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(fileStream);
+                    }
+                }
+            }
+        }
+
     }
 }

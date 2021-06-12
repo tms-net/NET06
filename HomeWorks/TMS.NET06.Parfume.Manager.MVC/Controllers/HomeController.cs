@@ -56,10 +56,25 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
             productViewModel.Price = product.Price;
             productViewModel.Volume = product.Volume;
             productViewModel.PageUrl = "/";
-            productViewModel.ImageUrls.Add("~/img/product-img/pro-big-1.jpg");
-            productViewModel.ImageUrls.Add("~/img/product-img/pro-big-2.jpg");
-            productViewModel.ImageUrls.Add("~/img/product-img/pro-big-3.jpg");
-            productViewModel.ImageUrls.Add("~/img/product-img/pro-big-4.jpg");
+
+            string directoryPath = Path.Combine(_env.WebRootPath, "img", "prod-img", id.ToString());
+            string imagePathRel = String.Concat("~/img/prod-img/", id.ToString());
+
+            if (Directory.Exists(directoryPath))
+            {
+                string[] files = Directory.GetFiles(directoryPath);
+               
+                foreach (string s in files)
+                {
+                    string fileNameShort = s.Replace(directoryPath + "\\", "");
+                   productViewModel.ImageUrls.Add(imagePathRel + "/" + fileNameShort);
+                }
+            }
+
+            //productViewModel.ImageUrls.Add("~/img/product-img/pro-big-1.jpg");
+            //productViewModel.ImageUrls.Add("~/img/product-img/pro-big-2.jpg");
+            //productViewModel.ImageUrls.Add("~/img/product-img/pro-big-3.jpg");
+            //productViewModel.ImageUrls.Add("~/img/product-img/pro-big-4.jpg");
 
             foreach (var imageUrl in productViewModel.ImageUrls)
             {
@@ -96,13 +111,12 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
             }
 
 
-            string webRootPath = _env.WebRootPath;
+          //  string webRootPath = _env.WebRootPath;
 
-            string imagePath = "~/img/product-img/product";
+          //  string imagePath = "~/img/product-img/product";
 
-            string imagePath1 = "/img/product-img/product";
-
-            var path = Path.Combine(_env.WebRootPath, imagePath1);
+            //string imagePath1 = "/img/product-img/product";
+            //var path = Path.Combine(_env.WebRootPath, imagePath1);
 
 
             //string p = HttpContext.Current.Server.MapPath("/UploadedFiles");
@@ -141,20 +155,31 @@ namespace TMS.NET06.Parfume.Manager.MVC.Controllers
                 shortProductViewModel.Name = product.Name;
                 shortProductViewModel.Price = (int)product.Price;
 
-                //shortProductViewModel.ImageUrl = product.Images[0];//imagePath + product.ImageId.ToString() + ".jpg";
+                string directoryPath = Path.Combine(_env.WebRootPath, "img", "prod-img", product.ProductId.ToString(), "small");
+                string imagePathRel = String.Concat("~/img/prod-img/", product.ProductId.ToString(), "/small");
 
+                if (Directory.Exists(directoryPath))
+                {
+                    string[] files = Directory.GetFiles(directoryPath);
+                    string fileNameShort;
+                    if (files.Length > 0)
+                    {
+                        fileNameShort = files[0].Replace(directoryPath + "\\", "");
+                        shortProductViewModel.ImageUrl = imagePathRel + "/" + fileNameShort;
+                        if (files.Length > 1)
+                        {
+                            fileNameShort = files[1].Replace(directoryPath + "\\", "");
+                            shortProductViewModel.HoverImageUrl = imagePathRel + "/" + fileNameShort;
 
-                //string hoverImageUrl = imagePath + product.Images[0] + "_h.jpg";//product.ImageId.ToString() + "_h.jpg";
-
-                shortProductViewModel.ImageUrl = imagePath + 1.ToString() + ".jpg";
-
-
-                string hoverImageUrl = imagePath + 1.ToString() + "_h.jpg";
-
-                if (System.IO.File.Exists(hoverImageUrl))
-                    shortProductViewModel.HoverImageUrl = hoverImageUrl;
-                else
-                    shortProductViewModel.HoverImageUrl = shortProductViewModel.ImageUrl;
+                        }
+                        else shortProductViewModel.HoverImageUrl = shortProductViewModel.ImageUrl;
+                    }
+                    else
+                    { shortProductViewModel.ImageUrl = "~/img/prod-img/product1";
+                      shortProductViewModel.HoverImageUrl = "~/img/prod-img/product1";
+                    }
+                    
+                }
 
                 shortProductViewModel.Rating = rnd.Next(1, 5);
                 shortProductViewModel.ProductId = product.ProductId;

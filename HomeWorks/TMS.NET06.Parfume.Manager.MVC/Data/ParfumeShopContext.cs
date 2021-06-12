@@ -50,6 +50,16 @@ namespace TMS.NET06.Parfume.Manager.MVC.Data
                   v => JsonSerializer.Serialize(v, null),
                   v => JsonSerializer.Deserialize<string[]>(v, null));
 
+         modelBuilder.Entity<Product>()
+        .Property(p => p.ImagesSmall)
+        .IsRequired(false);
+
+            modelBuilder.Entity<Product>()
+              .Property(p => p.ImagesSmall)
+              .HasConversion(
+                  v => JsonSerializer.Serialize(v, null),
+                  v => JsonSerializer.Deserialize<string[]>(v, null));
+
             //var valueComparer = new ValueComparer<List<int>>(
             //(c1, c2) => c1.SequenceEqual(c2),
             //c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),

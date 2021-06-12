@@ -39,8 +39,14 @@
                 <span asp-validation-for="Volume" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Images" class="control-label"></label>
+                <label asp-for="Images" class="control-label">Pick images</label>
                 <input type="file" class="form-control-file" id="Images" name="uploadImages" multiple>
+                @*<input asp-for="ImageId" class="form-control" />*@
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ImagesSmall" class="control-label">Pick small images</label>
+                <input type="file" class="form-control-file" id="ImagesSmall" name="uploadImagesSmall" multiple>
                 @*<input asp-for="ImageId" class="form-control" />*@
             </div>
             <div class="form-group">
