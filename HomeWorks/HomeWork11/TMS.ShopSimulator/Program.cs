@@ -10,7 +10,7 @@ namespace TMS.ShopSimulator
 	    {
 		    get
 		    {
-			    ThreadPool.GetAvailableThreads(out int availableThreads, out _);
+			    ThreadPool.GetAvailableThreads(out long availableThreads, out _);
 			    return availableThreads;
 		    }
 	    }
